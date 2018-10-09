@@ -1,3 +1,4 @@
+// https://umijs.org/zh/guide/router.html
 export default [
   {
     path: '/user',
