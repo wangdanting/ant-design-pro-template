@@ -1,10 +1,10 @@
 // https://umijs.org/zh/guide/router.html
 export default [
   {
-    path: '/user',
+    path: '/',
     component: '../layouts/UserLayout',
-    routes: [{
+    routes: [
       {path: '/user/login', component: './User/Login'}
-    }]
+    ]
   }
 ]

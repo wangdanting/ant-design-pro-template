@@ -4,9 +4,13 @@ import Link from 'umi/link';
 import styles from './Login.less';
 
 class LoginPage extends Component {
-  <div className={styles.main}>
-    
-  </div>
+  render() {
+    return (
+      <div className={styles.main}>
+        abc
+      </div>
+    )
+  }
 }
 
 export default LoginPage;

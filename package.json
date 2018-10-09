@@ -4,21 +4,14 @@
   "description": "Imitate an out-of-box UI solution for enterprise applications ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wangdanting/ant-design-pro-template.git"
+    "start": "cross-env APP_TYPE=site umi dev"
   },
   "author": "wangdanting",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/wangdanting/ant-design-pro-template/issues"
-  },
-  "homepage": "https://github.com/wangdanting/ant-design-pro-template#readme",
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "antd": "^3.10.0",
+    "classnames": "^2.2.6",
     "dva": "^2.4.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
@@ -27,6 +20,7 @@
   "devDependencies": {
     "antd-pro-merge-less": "0.0.9",
     "antd-pro-theme-webpack-plugin": "^1.1.8",
+    "cross-env": "^5.2.0",
     "umi": "^2.1.2",
     "umi-plugin-react": "^1.1.1"
   }
