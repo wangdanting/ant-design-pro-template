@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
-import { Tabs } from 'antd';
-import LoginContext from './loginContext';
+import React from "react";
+import LoginContext from './LoginContext';
 
-
-const wrapContext = props => (
-  <LoginContext.Consumer>
-    {value => console.log(value, 'value')}
-  </LoginContext.Consumer>
-);
-
-export default ThemedButton;
+export default class LoginTab extends React.PureComponent {
+  render() {
+    return (
+      <LoginContext.Consumer>
+        {name => {
+          console.log(name, 'name3')
+        }}
+      </LoginContext.Consumer>
+    );
+  }
+}

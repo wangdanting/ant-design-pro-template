@@ -8,13 +8,12 @@ import Login from '@/components/Login';
 // const { Tab } = Login;
 
 class LoginPage extends Component {
-  
 
   render() {
 
     return (
       <div className={styles.main}>
-        <Login></Login>
+        <Login/>
       </div>
     )
   }
