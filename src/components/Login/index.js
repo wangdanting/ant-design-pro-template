@@ -3,6 +3,7 @@ import LoginContext from './LoginContext';
 import classNames from 'classnames';
 import styles from './index.less';
 import LoginTab from './LoginTab';
+import LoginItem from './LoginItem';
 import { Form, Tabs } from 'antd';
 
 class Login extends Component {
@@ -46,6 +47,15 @@ class Login extends Component {
     };
   };
 
+  onSwitch = (type) => {
+    this.setState({
+      type
+    });
+
+    const { onTabChange } = this.props;
+    onTabChange(type);
+  }
+
   render() {
     const { className, children } = this.props;
     const { type, tabs } = this.state;
@@ -62,8 +72,6 @@ class Login extends Component {
         otherChildren.push(item);
       }
     });
-
-    console.log(tabs, 'tabs');
 
     return (
       <LoginContext.Provider value={this.getContext()}>
@@ -82,7 +90,7 @@ class Login extends Component {
                 {otherChildren}
               </Fragment>
             ) : (
-              [...children]
+                [...children]
               )}
           </Form>
         </div>
@@ -92,4 +100,8 @@ class Login extends Component {
 }
 
 Login.Tab = LoginTab;
+Object.keys(LoginItem).forEach(item => {
+  Login[item] = LoginItem[item];
+})
+
 export default Form.create()(Login);

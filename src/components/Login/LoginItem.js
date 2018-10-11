@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Row, Col } from 'antd';
 import ItemMap from './map';
-import LoginContext form './LoginContext';
+import LoginContext from './LoginContext';
 import omit from 'omit.js';
+import styles from './index.less';
 
 const FormItem = Form.Item;
 class WrapFormItem extends Component {
@@ -17,13 +18,17 @@ class WrapFormItem extends Component {
     };
   }
 
+  componentDidMount() {
+    const { updateActive, name } = this.props;
+    if (updateActive) {
+      updateActive(name);
+    }
+  }
+
   getFormItemOptions = ({ rules, defaultValue, customprops }) => {
     const options = {
       rules: rules || customprops.rules,
     };
-    if (onChange) {
-      options.onChange = onChange;
-    }
     if (defaultValue) {
       options.initialValue = defaultValue;
     }
@@ -31,7 +36,8 @@ class WrapFormItem extends Component {
   };
 
   onGetCaptcha = () => {
-    
+    const {onGetCaptcha} = this.props;
+
   }
 
 
@@ -46,6 +52,10 @@ class WrapFormItem extends Component {
     const {
       name,
       customprops,
+      defaultValue,
+      rules,
+      buttonText,
+      updateActive,
       type,
       ...restProps
     } = this.props;
