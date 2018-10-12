@@ -9,29 +9,29 @@ export default {
     // 插件有参数时为数组，数组的第二项是参数，类似 babel 插件
     ['umi-plugin-react', {
       antd: true,
-        dva: {
-          hmr: true,
-        },
-        targets: {
-          ie: 11,
-        },
-        locale: {
-          enable: true, // default false
-          default: 'zh-CN', // default zh-CN
-          baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
-        },
-        dynamicImport: {
-          loadingComponent: './components/PageLoading/index',
-        },
-        ...(!process.env.TEST && os.platform() === 'darwin'
-          ? {
-              dll: {
-                include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
-                exclude: ['@babel/runtime'],
-              },
-              hardSource: true,
-            }
-          : {}),
+      dva: {
+        hmr: true,
+      },
+      targets: {
+        ie: 11,
+      },
+      locale: {
+        enable: true, // default false
+        default: 'zh-CN', // default zh-CN
+        baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
+      },
+      dynamicImport: {
+        loadingComponent: './components/PageLoading/index',
+      },
+      ...(!process.env.TEST && os.platform() === 'darwin'
+        ? {
+          dll: {
+            include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
+            exclude: ['@babel/runtime'],
+          },
+          hardSource: true,
+        }
+        : {}),
     }],
   ],
 
@@ -52,6 +52,14 @@ export default {
   // 通过 webpack 的 DefinePlugin 传递给代码，值会自动做 JSON.stringify 处理
   define: {
     APP_TYPE: process.env.APP_TYPE || '',
+  },
+  // 代理请求到其他服务器
+  proxy: {
+    '/api': {
+      target: 'https://preview.pro.ant.design/',
+      changeOrigin: true,
+      secure: true
+    }
   },
   // 配置后会生成 manifest.json 当编译器(compiler)开始执行、解析和映射应用程序时，它会保留所有模块的详细要点
   manifest: {

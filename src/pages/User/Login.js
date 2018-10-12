@@ -1,26 +1,55 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { formatMessage, FormattedMessage } from 'umi/locale';
-import { connect } from 'dva';
 import Link from 'umi/link';
 import styles from './Login.less';
 import Login from '@/components/Login';
 
 const { Tab, UserName, Password, Mobile, Captcha } = Login;
 
+@connect(({ login, loading }) => ({
+  login,
+  submitting: loading.effects['login/login']
+}))
 class LoginPage extends Component {
   state = {
     type: 'account',
     autoLogin: true,
   };
 
-  handleSubmit = () => {
+  handleSubmit = (err, values) => {
+    console.log('xxxx');
+    console.log(values, 'values');
+    const { type } = this.state;
+    if (!err) {
+      const { dispatch } = this.props;
+      dispatch({
+        type: 'login/login',
+        payload: {
+          ...values,
+          type,
+        },
+      });
+    }
 
   };
 
-  onGetCaptcha = () => {
-
-  };
+  onGetCaptcha = () => (
+    new Promise((resolve, reject) => {
+      this.loginForm.validateFields(['mobile'], {}, (err, values) => {
+        console.log(values, 'values1');
+        if (err) {
+          reject(err);
+        } else {
+          const { dispatch } = this.props;
+          dispatch({
+            type: 'login/getCaptcha',
+            payload: values.mobile,
+          })
+        }
+      })
+    })
+  );
 
   onTabChange = (type) => {
     this.setState({

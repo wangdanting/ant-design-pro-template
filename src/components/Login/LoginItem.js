@@ -25,6 +25,10 @@ class WrapFormItem extends Component {
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   getFormItemOptions = ({ rules, defaultValue, customprops }) => {
     const options = {
       rules: rules || customprops.rules,
@@ -36,11 +40,30 @@ class WrapFormItem extends Component {
   };
 
   onGetCaptcha = () => {
-    const {onGetCaptcha} = this.props;
-
+    const { onGetCaptcha } = this.props;
+    const result = onGetCaptcha ? onGetCaptcha() : null;
+    if (result === false) {
+      return;
+    }
+    if (result instanceof Promise) {
+      result.then(this.runGetCaptchaCountDown);
+    } else {
+      this.runGetCaptchaCountDown();
+    }
   }
 
-
+  runGetCaptchaCountDown = () => {
+    const { countDown } = this.props;
+    let count = countDown || 59;
+    this.setState({ count });
+    this.interval = setInterval(() => {
+      count -= 1;
+      this.setState({ count });
+      if (count === 0) {
+        clearInterval(this.interval);
+      }
+    }, 1000);
+  }
 
   render() {
     const { count } = this.state;
