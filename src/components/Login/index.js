@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import styles from './index.less';
 import LoginTab from './LoginTab';
 import LoginItem from './LoginItem';
+import LoginSubmit from './LoginSubmit';
 import { Form, Tabs } from 'antd';
 
 class Login extends Component {
@@ -54,7 +55,18 @@ class Login extends Component {
 
     const { onTabChange } = this.props;
     onTabChange(type);
-  }
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { active, type } = this.state;
+    const { form, onSubmit } = this.props;
+    const activeFileds = active[type];
+    console.log(activeFileds, 'activeFileds');
+    form.validateFields(activeFileds, { force: true }, (err, values) => {
+      onSubmit(err, values);
+    });
+  };
 
   render() {
     const { className, children } = this.props;
@@ -100,6 +112,7 @@ class Login extends Component {
 }
 
 Login.Tab = LoginTab;
+Login.Submit = LoginSubmit;
 Object.keys(LoginItem).forEach(item => {
   Login[item] = LoginItem[item];
 })
