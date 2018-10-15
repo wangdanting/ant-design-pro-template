@@ -3,6 +3,7 @@ import styles from "./Register.less";
 import { formatMessage, FormattedMessage } from "umi/locale";
 import Link from "umi/link";
 import { Form, Input, Popover, Progress, Select, Button, Row, Col } from "antd";
+import { connect } from "dva";
 
 const FormItem = Form.Item;
 const InputGroup = Input.Group;
@@ -32,6 +33,10 @@ const passwordProgressMap = {
   poor: "exception"
 };
 
+@connect(({ register, loading }) => ({
+  register,
+  submitting: loading.effects["register/submit"]
+}))
 class Register extends Component {
   state = {
     count: 0,
@@ -135,7 +140,14 @@ class Register extends Component {
     const { form, dispatch } = this.props;
     form.validateFields({ force: true }, (err, values) => {
       if (!err) {
-        const {}
+        const { prefix } = this.state;
+        dispatch({
+          type: "register/submit",
+          payload: {
+            ...values,
+            prefix
+          }
+        });
       }
     });
   };
@@ -233,7 +245,7 @@ class Register extends Component {
                 size="large"
                 value={prefix}
                 onChange={this.changePrefix}
-                style={{ width: "20%" }}
+                style={{ width: "25%" }}
               >
                 <Option value="86">+86</Option>
                 <Option value="87">+87</Option>
@@ -247,7 +259,7 @@ class Register extends Component {
                     })
                   },
                   {
-                    pattern: /^\d{10}$/,
+                    pattern: /^1\d{10}$/,
                     message: formatMessage({
                       id: "validation.phone-number.wrong-format"
                     })
@@ -256,7 +268,7 @@ class Register extends Component {
               })(
                 <Input
                   size="large"
-                  style={{ width: "80%" }}
+                  style={{ width: "75%" }}
                   placeholder={formatMessage({
                     id: "form.phone-number.placeholder"
                   })}
