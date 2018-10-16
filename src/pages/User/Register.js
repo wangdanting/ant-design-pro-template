@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./Register.less";
 import { formatMessage, FormattedMessage } from "umi/locale";
 import Link from "umi/link";
+import router from "umi/router";
 import { Form, Input, Popover, Progress, Select, Button, Row, Col } from "antd";
 import { connect } from "dva";
 
@@ -45,6 +46,19 @@ class Register extends Component {
     help: "",
     prefix: "86"
   };
+
+  componentDidUpdate() {
+    const { form, register } = this.props;
+    const account = form.getFieldValue("mail");
+    if (register.status === "ok") {
+      router.push({
+        pathname: "/user/register-result",
+        state: {
+          account
+        }
+      });
+    }
+  }
 
   componentWillUnmount() {
     clearInterval(this.interval);
