@@ -4,6 +4,9 @@ import memoizeOne from "memoize-one";
 import isEqual from "lodash/isEqual";
 import pathToRegexp from "path-to-regexp";
 import { formatMessage } from "umi/locale";
+import { ContainerQuery } from "react-container-query";
+import Context from "./MenuContext";
+import classNames from "classnames";
 
 // Conversion router to menu
 function formatter(data, parentAuthority, parentName) {
@@ -39,6 +42,31 @@ function formatter(data, parentAuthority, parentName) {
 }
 
 const memoizeOneFormatter = memoizeOne(formatter, isEqual);
+
+const query = {
+  "screen-xs": {
+    maxWidth: 575
+  },
+  "screen-sm": {
+    minWidth: 576,
+    maxWidth: 767
+  },
+  "screen-md": {
+    minWidth: 768,
+    maxWidth: 991
+  },
+  "screen-lg": {
+    minWidth: 992,
+    maxWidth: 1199
+  },
+  "screen-xl": {
+    minWidth: 1200,
+    maxWidth: 1599
+  },
+  "screen-xxl": {
+    minWidth: 1600
+  }
+};
 
 class BasicLayout extends React.PureComponent {
   constructor(props) {
@@ -96,6 +124,14 @@ class BasicLayout extends React.PureComponent {
     return `${message} - Ant Design Pro`;
   };
 
+  getContext() {
+    const { location } = this.props;
+    return {
+      location,
+      breadcrumbNameMap: this.breadcrumbNameMap
+    };
+  }
+
   render() {
     const {
       location: { pathname },
@@ -105,7 +141,14 @@ class BasicLayout extends React.PureComponent {
     return (
       <Fragment>
         <DocumentTitle title={this.getPageTitle(pathname)}>
-          {children}
+          <ContainerQuery query={query}>
+            {params => (
+              <Context.Provider value={this.getContext()}>
+                <div className={classNames(params)} />
+              </Context.Provider>
+            )}
+          </ContainerQuery>
+          {/* {children} */}
         </DocumentTitle>
       </Fragment>
     );
