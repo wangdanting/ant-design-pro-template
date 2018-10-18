@@ -3,6 +3,7 @@ import { stringify } from 'qs';
 import { getFakeCaptcha, fakeAccountLogin } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils'
+import { reloadAuthorized } from '@/utils/Authorized';
 
 export default {
   namespace: 'login',
@@ -20,7 +21,7 @@ export default {
       });
 
       if (response.status === 'ok') {
-        
+        reloadAuthorized();
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;

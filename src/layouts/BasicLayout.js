@@ -1,12 +1,12 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from "react";
+import DocumentTitle from "react-document-title";
 
 class BasicLayout extends React.PureComponent {
   render() {
-    return (
-      <Fragment>
-        
-      </Fragment>
-    )
+    const {
+      location: { pathname }
+    } = this.props;
+    return <Fragment />;
   }
 }
 
