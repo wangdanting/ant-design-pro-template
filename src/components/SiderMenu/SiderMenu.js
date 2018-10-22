@@ -1,37 +1,39 @@
 import React, { PureComponent } from "react";
 import { Layout } from "antd";
 import classNames from "classnames";
-import styles from "index.less";
+import styles from "./index.less";
 import Link from "umi/link";
 import BaseMenu, { getMenuMatches } from "./BaseMenu";
-import { urlToList } from '../_utils/pathTools';
+import { urlToList } from "../_utils/pathTools";
 
-const { Sider } = Layout
+const { Sider } = Layout;
 
 const getDefaultCollapsedSubMenus = props => {
   const {
-    location: {pathname},
-    flatMenuKeys,
-  } = this.props;
-  return urlToList(pathname).map(item => getMenuMatches(flatMenuKeys, item)[0]).filter(item => item);
-}
+    location: { pathname },
+    flatMenuKeys
+  } = props;
+  return urlToList(pathname)
+    .map(item => getMenuMatches(flatMenuKeys, item)[0])
+    .filter(item => item);
+};
 
 export default class SiderMenu extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       openKeys: getDefaultCollapsedSubMenus(props)
-    }
+    };
   }
 
   // updating state based on props
   static getDerivedStateFromProps(props, state) {
-    const { pathname} = state;
-    if(props.location.pathname !== pathname) {
+    const { pathname } = state;
+    if (props.location.pathname !== pathname) {
       return {
         pathname: props.location.pathname,
         openKeys: getDefaultCollapsedSubMenus(props)
-      }
+      };
     }
     return null;
   }
@@ -50,7 +52,7 @@ export default class SiderMenu extends PureComponent {
     const moreThanOne =
       openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
     this.setState({
-      openKeys: moreThanOne ? [openKeys.pop()] : [...openKeys];
+      openKeys: moreThanOne ? [openKeys.pop()] : [...openKeys]
     });
   };
 
@@ -68,7 +70,7 @@ export default class SiderMenu extends PureComponent {
       <Sider
         trigger={null}
         collapsible
-        collapse={collapse}
+        collapse={collapsed}
         breakpoint="lg"
         onCollapse={onCollapse}
         width={256}

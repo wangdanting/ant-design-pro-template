@@ -3,10 +3,10 @@ import { Menu, Icon } from "antd";
 import memoizeOne from "memoize-one";
 import isEqual from "lodash/isEqual";
 import { urlToList } from "../_utils/pathTools";
-import { pathToRegexp } from "path-to-regexp";
+import pathToRegexp from "path-to-regexp";
 import { formatMessage } from "umi/locale";
 import Link from "umi/link";
-import styles from "./index.less";
+import styles from './index.less';
 
 const SubMenu = Menu.SubMenu;
 
@@ -144,7 +144,7 @@ export default class BaseMenu extends PureComponent {
       return [];
     }
     return menuData
-      .filter(item.name && !item.hideInMenu)
+      .filter(item => item.name && !item.hideInMenu)
       .map(item => {
         // make Dom
         const ItemDom = this.getSubMenuOrItem(item, parent);

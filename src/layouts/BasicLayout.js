@@ -7,6 +7,11 @@ import { formatMessage } from "umi/locale";
 import { ContainerQuery } from "react-container-query";
 import Context from "./MenuContext";
 import classNames from "classnames";
+import { Layout } from "antd";
+import SiderMenu from "@/components/SiderMenu";
+import logo from "@/assets/logo.svg";
+import Authorized from "@/utils/Authorized";
+import { connect } from 'dva';
 
 // Conversion router to menu
 function formatter(data, parentAuthority, parentName) {
@@ -68,6 +73,9 @@ const query = {
   }
 };
 
+@connect(({ global }) => ({
+  collapsed: global.collapsed
+}))
 class BasicLayout extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -76,6 +84,7 @@ class BasicLayout extends React.PureComponent {
   }
 
   state = {
+    isMobile: false,
     menuData: this.getMenuData()
   };
 
@@ -132,11 +141,34 @@ class BasicLayout extends React.PureComponent {
     };
   }
 
+  handleMenuCollapse = collapsed => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "global/changeLayoutCollapsed",
+      payload: collapsed
+    });
+  };
+
   render() {
     const {
+      navTheme,
       location: { pathname },
       children
     } = this.props;
+    const { menuData } = this.state;
+
+    const layout = (
+      <Layout>
+        <SiderMenu
+          logo={logo}
+          Authorized={Authorized}
+          theme={navTheme}
+          onCollapse={this.handleMenuCollapse}
+          menuData={menuData}
+          {...this.props}
+        />
+      </Layout>
+    );
 
     return (
       <Fragment>
@@ -144,11 +176,10 @@ class BasicLayout extends React.PureComponent {
           <ContainerQuery query={query}>
             {params => (
               <Context.Provider value={this.getContext()}>
-                <div className={classNames(params)} />
+                <div className={classNames(params)}>{layout}</div>
               </Context.Provider>
             )}
           </ContainerQuery>
-          {/* {children} */}
         </DocumentTitle>
       </Fragment>
     );
