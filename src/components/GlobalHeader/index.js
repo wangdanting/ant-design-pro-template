@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import styles from "./index.less";
 import { Icon } from "antd";
+import RightContent from "./RightContent";
 
 class GlobalHeader extends PureComponent {
   toggle = () => {
@@ -17,6 +18,7 @@ class GlobalHeader extends PureComponent {
           type={collapsed ? "menu-unfold" : "menu-fold"}
           onClick={this.toggle}
         />
+        <RightContent />
       </div>
     );
   }

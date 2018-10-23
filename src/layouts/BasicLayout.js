@@ -208,7 +208,7 @@ class BasicLayout extends React.PureComponent {
             minHeight: "100vh"
           }}
         >
-          <Header handleMenuCollapse={this.handleMenuCollapse} />
+          <Header handleMenuCollapse={this.handleMenuCollapse} {...this.props} />
           {/* <Content
             style={{
               background: "#fff",
