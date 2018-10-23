@@ -11,7 +11,11 @@ import { Layout } from "antd";
 import SiderMenu from "@/components/SiderMenu";
 import logo from "@/assets/logo.svg";
 import Authorized from "@/utils/Authorized";
-import { connect } from 'dva';
+import { connect } from "dva";
+import { enquireScreen, unenquireScreen } from "enquire-js";
+import Header from "./Header";
+
+const { Content } = Layout;
 
 // Conversion router to menu
 function formatter(data, parentAuthority, parentName) {
@@ -73,8 +77,10 @@ const query = {
   }
 };
 
-@connect(({ global }) => ({
-  collapsed: global.collapsed
+@connect(({ global, setting }) => ({
+  collapsed: global.collapsed,
+  layout: setting.layout,
+  ...setting
 }))
 class BasicLayout extends React.PureComponent {
   constructor(props) {
@@ -88,7 +94,21 @@ class BasicLayout extends React.PureComponent {
     menuData: this.getMenuData()
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.enquireHandler = enquireScreen(mobile => {
+      console.log(mobile, "mobile");
+      const { isMobile } = this.state;
+      if (isMobile !== mobile) {
+        this.setState({
+          isMobile: mobile
+        });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    unenquireScreen(this.enquireHandler);
+  }
 
   getMenuData() {
     const {
@@ -149,24 +169,57 @@ class BasicLayout extends React.PureComponent {
     });
   };
 
+  getLayoutStyle = () => {
+    const { isMobile } = this.state;
+    const { fixSiderbar, collapsed, layout } = this.props;
+    if (fixSiderbar && layout !== "topmenu" && !isMobile) {
+      return {
+        paddingLeft: collapsed ? "80px" : "256px"
+      };
+    }
+    return null;
+  };
+
   render() {
     const {
       navTheme,
+      layout: PropsLayout,
       location: { pathname },
       children
     } = this.props;
     const { menuData } = this.state;
+    const isTop = PropsLayout === "topmenu";
 
     const layout = (
       <Layout>
-        <SiderMenu
-          logo={logo}
-          Authorized={Authorized}
-          theme={navTheme}
-          onCollapse={this.handleMenuCollapse}
-          menuData={menuData}
-          {...this.props}
-        />
+        {isTop && !isMobile ? null : (
+          <SiderMenu
+            logo={logo}
+            Authorized={Authorized}
+            theme={navTheme}
+            onCollapse={this.handleMenuCollapse}
+            menuData={menuData}
+            {...this.props}
+          />
+        )}
+        <Layout
+          style={{
+            ...this.getLayoutStyle(),
+            minHeight: "100vh"
+          }}
+        >
+          <Header handleMenuCollapse={this.handleMenuCollapse} />
+          {/* <Content
+            style={{
+              background: "#fff",
+              padding: 24,
+              margin: 0,
+              minHeight: 280
+            }}
+          >
+            Content
+          </Content> */}
+        </Layout>
       </Layout>
     );
 

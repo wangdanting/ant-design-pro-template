@@ -2,7 +2,7 @@
 import os from 'os';
 import pageRoutes from './router.config';
 import webpackplugin from './plugin.config';
-import defaultSettings from '../src/defaultSetting';
+import defaultSettings from '../src/defaultSettings';
 
 export default {
   plugins: [
