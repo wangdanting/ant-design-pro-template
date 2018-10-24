@@ -1,14 +1,18 @@
 import React, { PureComponent } from "react";
-import { Layout } from "antd";
+import { Layout, message } from "antd";
 import { connect } from "dva";
 import styles from "./Header.less";
 import GlobalHeader from "@/components/GlobalHeader";
+import { formatMessage } from 'umi/locale';
 
 const { Header } = Layout;
 
-@connect(({ setting, global }) => ({
+@connect(({ setting, global, user, loading }) => ({
+  currentUser: user.currentUser,
   setting,
-  collapsed: global.collapsed
+  collapsed: global.collapsed,
+  notices: global.notices,
+  fetchingNotices: loading.effects["global/fetchNotices"]
 }))
 class HeaderView extends PureComponent {
   state = {
@@ -20,6 +24,24 @@ class HeaderView extends PureComponent {
   //   return collapsed ? "calc(100% - 80px)" : "calc(100% - 256px)";
   // };
 
+  handleNoticeVisibleChange = visible => {
+    if (visible) {
+      const { dispatch } = this.props;
+      dispatch({
+        type: "global/fetchNotices"
+      });
+    }
+  };
+
+  handleNoticeClear = type => {
+    message.success(`${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({ id: `component.globalHeader.${type}` })}`);
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'global/clearNotices',
+      payload: type,
+    });
+  };
+
   render() {
     const { setting, handleMenuCollapse } = this.props;
     const { fixedHeader } = setting;
@@ -30,7 +52,11 @@ class HeaderView extends PureComponent {
         style={{ padding: 0 }}
         className={fixedHeader ? "style.fixedHeader" : ""}
       >
-        <GlobalHeader onCollapse={handleMenuCollapse} {...this.props} />
+        <GlobalHeader
+          onCollapse={handleMenuCollapse}
+          onNoticeVisibleChange={this.handleNoticeVisibleChange}
+          {...this.props}
+        />
       </Header>
     ) : null;
     return <div>{HeaderDom}</div>;
