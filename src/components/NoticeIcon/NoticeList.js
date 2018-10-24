@@ -9,7 +9,9 @@ export default function NoticeList({
   emptyText,
   emptyImage,
   onClick,
-  showClear = true
+  showClear = true,
+  onClear,
+  title
 }) {
   if (data.length === 0) {
     return (
@@ -66,6 +68,11 @@ export default function NoticeList({
           );
         })}
       </List>
+      {showClear ? (
+        <div className={styles.clear} onClick={onClear}>
+          {locale.clear} {title}
+        </div>
+      ) : null}
     </div>
   );
 }

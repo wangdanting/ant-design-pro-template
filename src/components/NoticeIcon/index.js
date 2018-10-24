@@ -12,6 +12,7 @@ class NoticeIcon extends PureComponent {
   static defaultProps = {
     onTabChange: () => {},
     onItemClick: () => {},
+    onClear: () => {}
   };
 
   onTabChange = tabType => {
@@ -25,7 +26,7 @@ class NoticeIcon extends PureComponent {
   };
 
   getNotificationBox() {
-    const { children, loading, locale } = this.props;
+    const { children, loading, locale, onClear } = this.props;
     if (!children) {
       return null;
     }
@@ -44,6 +45,7 @@ class NoticeIcon extends PureComponent {
             title={child.props.title}
             locale={locale}
             onClick={item => this.onItemClick(item, child.props)}
+            onClear={() => onClear(child.props.name)}
           />
         </TabPane>
       );
@@ -58,7 +60,13 @@ class NoticeIcon extends PureComponent {
   }
 
   render() {
-    const { className, count, bell, onPopupVisibleChange } = this.props;
+    const {
+      className,
+      count,
+      bell,
+      onPopupVisibleChange,
+      popupAlign
+    } = this.props;
     const noticeButtonClass = classNames(className, styles.noticeButton);
     const NoticeBellIcon = bell || <Icon type="bell" className={styles.icon} />;
     const notificationBox = this.getNotificationBox();
@@ -81,6 +89,8 @@ class NoticeIcon extends PureComponent {
         placement="bottomRight"
         content={notificationBox}
         onVisibleChange={onPopupVisibleChange}
+        trigger="click"
+        popupAlign={popupAlign}
       >
         {trigger}
       </Popover>

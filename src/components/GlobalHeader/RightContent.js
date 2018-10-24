@@ -2,11 +2,13 @@ import React, { PureComponent } from "react";
 import styles from "./index.less";
 import HeaderSearch from "../HeaderSearch";
 import classNames from "classnames";
-import { formatMessage } from "umi/locale";
-import { Tooltip, Icon, Tag } from "antd";
+import { formatMessage, FormattedMessage } from "umi/locale";
+import { Tooltip, Icon, Tag, Menu, Dropdown, Spin, Avatar } from "antd";
 import NoticeIcon from "../NoticeIcon";
 import groupBy from "lodash/groupBy";
 import moment from "moment";
+import SelectLang from '../SelectLang';
+
 
 class GlobalHeaderRight extends PureComponent {
   getNoticeData() {
@@ -42,12 +44,49 @@ class GlobalHeaderRight extends PureComponent {
   }
 
   render() {
-    const { theme, currentUser, onNoticeVisibleChange, fetchingNotices } = this.props;
+    const {
+      theme,
+      currentUser,
+      onNoticeVisibleChange,
+      fetchingNotices,
+      onNoticeClear,
+      onMenuClick
+    } = this.props;
     let className = styles.right;
     if (theme === "dark") {
       className = `${styles.right}  ${styles.dark}`;
     }
     const noticeData = this.getNoticeData();
+    const menu = (
+      <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
+        <Menu.Item key="userCenter">
+          <Icon type="user" />
+          <FormattedMessage
+            id="menu.account.center"
+            defaultMessage="account center"
+          />
+        </Menu.Item>
+        <Menu.Item key="userinfo">
+          <Icon type="setting" />
+          <FormattedMessage
+            id="menu.account.settings"
+            defaultMessage="account settings"
+          />
+        </Menu.Item>
+        <Menu.Item key="triggerError">
+          <Icon type="close-circle" />
+          <FormattedMessage
+            id="menu.account.trigger"
+            defaultMessage="Trigger Error"
+          />
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="logout">
+          <Icon type="logout" />
+          <FormattedMessage id="menu.account.logout" defaultMessage="logout" />
+        </Menu.Item>
+      </Menu>
+    );
     return (
       <div className={className}>
         <HeaderSearch
@@ -81,12 +120,14 @@ class GlobalHeaderRight extends PureComponent {
           onPopupVisibleChange={onNoticeVisibleChange}
           loading={fetchingNotices}
           locale={{
-            emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
-            clear: formatMessage({ id: 'component.noticeIcon.clear' }),
+            emptyText: formatMessage({ id: "component.noticeIcon.empty" }),
+            clear: formatMessage({ id: "component.noticeIcon.clear" })
           }}
           onItemClick={(item, tabProps) => {
             console.log(item, tabProps); // eslint-disable-line
           }}
+          onClear={onNoticeClear}
+          popupAlign={{ offset: [20, -16] }}
         >
           <NoticeIcon.Tab
             list={noticeData.notification}
@@ -116,6 +157,22 @@ class GlobalHeaderRight extends PureComponent {
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
           />
         </NoticeIcon>
+        {currentUser.name ? (
+          <Dropdown overlay={menu}>
+            <span className={`${styles.action} ${styles.account}`}>
+              <Avatar
+                size="small"
+                className={styles.avatar}
+                src={currentUser.avatar}
+                alt="avatar"
+              />
+              <span className={styles.name}>{currentUser.name}</span>
+            </span>
+          </Dropdown>
+        ) : (
+          <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
+        )}
+        <SelectLang className={styles.action} />
       </div>
     );
   }
