@@ -14,6 +14,7 @@ import Authorized from "@/utils/Authorized";
 import { connect } from "dva";
 import { enquireScreen, unenquireScreen } from "enquire-js";
 import Header from "./Header";
+import Exception403 from "../pages/Exception/403";
 
 const { Content } = Layout;
 
@@ -97,7 +98,7 @@ class BasicLayout extends React.PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'user/fetchCurrent',
+      type: "user/fetchCurrent"
     });
     this.enquireHandler = enquireScreen(mobile => {
       console.log(mobile, "mobile");
@@ -184,6 +185,14 @@ class BasicLayout extends React.PureComponent {
     return null;
   };
 
+  getContentStyle = () => {
+    const { fixedHeader } = this.props;
+    return {
+      margin: "24px 24px 0",
+      paddingTop: fixedHeader ? 64 : 0
+    };
+  };
+
   render() {
     const {
       navTheme,
@@ -193,6 +202,7 @@ class BasicLayout extends React.PureComponent {
     } = this.props;
     const { menuData } = this.state;
     const isTop = PropsLayout === "topmenu";
+    const routerConfig = this.matchParamsPath(pathname);
 
     const layout = (
       <Layout>
@@ -212,17 +222,18 @@ class BasicLayout extends React.PureComponent {
             minHeight: "100vh"
           }}
         >
-          <Header handleMenuCollapse={this.handleMenuCollapse} {...this.props} />
-          {/* <Content
-            style={{
-              background: "#fff",
-              padding: 24,
-              margin: 0,
-              minHeight: 280
-            }}
-          >
-            Content
-          </Content> */}
+          <Header
+            handleMenuCollapse={this.handleMenuCollapse}
+            {...this.props}
+          />
+          <Content style={this.getContentStyle()}>
+            <Authorized
+              authority={routerConfig && routerConfig.authority}
+              noMatch={<Exception403 />}
+            >
+              {children}
+            </Authorized>
+          </Content>
         </Layout>
       </Layout>
     );
