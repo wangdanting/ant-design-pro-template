@@ -7,7 +7,6 @@ const Authority = getAuthority();
 const Authorized = RenderAuthorized(Authority);
 
 export default ({ children }) => {
-  console.log(children, "children");
   return (
     <Authorized
       authority={children.props.route.authority}

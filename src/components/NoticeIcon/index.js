@@ -31,7 +31,6 @@ class NoticeIcon extends PureComponent {
       return null;
     }
     const panes = React.Children.map(children, child => {
-      console.log(child, "child");
       const title =
         child.props.list && child.props.list.length > 0
           ? `${child.props.title} (${child.props.list.length})`

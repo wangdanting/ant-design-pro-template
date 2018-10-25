@@ -27,6 +27,9 @@ export default [
             component: "./Forms/BasicForm"
           }
         ]
+      },
+      {
+        component: "./Exception/404"
       }
     ]
   }
