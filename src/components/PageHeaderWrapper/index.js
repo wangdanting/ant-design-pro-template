@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PageHeader from "@/components/PageHeader";
 import MenuContext from "@/layouts/MenuContext";
 import { connect } from "dva";
 import { FormattedMessage } from "umi/locale";
 
-const PageHeaderWrapper = ({ contentWidth }) => (
+const PageHeaderWrapper = ({ contentWidth, ...restProps }) => (
   <div>
     <MenuContext.Consumer>
       {value => (
@@ -19,6 +19,7 @@ const PageHeaderWrapper = ({ contentWidth }) => (
             }
             return item.name;
           }}
+          {...restProps}
         />
       )}
     </MenuContext.Consumer>
