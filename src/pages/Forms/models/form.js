@@ -3,7 +3,14 @@ import { message } from "antd";
 export default {
   namespaced: "form",
 
-  state: {},
+  state: {
+    step: {
+      payAccount: "ant-design@alipay.com",
+      receiverAccount: "test@example.com",
+      receiverName: "Alex",
+      amount: "500"
+    }
+  },
 
   effects: {
     *submitRegularForm({ payload }, { call }) {
