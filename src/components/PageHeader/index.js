@@ -2,7 +2,8 @@ import React, { PureComponent } from "react";
 import BreadcrumbView from "./breadcrumb";
 import classNames from "classnames";
 import styles from "./index.less";
-import { Skeleton } from "antd";
+import { Skeleton, Tabs } from "antd";
+const { TabPane } = Tabs;
 
 class PageHeader extends PureComponent {
   onChange = key => {
