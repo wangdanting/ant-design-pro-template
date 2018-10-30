@@ -3,8 +3,10 @@ import PageHeader from "@/components/PageHeader";
 import MenuContext from "@/layouts/MenuContext";
 import { connect } from "dva";
 import { FormattedMessage } from "umi/locale";
+import styles from "./index.less";
+import GridContent from "./GridContent";
 
-const PageHeaderWrapper = ({ contentWidth, ...restProps }) => (
+const PageHeaderWrapper = ({ children, contentWidth, ...restProps }) => (
   <div>
     <MenuContext.Consumer>
       {value => (
@@ -23,6 +25,11 @@ const PageHeaderWrapper = ({ contentWidth, ...restProps }) => (
         />
       )}
     </MenuContext.Consumer>
+    {children ? (
+      <div className={styles.content}>
+        <GridContent>{children}</GridContent>
+      </div>
+    ) : null}
   </div>
 );
 
