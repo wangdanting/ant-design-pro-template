@@ -14,6 +14,7 @@ import Authorized from "@/utils/Authorized";
 import { connect } from "dva";
 import { enquireScreen, unenquireScreen } from "enquire-js";
 import Header from "./Header";
+import Footer from "./Footer";
 import Exception403 from "../pages/Exception/403";
 
 const { Content } = Layout;
@@ -232,6 +233,7 @@ class BasicLayout extends React.PureComponent {
               {children}
             </Authorized>
           </Content>
+          <Footer />
         </Layout>
       </Layout>
     );

@@ -6,7 +6,7 @@ import { urlToList } from "../_utils/pathTools";
 import pathToRegexp from "path-to-regexp";
 import { formatMessage } from "umi/locale";
 import Link from "umi/link";
-import styles from './index.less';
+import styles from "./index.less";
 
 const SubMenu = Menu.SubMenu;
 

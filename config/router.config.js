@@ -52,6 +52,11 @@ export default [
                 component: "./Forms/StepForm/Step3"
               }
             ]
+          },
+          {
+            path: "/form/advanced-form",
+            name: "advancedform",
+            component: "./Forms/AdvancedForm"
           }
         ]
       },
