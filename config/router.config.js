@@ -61,6 +61,18 @@ export default [
         ]
       },
       {
+        path: "./list",
+        icon: "table",
+        name: "list",
+        routes: [
+          {
+            path: "/list/table-list",
+            name: "searchtable",
+            component: "./List/TableList"
+          }
+        ]
+      },
+      {
         component: "./Exception/404"
       }
     ]
