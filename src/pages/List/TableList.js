@@ -11,13 +11,20 @@ import {
   Icon,
   DatePicker,
   InputNumber,
-  Modal
+  Modal,
+  Badge,
+  Divider
 } from "antd";
 import styles from "./TableList.less";
 import { connect } from "dva";
+import StandardTable from "@/components/StandardTable";
+import moment from "moment";
 
 const FormItem = Form.Item;
 const { Option } = Select;
+
+const statusMap = ["default", "processing", "success", "error"];
+const status = ["关闭", "运行中", "已上线", "异常"];
 
 const CreateForm = Form.create()(props => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
@@ -58,8 +65,79 @@ const CreateForm = Form.create()(props => {
 class TableList extends PureComponent {
   state = {
     expandForm: false, //是否是展开状态
-    modalVisible: false
+    modalVisible: false,
+    selectedRows: []
   };
+
+  columns = [
+    {
+      title: "规则名称",
+      dataIndex: "name"
+    },
+    {
+      title: "描述",
+      dataIndex: "desc"
+    },
+    {
+      title: "服务调用次数",
+      dataIndex: "callNo",
+      sorter: true,
+      align: "right",
+      render: val => `${val} 万`,
+      // mark to display a total number
+      needTotal: true
+    },
+    {
+      title: "状态",
+      dataIndex: "status",
+      filters: [
+        {
+          text: status[0],
+          value: 0
+        },
+        {
+          text: status[1],
+          value: 1
+        },
+        {
+          text: status[2],
+          value: 2
+        },
+        {
+          text: status[3],
+          value: 3
+        }
+      ],
+      render(val) {
+        return <Badge status={statusMap[val]} text={status[val]} />;
+      }
+    },
+    {
+      title: "上次调度时间",
+      dataIndex: "updatedAt",
+      sorter: true,
+      render: val => <span>{moment(val).format("YYYY-MM-DD HH:mm:ss")}</span>
+    },
+    {
+      title: "操作",
+      render: (text, record) => (
+        <Fragment>
+          <a onClick={() => this.handleUpdateModalVisible(true, record)}>
+            配置
+          </a>
+          <Divider type="vertical" />
+          <a href="">订阅警报</a>
+        </Fragment>
+      )
+    }
+  ];
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "rule/fetch"
+    });
+  }
 
   handleSearch() {}
 
@@ -223,8 +301,17 @@ class TableList extends PureComponent {
     return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
   }
 
+  handleSelectRows = rows => {
+    this.setState({
+      selectedRows: rows
+    });
+  };
+
   render() {
-    const { modalVisible } = this.state;
+    const { modalVisible, selectedRows } = this.state;
+    const {
+      rule: { data }
+    } = this.props;
     return (
       <PageHeaderWrapper title="查询表格">
         <Card bordered={false}>
@@ -239,6 +326,12 @@ class TableList extends PureComponent {
                 新建
               </Button>
             </div>
+            <StandardTable
+              selectedRows={selectedRows}
+              columns={this.columns}
+              data={data}
+              onSelectRow={this.handleSelectRows}
+            />
           </div>
         </Card>
         <CreateForm
