@@ -53,3 +53,13 @@ export async function removeRule(params) {
     }
   });
 }
+
+export async function updateRule(params) {
+  return request("/api/rule", {
+    method: "POST",
+    body: {
+      ...params,
+      method: "update"
+    }
+  });
+}

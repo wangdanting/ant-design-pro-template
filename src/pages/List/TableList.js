@@ -13,7 +13,9 @@ import {
   InputNumber,
   Modal,
   Badge,
-  Divider
+  Divider,
+  Dropdown,
+  Menu
 } from "antd";
 import styles from "./TableList.less";
 import { connect } from "dva";
@@ -22,7 +24,10 @@ import moment from "moment";
 
 const FormItem = Form.Item;
 const { Option } = Select;
-
+const getValue = obj =>
+  Object.keys(obj)
+    .map(key => obj[key])
+    .join(",");
 const statusMap = ["default", "processing", "success", "error"];
 const status = ["关闭", "运行中", "已上线", "异常"];
 
@@ -58,15 +63,25 @@ const CreateForm = Form.create()(props => {
   );
 });
 
-@connect(({ rule }) => ({
-  rule
+@Form.create()
+class UpdateForm extends PureComponent {
+  render() {
+    return <div>dddd</div>;
+  }
+}
+
+@connect(({ rule, loading }) => ({
+  rule,
+  loading: loading.models.rule
 }))
 @Form.create()
 class TableList extends PureComponent {
   state = {
     expandForm: false, //是否是展开状态
     modalVisible: false,
-    selectedRows: []
+    selectedRows: [],
+    updateModalVisible: false,
+    stepFormValues: {}
   };
 
   columns = [
@@ -122,7 +137,11 @@ class TableList extends PureComponent {
       title: "操作",
       render: (text, record) => (
         <Fragment>
-          <a onClick={() => this.handleUpdateModalVisible(true, record)}>
+          <a
+            onClick={() =>
+              this.handleUpdateModalVisible({ flag: true }, record)
+            }
+          >
             配置
           </a>
           <Divider type="vertical" />
@@ -138,6 +157,38 @@ class TableList extends PureComponent {
       type: "rule/fetch"
     });
   }
+
+  handleUpdateModalVisible = ({ flag = false } = {}, record) => {
+    this.setState({
+      updateModalVisible: !!flag,
+      stepFormValues: record || {}
+    });
+  };
+
+  handleStandardTableChange = (pagination, filtersArg, sorter) => {
+    const { dispatch } = this.props;
+
+    const filters = Object.keys(filtersArg).reduce((obj, key) => {
+      const newObj = { ...obj };
+      newObj[key] = getValue(filtersArg[key]);
+      return newObj;
+    }, {});
+
+    const params = {
+      currentPage: pagination.current,
+      pageSize: pagination.pageSize,
+      ...filters
+    };
+
+    if (sorter.field) {
+      params.sorter = `${sorter.field}_${sorter.order}`;
+    }
+
+    dispatch({
+      type: "rule/fetch",
+      payload: params
+    });
+  };
 
   handleSearch() {}
 
@@ -307,11 +358,45 @@ class TableList extends PureComponent {
     });
   };
 
+  handleMenuClick = e => {
+    const { dispatch } = this.props;
+    const { selectedRows } = this.state;
+
+    if (!selectedRows) return;
+
+    switch (e.key) {
+      case "remove":
+        dispatch({
+          type: "rule/remove",
+          payload: {
+            key: selectedRows.map(row => row.key)
+          },
+          callback: () => {
+            console.log(e.key, "eee");
+            this.setState({
+              selectedRows: []
+            });
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
   render() {
-    const { modalVisible, selectedRows } = this.state;
+    const { modalVisible, selectedRows, stepFormValues } = this.state;
     const {
-      rule: { data }
+      rule: { data },
+      loading
     } = this.props;
+    const menu = (
+      <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
+        <Menu.Item key="remove">删除</Menu.Item>
+        <Menu.Item key="approval">批量审批</Menu.Item>
+      </Menu>
+    );
+
     return (
       <PageHeaderWrapper title="查询表格">
         <Card bordered={false}>
@@ -325,12 +410,24 @@ class TableList extends PureComponent {
               >
                 新建
               </Button>
+              {selectedRows.length > 0 && (
+                <span>
+                  <Button>批量操作</Button>
+                  <Dropdown overlay={menu}>
+                    <Button>
+                      更多操作 <Icon type="down" />
+                    </Button>
+                  </Dropdown>
+                </span>
+              )}
             </div>
             <StandardTable
               selectedRows={selectedRows}
+              loading={loading}
               columns={this.columns}
               data={data}
               onSelectRow={this.handleSelectRows}
+              onChange={this.handleStandardTableChange}
             />
           </div>
         </Card>
@@ -339,6 +436,13 @@ class TableList extends PureComponent {
           handleModalVisible={this.handleModalVisible}
           modalVisible={modalVisible}
         />
+        {stepFormValues && Object.keys(stepFormValues).length ? (
+          <UpdateForm
+            handleUpdateModalVisible={this.handleUpdateModalVisible}
+            handleUpdate={this.handleUpdate}
+            values={stepFormValues}
+          />
+        ) : null}
       </PageHeaderWrapper>
     );
   }
