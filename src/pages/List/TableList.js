@@ -15,12 +15,14 @@ import {
   Badge,
   Divider,
   Dropdown,
-  Menu
+  Menu,
+  Steps
 } from "antd";
 import styles from "./TableList.less";
 import { connect } from "dva";
 import StandardTable from "@/components/StandardTable";
 import moment from "moment";
+const Step = Steps.Step;
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -65,8 +67,49 @@ const CreateForm = Form.create()(props => {
 
 @Form.create()
 class UpdateForm extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      formVals: {
+        name: props.values.name,
+        desc: props.values.desc,
+        key: props.values.key,
+        target: "0",
+        template: "0",
+        type: "1",
+        time: "",
+        frequency: "month"
+      },
+      currentStep: 0
+    };
+  }
+
+  renderContent = (currentStep, formVals) => {
+    const { form } = this.props;
+    return <div>ddd</div>;
+  };
+
   render() {
-    return <div>dddd</div>;
+    const { updateModalVisible } = this.props;
+    const { currentStep, formVals } = this.state;
+
+    return (
+      <Modal
+        width={640}
+        bodyStyle={{ padding: "32px 40px 48px" }}
+        title="规则配置"
+        destroyOnClose
+        visible={updateModalVisible}
+      >
+        {/* <Steps style={{ marginBottom: 28 }} size="small" current={currentStep}>
+          <Step title="基本信息" />
+          <Step title="配置规则属性" />
+          <Step title="设定调度周期" />
+        </Steps> */}
+        {this.renderContent(currentStep, formVals)}
+      </Modal>
+    );
   }
 }
 
@@ -384,8 +427,28 @@ class TableList extends PureComponent {
     }
   };
 
+  handleUpdate = fields => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "rule/update",
+      payload: {
+        name: fields.name,
+        desc: fields.desc,
+        key: fields.key
+      }
+    });
+
+    message.success("配置成功");
+    this.handleUpdateModalVisible();
+  };
+
   render() {
-    const { modalVisible, selectedRows, stepFormValues } = this.state;
+    const {
+      modalVisible,
+      selectedRows,
+      stepFormValues,
+      updateModalVisible
+    } = this.state;
     const {
       rule: { data },
       loading
@@ -440,6 +503,7 @@ class TableList extends PureComponent {
           <UpdateForm
             handleUpdateModalVisible={this.handleUpdateModalVisible}
             handleUpdate={this.handleUpdate}
+            updateModalVisible={updateModalVisible}
             values={stepFormValues}
           />
         ) : null}
