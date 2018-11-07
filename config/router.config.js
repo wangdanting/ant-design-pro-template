@@ -69,6 +69,11 @@ export default [
             path: "/list/table-list",
             name: "searchtable",
             component: "./List/TableList"
+          },
+          {
+            path: "/list/basic-list",
+            name: "basiclist",
+            component: "./List/BasicList"
           }
         ]
       },
