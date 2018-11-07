@@ -22,6 +22,7 @@ import {
 import styles from "./BasicList.less";
 import { connect } from "dva";
 import moment from "moment";
+import { findDOMNode } from "react-dom";
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -85,6 +86,7 @@ class BasicList extends PureComponent {
   };
 
   handleDone = () => {
+    setTimeout(() => this.addBtn.blur(), 0);
     this.setState({
       done: false,
       visible: false
@@ -92,6 +94,7 @@ class BasicList extends PureComponent {
   };
 
   handleCancel = () => {
+    setTimeout(() => this.addBtn.blur(), 0);
     this.setState({
       visible: false
     });
@@ -101,6 +104,25 @@ class BasicList extends PureComponent {
     this.setState({
       visible: true,
       current: undefined
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { dispatch, form } = this.props;
+    const { current } = this.state;
+    const id = current ? current.id : "";
+
+    setTimeout(() => this.addBtn.blur(), 0);
+    form.validateFields((err, fieldsValue) => {
+      if (err) return;
+      this.setState({
+        done: true
+      });
+      dispatch({
+        type: "list/submit",
+        payload: { id, ...fieldsValue }
+      });
     });
   };
 
@@ -281,6 +303,9 @@ class BasicList extends PureComponent {
               style={{ width: "100%", marginBottom: 8 }}
               icon="plus"
               onClick={this.showModal}
+              ref={component => {
+                this.addBtn = findDOMNode(component);
+              }}
             >
               添加
             </Button>
