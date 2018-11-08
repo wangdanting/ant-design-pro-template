@@ -74,6 +74,11 @@ export default [
             path: "/list/basic-list",
             name: "basiclist",
             component: "./List/BasicList"
+          },
+          {
+            path: "/list/card-list",
+            name: "cardlist",
+            component: "./List/CardList"
           }
         ]
       },
