@@ -2,15 +2,92 @@ import React, { PureComponent, Fragment } from "react";
 import StandardFormRow from "@/components/StandardFormRow";
 import TagSelect from "@/components/TagSelect";
 import styles from "./Articles.less";
-import { Card, Form } from "antd";
+import { connect } from "dva";
+import moment from "moment";
+import { Card, Form, Row, Col, Select, List, Icon, Tag, Avatar } from "antd";
 
 const FormItem = Form.Item;
+const { Option } = Select;
 
+const owners = [
+  {
+    id: "wzj",
+    name: "我自己"
+  },
+  {
+    id: "wjh",
+    name: "吴家豪"
+  },
+  {
+    id: "zxx",
+    name: "周星星"
+  },
+  {
+    id: "zly",
+    name: "赵丽颖"
+  },
+  {
+    id: "ym",
+    name: "姚明"
+  }
+];
+
+const formItemLayout = {
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 24 },
+    md: { span: 12 }
+  }
+};
+
+const IconText = ({ type, text }) => (
+  <span>
+    <Icon type={type} style={{ marginRight: 8 }} />
+    {text}
+  </span>
+);
+
+const ArticleListContent = ({
+  data: { content, updatedAt, avatar, owner, href }
+}) => (
+  <div className={styles.listContent}>
+    <div className={styles.description}>{content}</div>
+    <div className={styles.extra}>
+      <Avatar src={avatar} size="small" />
+      <a href={href}>{owner}</a> 发布在 <a href={href}>{href}</a>
+      <em>{moment(updatedAt).format("YYYY-MM-DD HH:mm")}</em>
+    </div>
+  </div>
+);
+
+@connect(({ list, loading }) => ({
+  list,
+  loading: loading.models.list
+}))
 @Form.create()
 class Articles extends PureComponent {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "list/fetch",
+      payload: {
+        count: 5
+      }
+    });
+  }
+
+  setOwner = () => {
+    const { form } = this.props;
+    form.setFieldsValue({
+      owner: ["wzj"]
+    });
+  };
+
   render() {
     const {
-      form: { getFieldDecorator }
+      form: { getFieldDecorator },
+      list: { list },
+      loading
     } = this.props;
     return (
       <Fragment>
@@ -22,7 +99,9 @@ class Articles extends PureComponent {
               style={{ paddingBottom: 11 }}
             >
               <FormItem>
-                {getFieldDecorator("category")(
+                {getFieldDecorator("category", {
+                  initialValue: "cat1"
+                })(
                   <TagSelect expandable>
                     <TagSelect.Option value="cat1">类目一</TagSelect.Option>
                     <TagSelect.Option value="cat2">类目二</TagSelect.Option>
@@ -40,7 +119,100 @@ class Articles extends PureComponent {
                 )}
               </FormItem>
             </StandardFormRow>
+            <StandardFormRow title="owner" grid>
+              <Row>
+                <Col lg={16} md={24} sm={24} xs={24}>
+                  <FormItem>
+                    {getFieldDecorator("owner", {
+                      initialValue: ["wjh", "zxx"]
+                    })(
+                      <Select
+                        mode="multiple"
+                        style={{ maxWidth: 286, width: "100%" }}
+                        placeholder="选择 owner"
+                      >
+                        {owners.map(owners => (
+                          <Option key={owners.id} value={owners.id}>
+                            {owners.name}
+                          </Option>
+                        ))}
+                      </Select>
+                    )}
+                    <a className={styles.selfTrigger} onClick={this.setOwner}>
+                      只看自己的
+                    </a>
+                  </FormItem>
+                </Col>
+              </Row>
+            </StandardFormRow>
+            <StandardFormRow title="其它选项" grid last>
+              <Row gutter={16}>
+                <Col xl={8} lg={10} md={12} sm={24} xs={24}>
+                  <FormItem {...formItemLayout} label="活跃用户">
+                    {getFieldDecorator("user", {})(
+                      <Select
+                        placeholder="不限"
+                        style={{ maxWidth: 200, width: "100%" }}
+                      >
+                        <Option value="lisa">李三</Option>
+                      </Select>
+                    )}
+                  </FormItem>
+                </Col>
+                <Col xl={8} lg={10} md={12} sm={24} xs={24}>
+                  <FormItem {...formItemLayout} label="好评度">
+                    {getFieldDecorator("rate", {})(
+                      <Select
+                        placeholder="不限"
+                        style={{ maxWidth: 200, width: "100%" }}
+                      >
+                        <Option value="good">优秀</Option>
+                      </Select>
+                    )}
+                  </FormItem>
+                </Col>
+              </Row>
+            </StandardFormRow>
           </Form>
+        </Card>
+        <Card
+          style={{ marginTop: 24 }}
+          bordered={false}
+          bodyStyle={{ padding: "8px 32px 32px 32px" }}
+        >
+          <List
+            size="large"
+            loading={list.length === 0 ? loading : false}
+            rowKey="id"
+            itemLayout="vertical"
+            dataSource={list}
+            renderItem={item => (
+              <List.Item
+                key={item.id}
+                actions={[
+                  <IconText type="star-o" text={item.star} />,
+                  <IconText type="like-o" text={item.like} />,
+                  <IconText type="message" text={item.message} />
+                ]}
+              >
+                <List.Item.Meta
+                  title={
+                    <a className={styles.listItemMetaTitle} href={item.href}>
+                      {item.title}
+                    </a>
+                  }
+                  description={
+                    <span>
+                      <Tag>Ant Design</Tag>
+                      <Tag>设计语言</Tag>
+                      <Tag>蚂蚁金服</Tag>
+                    </span>
+                  }
+                />
+                <ArticleListContent data={item} />
+              </List.Item>
+            )}
+          />
         </Card>
       </Fragment>
     );
