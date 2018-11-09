@@ -4,7 +4,18 @@ import TagSelect from "@/components/TagSelect";
 import styles from "./Articles.less";
 import { connect } from "dva";
 import moment from "moment";
-import { Card, Form, Row, Col, Select, List, Icon, Tag, Avatar } from "antd";
+import {
+  Card,
+  Form,
+  Row,
+  Col,
+  Select,
+  List,
+  Icon,
+  Tag,
+  Avatar,
+  Button
+} from "antd";
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -60,6 +71,8 @@ const ArticleListContent = ({
   </div>
 );
 
+const pageSize = 5;
+
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list
@@ -83,12 +96,41 @@ class Articles extends PureComponent {
     });
   };
 
+  fetchMore = () => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "list/appendFetch",
+      payload: {
+        count: pageSize
+      }
+    });
+  };
+
   render() {
     const {
       form: { getFieldDecorator },
       list: { list },
       loading
     } = this.props;
+
+    const loadMore =
+      list.length > 0 ? (
+        <div style={{ textAlign: "center", marginTop: 16 }}>
+          <Button
+            onClick={this.fetchMore}
+            style={{ paddingLeft: 48, paddingRight: 48 }}
+          >
+            {loading ? (
+              <span>
+                <Icon type="loading" /> 加载中...
+              </span>
+            ) : (
+              "加载更多"
+            )}
+          </Button>
+        </div>
+      ) : null;
+
     return (
       <Fragment>
         <Card bordered={false}>
@@ -186,6 +228,7 @@ class Articles extends PureComponent {
             rowKey="id"
             itemLayout="vertical"
             dataSource={list}
+            loadMore={loadMore}
             renderItem={item => (
               <List.Item
                 key={item.id}
