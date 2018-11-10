@@ -2,7 +2,12 @@ import { queryBasicProfile, queryAdvancedProfile } from "@/services/api";
 export default {
   namespaced: "profile",
 
-  state: {},
+  state: {
+    basicGoods: [],
+    advancedOperation1: [],
+    advancedOperation2: [],
+    advancedOperation3: []
+  },
 
   effects: {
     *fetchBasic(_, { call, put }) {
