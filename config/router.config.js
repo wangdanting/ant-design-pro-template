@@ -109,6 +109,24 @@ export default [
         ]
       },
       {
+        path: "/profile",
+        name: "profile",
+        icon: "profile",
+        routes: [
+          {
+            path: "/profile/basic",
+            name: "basic",
+            component: "./Profile/BasicProfile"
+          },
+          {
+            path: "/profile/advanced",
+            name: "advanced",
+            authority: ["admin"],
+            component: "./Profile/AdvancedProfile"
+          }
+        ]
+      },
+      {
         component: "./Exception/404"
       }
     ]

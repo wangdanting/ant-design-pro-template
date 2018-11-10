@@ -100,3 +100,11 @@ export async function updateFakeList(params) {
     }
   });
 }
+
+export async function queryBasicProfile(params) {
+  return request("/api/profile/basic");
+}
+
+export async function queryAdvancedProfile() {
+  return request("/api/profile/advanced");
+}
