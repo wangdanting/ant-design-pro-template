@@ -65,7 +65,11 @@ class Projects extends PureComponent {
                 <div className={styles.avatarList}>
                   <AvatarList size="mini">
                     {item.members.map((member, i) => (
-                      <div key={`${item.id}-avatar-${i}`}>dd</div>
+                      <AvatarList.Item
+                        key={`${item.id}-avatar-${i}`}
+                        src={member.avatar}
+                        tips={member.name}
+                      />
                     ))}
                   </AvatarList>
                 </div>
