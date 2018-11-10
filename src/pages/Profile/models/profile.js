@@ -16,6 +16,13 @@ export default {
         type: "show",
         payload: response
       });
+    },
+    *fetchAdvanced(_, { call, put }) {
+      const response = yield call(queryAdvancedProfile);
+      yield put({
+        type: "show",
+        payload: response
+      });
     }
   },
 
