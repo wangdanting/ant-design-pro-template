@@ -108,3 +108,7 @@ export async function queryBasicProfile(params) {
 export async function queryAdvancedProfile() {
   return request("/api/profile/advanced");
 }
+
+export async function queryProjectNotice() {
+  return request("/api/project/notice");
+}
