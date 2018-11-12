@@ -156,6 +156,23 @@ export default [
         ]
       },
       {
+        name: "result",
+        icon: "check-circle-o",
+        path: "/result",
+        routes: [
+          {
+            path: "/result/success",
+            name: "success",
+            component: "./Result/Success"
+          },
+          {
+            path: "/result/fail",
+            name: "fail",
+            component: "./Result/Error"
+          }
+        ]
+      },
+      {
         component: "./Exception/404"
       }
     ]
