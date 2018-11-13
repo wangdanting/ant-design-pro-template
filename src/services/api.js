@@ -112,3 +112,7 @@ export async function queryAdvancedProfile() {
 export async function queryProjectNotice() {
   return request("/api/project/notice");
 }
+
+export async function fakeChartData() {
+  return request("/api/fake_chart_data");
+}
