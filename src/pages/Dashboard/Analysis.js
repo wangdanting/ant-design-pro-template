@@ -4,7 +4,7 @@ import { connect } from "dva";
 import numeral from "numeral";
 import { formatMessage, FormattedMessage } from "umi/locale";
 import GridContent from "@/components/PageHeaderWrapper/GridContent";
-import { ChartCard, Field } from "@/components/Charts";
+import { ChartCard, Field, MiniArea } from "@/components/Charts";
 import Trend from "@/components/Trend";
 import Yuan from "@/utils/Yuan";
 
@@ -53,8 +53,9 @@ class Analysis extends PureComponent {
 
   render() {
     const { loading: stateLoading } = this.state;
-    const { loading: propsLoading } = this.props;
+    const { loading: propsLoading, chart } = this.props;
     const loading = propsLoading || stateLoading;
+    const { visitData } = chart;
     return (
       <GridContent>
         <Row gutter={24}>
@@ -108,6 +109,45 @@ class Analysis extends PureComponent {
                 />
                 <span className={styles.trendText}>11%</span>
               </Trend>
+            </ChartCard>
+          </Col>
+          <Col {...topColResponsiveProps}>
+            <ChartCard
+              bordered={false}
+              loading={loading}
+              title={
+                <FormattedMessage
+                  id="app.analysis.visits"
+                  defaultMessage="visits"
+                />
+              }
+              action={
+                <Tooltip
+                  title={
+                    <FormattedMessage
+                      id="app.analysis.introduce"
+                      defaultMessage="introduce"
+                    />
+                  }
+                >
+                  <Icon type="info-circle-o" />
+                </Tooltip>
+              }
+              total={numeral(8846).format("0,0")}
+              footer={
+                <Field
+                  label={
+                    <FormattedMessage
+                      id="app.analysis.day-visits"
+                      defaultMessage="Day Visits"
+                    />
+                  }
+                  value={numeral(1234).format("0,0")}
+                />
+              }
+              contentheight={46}
+            >
+              <MiniArea color="#975FE4" data={visitData} />
             </ChartCard>
           </Col>
         </Row>

@@ -11,7 +11,6 @@ const Trend = ({
   className,
   ...rest
 }) => {
-  s;
   const classString = classNames(
     styles.trendItem,
     {

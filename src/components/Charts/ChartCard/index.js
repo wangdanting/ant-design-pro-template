@@ -49,6 +49,25 @@ class ChartCard extends PureComponent {
             {renderTotal(total)}
           </div>
         </div>
+        {children && (
+          <div
+            className={styles.content}
+            style={{ height: contentheight || "auto" }}
+          >
+            <div className={contentheight && styles.contentFixed}>
+              {children}
+            </div>
+          </div>
+        )}
+        {footer && (
+          <div
+            className={classNames(styles.footer, {
+              [styles.footerMargin]: !children
+            })}
+          >
+            {footer}
+          </div>
+        )}
       </div>
     );
   };

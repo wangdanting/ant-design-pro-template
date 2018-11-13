@@ -11,6 +11,7 @@
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "antd": "^3.10.0",
+    "bizcharts": "^3.2.5-beta.4",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
     "enquire-js": "^0.2.1",
