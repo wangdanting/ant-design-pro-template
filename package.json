@@ -4,7 +4,8 @@
   "description": "Imitate an out-of-box UI solution for enterprise applications ",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env APP_TYPE=site umi dev"
+    "start": "cross-env APP_TYPE=site umi dev",
+    "lint": "eslint --ext .js src/pages/Result/Success.js"
   },
   "author": "wangdanting",
   "license": "ISC",
@@ -35,7 +36,17 @@
   "devDependencies": {
     "antd-pro-merge-less": "0.0.9",
     "antd-pro-theme-webpack-plugin": "^1.1.8",
+    "babel-eslint": "^10.0.1",
     "cross-env": "^5.2.0",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-compat": "^2.6.3",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-markdown": "^1.0.0-rc.0",
+    "eslint-plugin-react": "^7.11.1",
     "umi": "^2.1.2",
     "umi-plugin-react": "^1.1.1"
   }

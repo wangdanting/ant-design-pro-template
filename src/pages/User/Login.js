@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'dva';
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import Link from 'umi/link';
@@ -15,7 +15,7 @@ const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 class LoginPage extends Component {
   state = {
     type: 'account',
-    autoLogin: true,
+    autoLogin: true
   };
 
   handleSubmit = (err, values) => {
@@ -26,43 +26,46 @@ class LoginPage extends Component {
         type: 'login/login',
         payload: {
           ...values,
-          type,
-        },
+          type
+        }
       });
     }
   };
 
-  onGetCaptcha = () => (
+  onGetCaptcha = () =>
     new Promise((resolve, reject) => {
       this.loginForm.validateFields(['mobile'], {}, (err, values) => {
-        console.log(values, 'values1');
         if (err) {
           reject(err);
         } else {
           const { dispatch } = this.props;
           dispatch({
             type: 'login/getCaptcha',
-            payload: values.mobile,
-          })
+            payload: values.mobile
+          });
         }
-      })
-    })
-  );
+      });
+    });
 
-  onTabChange = (type) => {
+  onTabChange = type => {
     this.setState({
       type
     });
   };
 
-  changeAutoLogin = (e) => {
+  changeAutoLogin = e => {
     this.setState({
       autoLogin: e.target.checked
-    })
+    });
   };
 
   renderMessage = content => (
-    <Alert style={{ marginButton: 24 }} message={content} type="error" showIcon />
+    <Alert
+      style={{ marginButton: 24 }}
+      message={content}
+      type="error"
+      showIcon
+    />
   );
 
   render() {
@@ -76,33 +79,53 @@ class LoginPage extends Component {
           onSubmit={this.handleSubmit}
           ref={form => {
             this.loginForm = form;
-          }}>
-          <Tab key="account" tab={formatMessage({ id: 'app.login.tab-login-credentials' })}>
+          }}
+        >
+          <Tab
+            key="account"
+            tab={formatMessage({ id: 'app.login.tab-login-credentials' })}
+          >
             {login.status === 'error' &&
               login.type === 'account' &&
               !submitting &&
-              this.renderMessage(formatMessage({ id: 'app.message-login.invalid-credentials' }))
-            }
-            <UserName name="userName" placeholder="admin/user" />
+              this.renderMessage(
+                formatMessage({
+                  id: 'app.login.message-invalid-verification-code'
+                })
+              )}
+            <UserName name="userName" placeholder="username: admin or user" />
             <Password
               name="password"
-              placeholder="888888/123456"
-              onPressEnter={() => this.loginForm.validateFields(this.handleSubmit)}
+              placeholder="password: ant.design"
+              onPressEnter={() =>
+                this.loginForm.validateFields(this.handleSubmit)
+              }
             />
           </Tab>
-          <Tab key="mobile" tab={formatMessage({ id: 'app.login.tab-login-mobile' })}>
+          <Tab
+            key="mobile"
+            tab={formatMessage({ id: 'app.login.tab-login-mobile' })}
+          >
             {login.status === 'error' &&
               login.type === 'mobile' &&
               !submitting &&
-              this.renderMessage(formatMessage({ id: 'app.login.message-invalid-verification-code' }))}
+              this.renderMessage(
+                formatMessage({
+                  id: 'app.login.message-invalid-verification-code'
+                })
+              )}
             <Mobile name="mobile" />
-            <Captcha name="captcha" countDown={120} onGetCaptcha={this.onGetCaptcha} />
+            <Captcha
+              name="captcha"
+              countDown={120}
+              onGetCaptcha={this.onGetCaptcha}
+            />
           </Tab>
           <div>
             <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
               <FormattedMessage id="app.login.remember-me" />
             </Checkbox>
-            <a style={{ float: 'right' }} href="">
+            <a href="http://">
               <FormattedMessage id="app.login.forgot-password" />
             </a>
           </div>
@@ -111,18 +134,29 @@ class LoginPage extends Component {
           </Submit>
           <div className={styles.other}>
             <FormattedMessage id="app.login.sign-in-with" />
-            <Icon type="alipay-circle" className={styles.icon} theme="outlined" />
-            <Icon type="taobao-circle" className={styles.icon} theme="outlined" />
-            <Icon type="weibo-circle" className={styles.icon} theme="outlined" />
+            <Icon
+              type="alipay-circle"
+              className={styles.icon}
+              theme="outlined"
+            />
+            <Icon
+              type="taobao-circle"
+              className={styles.icon}
+              theme="outlined"
+            />
+            <Icon
+              type="weibo-circle"
+              className={styles.icon}
+              theme="outlined"
+            />
             <Link className={styles.register} to="/User/Register">
               <FormattedMessage id="app.login.signup" />
             </Link>
           </div>
         </Login>
       </div>
-    )
+    );
   }
 }
 
 export default LoginPage;
-

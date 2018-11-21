@@ -1,12 +1,12 @@
-import { routerRedux } from "dva/router";
-import { stringify } from "qs";
-import { getFakeCaptcha, fakeAccountLogin } from "@/services/api";
-import { setAuthority } from "@/utils/authority";
-import { getPageQuery } from "@/utils/utils";
-import { reloadAuthorized } from "@/utils/Authorized";
+import { routerRedux } from 'dva/router';
+import { stringify } from 'qs';
+import { getFakeCaptcha, fakeAccountLogin } from '@/services/api';
+import { setAuthority } from '@/utils/authority';
+import { getPageQuery } from '@/utils/utils';
+import { reloadAuthorized } from '@/utils/Authorized';
 
 export default {
-  namespace: "login",
+  namespace: 'login',
 
   state: {
     status: undefined
@@ -16,11 +16,11 @@ export default {
     *login({ payload }, { call, put }) {
       const response = yield call(fakeAccountLogin, payload);
       yield put({
-        type: "changeLoginStatus",
+        type: 'changeLoginStatus',
         payload: response
       });
 
-      if (response.status === "ok") {
+      if (response.status === 'ok') {
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
@@ -29,7 +29,7 @@ export default {
           const redirectUrlParams = new URL(redirect);
           if (redirectUrlParams.origin === urlParams.origin) {
             redirect = redirect.substr(urlParams.origin.length);
-            if (redirect.startsWith("/#")) {
+            if (redirect.startsWith('/#')) {
               redirect = redirect.substr(2);
             }
           } else {
@@ -38,7 +38,7 @@ export default {
           }
         }
 
-        yield put(routerRedux.replace(redirect || "/"));
+        yield put(routerRedux.replace(redirect || '/'));
       }
     },
 
@@ -48,16 +48,16 @@ export default {
 
     *logout(_, { put }) {
       yield put({
-        type: "changeLoginStatus",
+        type: 'changeLoginStatus',
         payload: {
           status: false,
-          currentAuthority: "guest"
+          currentAuthority: 'guest'
         }
       });
       reloadAuthorized();
       yield put(
         routerRedux.push({
-          pathname: "/user/login",
+          pathname: '/user/login',
           search: stringify({
             redirect: window.location.href
           })

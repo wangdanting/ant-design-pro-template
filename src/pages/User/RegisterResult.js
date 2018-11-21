@@ -1,13 +1,13 @@
-import React from "react";
-import Result from "@/components/Result";
-import styles from "./RegisterResult.less";
-import { formatMessage, FormattedMessage } from "umi/locale";
-import Link from "umi/link";
-import { Button } from "antd";
+import React from 'react';
+import Result from '@/components/Result';
+import { formatMessage, FormattedMessage } from 'umi/locale';
+import Link from 'umi/link';
+import { Button } from 'antd';
+import styles from './RegisterResult.less';
 
 const actions = (
   <div className={styles.actions}>
-    <a href="">
+    <a href="http://">
       <Button size="large" type="primary">
         <FormattedMessage id="app.register-result.view-mailbox" />
       </Button>
@@ -31,12 +31,12 @@ const RegisterResult = ({ location }) => (
           values={{
             email: location.state
               ? location.state.account
-              : "AntDesign@example.com"
+              : 'AntDesign@example.com'
           }}
         />
       </div>
     }
-    description={formatMessage({ id: "app.register-result.activation-email" })}
+    description={formatMessage({ id: 'app.register-result.activation-email' })}
     actions={actions}
   />
 );
