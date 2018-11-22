@@ -1,6 +1,6 @@
-import React, { PureComponent } from "react";
-import { connect } from "dva";
-import numeral from "numeral";
+import React, { PureComponent } from 'react';
+import { connect } from 'dva';
+import numeral from 'numeral';
 import {
   Row,
   Col,
@@ -13,12 +13,12 @@ import {
   Tooltip,
   Dropdown,
   Menu
-} from "antd";
-import StandardFormRow from "@/components/StandardFormRow";
-import TagSelect from "@/components/TagSelect";
-import { formatWan } from "@/utils/utils";
+} from 'antd';
+import StandardFormRow from '@/components/StandardFormRow';
+import TagSelect from '@/components/TagSelect';
+import { formatWan } from '@/utils/utils';
 
-import styles from "./Applications.less";
+import styles from './Applications.less';
 
 const { Option } = Select;
 const FormItem = Form.Item;
@@ -32,7 +32,7 @@ class Applications extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: "list/fetch",
+      type: 'list/fetch',
       payload: {
         count: 8
       }
@@ -108,7 +108,7 @@ class Applications extends PureComponent {
               style={{ paddingBottom: 11 }}
             >
               <FormItem>
-                {getFieldDecorator("category")(
+                {getFieldDecorator('category')(
                   <TagSelect expandable>
                     <TagSelect.Option value="cat1">类目一</TagSelect.Option>
                     <TagSelect.Option value="cat2">类目二</TagSelect.Option>
@@ -130,10 +130,10 @@ class Applications extends PureComponent {
               <Row gutter={16}>
                 <Col lg={8} md={10} sm={10} xs={24}>
                   <FormItem {...formItemLayout} label="作者">
-                    {getFieldDecorator("author", {})(
+                    {getFieldDecorator('author', {})(
                       <Select
                         placeholder="不限"
-                        style={{ maxWidth: 200, width: "100%" }}
+                        style={{ maxWidth: 200, width: '100%' }}
                       >
                         <Option value="lisa">王昭君</Option>
                       </Select>
@@ -142,10 +142,10 @@ class Applications extends PureComponent {
                 </Col>
                 <Col lg={8} md={10} sm={10} xs={24}>
                   <FormItem {...formItemLayout} label="好评度">
-                    {getFieldDecorator("rate", {})(
+                    {getFieldDecorator('rate', {})(
                       <Select
                         placeholder="不限"
-                        style={{ maxWidth: 200, width: "100%" }}
+                        style={{ maxWidth: 200, width: '100%' }}
                       >
                         <Option value="good">优秀</Option>
                         <Option value="normal">普通</Option>
@@ -190,7 +190,7 @@ class Applications extends PureComponent {
                 <div className={styles.cardItemContent}>
                   <CardInfo
                     activeUser={formatWan(item.activeUser)}
-                    newUser={numeral(item.newUser).format("0,0")}
+                    newUser={numeral(item.newUser).format('0,0')}
                   />
                 </div>
               </Card>

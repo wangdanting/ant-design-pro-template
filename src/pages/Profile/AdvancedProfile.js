@@ -1,10 +1,10 @@
-import React, { PureComponent, Fragment } from "react";
-import { connect } from "dva";
-import Bind from "lodash-decorators/bind";
-import Debounce from "lodash-decorators/debounce";
-import classNames from "classnames";
-import PageHeaderWrapper from "@/components/PageHeaderWrapper";
-import DescriptionList from "@/components/DescriptionList";
+import React, { PureComponent, Fragment } from 'react';
+import { connect } from 'dva';
+import Bind from 'lodash-decorators/bind';
+import Debounce from 'lodash-decorators/debounce';
+import classNames from 'classnames';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import DescriptionList from '@/components/DescriptionList';
 import {
   Button,
   Menu,
@@ -19,9 +19,9 @@ import {
   Tooltip,
   Divider,
   Table
-} from "antd";
+} from 'antd';
 
-import styles from "./AdvancedProfile.less";
+import styles from './AdvancedProfile.less';
 
 const ButtonGroup = Button.Group;
 const { Description } = DescriptionList;
@@ -59,7 +59,7 @@ const description = (
     <Description term="订购产品">XX 服务</Description>
     <Description term="创建时间">2017-07-07</Description>
     <Description term="关联单据">
-      <a href="">12421</a>
+      <a href="http://">12421</a>
     </Description>
     <Description term="生效日期">2017-07-07 ~ 2017-08-08</Description>
     <Description term="备注">请于两个工作日内确认</Description>
@@ -81,12 +81,12 @@ const extra = (
 
 const tabList = [
   {
-    key: "detail",
-    tab: "详情"
+    key: 'detail',
+    tab: '详情'
   },
   {
-    key: "rule",
-    tab: "规则"
+    key: 'rule',
+    tab: '规则'
   }
 ];
 
@@ -104,10 +104,10 @@ const desc2 = (
   <div className={styles.stepDescription}>
     <Fragment>
       周毛毛
-      <Icon type="dingding-o" style={{ color: "#00A0E9", marginLeft: 8 }} />
+      <Icon type="dingding-o" style={{ color: '#00A0E9', marginLeft: 8 }} />
     </Fragment>
     <div>
-      <a href="">催一下</a>
+      <a href="http://">催一下</a>
     </div>
   </div>
 );
@@ -115,10 +115,10 @@ const desc2 = (
 const popoverContent = (
   <div style={{ width: 160 }}>
     吴加号
-    <span className={styles.textSecondary} style={{ float: "right" }}>
+    <span className={styles.textSecondary} style={{ float: 'right' }}>
       <Badge
         status="default"
-        text={<span style={{ color: "rgba(0, 0, 0, 0.45)" }}>未响应</span>}
+        text={<span style={{ color: 'rgba(0, 0, 0, 0.45)' }}>未响应</span>}
       />
     </span>
     <div className={styles.textSecondary} style={{ marginTop: 4 }}>
@@ -128,7 +128,7 @@ const popoverContent = (
 );
 
 const customDot = (dot, { status }) =>
-  status === "process" ? (
+  status === 'process' ? (
     <Popover placement="topLeft" arrowPointAtCenter content={popoverContent}>
       {dot}
     </Popover>
@@ -138,75 +138,75 @@ const customDot = (dot, { status }) =>
 
 const operationTabList = [
   {
-    key: "tab1",
-    tab: "操作日志一"
+    key: 'tab1',
+    tab: '操作日志一'
   },
   {
-    key: "tab2",
-    tab: "操作日志二"
+    key: 'tab2',
+    tab: '操作日志二'
   },
   {
-    key: "tab3",
-    tab: "操作日志三"
+    key: 'tab3',
+    tab: '操作日志三'
   }
 ];
 
 const columns = [
   {
-    title: "操作类型",
-    dataIndex: "type",
-    key: "type"
+    title: '操作类型',
+    dataIndex: 'type',
+    key: 'type'
   },
   {
-    title: "操作人",
-    dataIndex: "name",
-    key: "name"
+    title: '操作人',
+    dataIndex: 'name',
+    key: 'name'
   },
   {
-    title: "执行结果",
-    dataIndex: "status",
-    key: "status",
+    title: '执行结果',
+    dataIndex: 'status',
+    key: 'status',
     render: text =>
-      text === "agree" ? (
+      text === 'agree' ? (
         <Badge status="success" text="成功" />
       ) : (
         <Badge status="error" text="驳回" />
       )
   },
   {
-    title: "操作时间",
-    dataIndex: "updatedAt",
-    key: "updatedAt"
+    title: '操作时间',
+    dataIndex: 'updatedAt',
+    key: 'updatedAt'
   },
   {
-    title: "备注",
-    dataIndex: "memo",
-    key: "memo"
+    title: '备注',
+    dataIndex: 'memo',
+    key: 'memo'
   }
 ];
 
 @connect(({ profile, loading }) => ({
   profile,
-  loading: loading.effects["profile/fetchAdvanced"]
+  loading: loading.effects['profile/fetchAdvanced']
 }))
 class AdvancedProfile extends PureComponent {
   state = {
-    operationkey: "tab1",
-    stepDirection: "horizontal"
+    operationkey: 'tab1',
+    stepDirection: 'horizontal'
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: "profile/fetchAdvanced"
+      type: 'profile/fetchAdvanced'
     });
 
     this.setStepDirection();
-    window.addEventListener("resize", this.setStepDirection, { passive: true });
+    window.addEventListener('resize', this.setStepDirection, { passive: true });
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.setStepDirection);
+    window.removeEventListener('resize', this.setStepDirection);
     this.setStepDirection.cancel();
   }
 
@@ -215,13 +215,13 @@ class AdvancedProfile extends PureComponent {
   setStepDirection() {
     const { stepDirection } = this.state;
     const w = getWindowWidth();
-    if (stepDirection !== "vertical" && w <= 576) {
+    if (stepDirection !== 'vertical' && w <= 576) {
       this.setState({
-        stepDirection: "vertical"
+        stepDirection: 'vertical'
       });
-    } else if (stepDirection !== "horizontal" && w > 576) {
+    } else if (stepDirection !== 'horizontal' && w > 576) {
       this.setState({
-        stepDirection: "horizontal"
+        stepDirection: 'horizontal'
       });
     }
   }
@@ -307,7 +307,7 @@ class AdvancedProfile extends PureComponent {
                   某某数据
                   <Tooltip title="数据说明">
                     <Icon
-                      style={{ color: "rgba(0, 0, 0, 0.43)", marginLeft: 4 }}
+                      style={{ color: 'rgba(0, 0, 0, 0.43)', marginLeft: 4 }}
                       type="info-circle-o"
                     />
                   </Tooltip>
@@ -333,7 +333,7 @@ class AdvancedProfile extends PureComponent {
                 这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长...
               </Description>
             </DescriptionList>
-            <Divider style={{ margin: "16px 0" }} />
+            <Divider style={{ margin: '16px 0' }} />
             <DescriptionList
               size="small"
               style={{ marginBottom: 16 }}
@@ -345,7 +345,7 @@ class AdvancedProfile extends PureComponent {
                 Nakai一年生蔓生藤本；茎、枝粗壮，具明显的棱。卷须较粗..
               </Description>
             </DescriptionList>
-            <Divider style={{ margin: "16px 0" }} />
+            <Divider style={{ margin: '16px 0' }} />
             <DescriptionList size="small" title="组名称">
               <Description term="负责人">付小小</Description>
               <Description term="角色码">1234568</Description>

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env APP_TYPE=site umi dev",
-    "lint": "eslint --ext .js src/pages/Result/Success.js"
+    "lint": "eslint --ext .js src/pages/List/TableList.js"
   },
   "author": "wangdanting",
   "license": "ISC",

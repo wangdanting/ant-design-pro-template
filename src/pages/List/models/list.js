@@ -3,9 +3,10 @@ import {
   removeFakeList,
   addFakeList,
   updateFakeList
-} from "@/services/api";
+} from '@/services/api';
+
 export default {
-  namespaced: "list",
+  namespaced: 'list',
 
   state: {
     list: []
@@ -15,7 +16,7 @@ export default {
     *fetch({ payload }, { call, put }) {
       const response = yield call(queryFakeList, payload);
       yield put({
-        type: "queryList",
+        type: 'queryList',
         payload: Array.isArray(response) ? response : []
       });
     },
@@ -29,14 +30,14 @@ export default {
       }
       const response = yield call(callback, payload);
       yield put({
-        type: "queryList",
+        type: 'queryList',
         payload: response
       });
     },
     *appendFetch({ payload }, { call, put }) {
       const response = yield call(queryFakeList, payload);
       yield put({
-        type: "appendList",
+        type: 'appendList',
         payload: Array.isArray(response) ? response : []
       });
     }

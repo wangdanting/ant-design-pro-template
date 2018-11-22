@@ -1,9 +1,9 @@
-import React, { PureComponent } from "react";
-import PageHeaderWrapper from "@/components/PageHeaderWrapper";
-import Ellipsis from "@/components/Ellipsis";
-import styles from "./CardList.less";
-import { connect } from "dva";
-import { Card, Button, Icon, List } from "antd";
+import React, { PureComponent } from 'react';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import Ellipsis from '@/components/Ellipsis';
+import { connect } from 'dva';
+import { Card, Button, Icon, List } from 'antd';
+import styles from './CardList.less';
 
 @connect(({ list, loading }) => ({
   list,
@@ -13,7 +13,7 @@ class CardList extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: "list/fetch",
+      type: 'list/fetch',
       payload: {
         count: 8
       }
@@ -33,21 +33,24 @@ class CardList extends PureComponent {
         </p>
         <div className={styles.contentLink}>
           <a>
-            <img src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg" />{" "}
+            <img
+              alt=""
+              src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg"
+            />
             快速开始
           </a>
           <a>
             <img
               alt=""
               src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg"
-            />{" "}
+            />
             产品简介
           </a>
           <a>
             <img
               alt=""
               src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg"
-            />{" "}
+            />
             产品文档
           </a>
         </div>
@@ -74,7 +77,7 @@ class CardList extends PureComponent {
             rowKey="id"
             loading={loading}
             grid={{ gutter: 24, lg: 3, md: 2, sm: 1, xs: 1 }}
-            dataSource={["", ...list]}
+            dataSource={['', ...list]}
             renderItem={item =>
               item ? (
                 <List.Item key={item.id}>
@@ -103,7 +106,8 @@ class CardList extends PureComponent {
               ) : (
                 <List.Item>
                   <Button type="dashed" className={styles.newButton}>
-                    <Icon type="plus" /> 新增产品
+                    <Icon type="plus" />
+                    新增产品
                   </Button>
                 </List.Item>
               )

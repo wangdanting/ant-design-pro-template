@@ -1,9 +1,8 @@
-import React, { PureComponent, Fragment } from "react";
-import StandardFormRow from "@/components/StandardFormRow";
-import TagSelect from "@/components/TagSelect";
-import styles from "./Articles.less";
-import { connect } from "dva";
-import moment from "moment";
+import React, { PureComponent, Fragment } from 'react';
+import StandardFormRow from '@/components/StandardFormRow';
+import TagSelect from '@/components/TagSelect';
+import { connect } from 'dva';
+import moment from 'moment';
 import {
   Card,
   Form,
@@ -15,31 +14,32 @@ import {
   Tag,
   Avatar,
   Button
-} from "antd";
+} from 'antd';
+import styles from './Articles.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;
 
 const owners = [
   {
-    id: "wzj",
-    name: "我自己"
+    id: 'wzj',
+    name: '我自己'
   },
   {
-    id: "wjh",
-    name: "吴家豪"
+    id: 'wjh',
+    name: '吴家豪'
   },
   {
-    id: "zxx",
-    name: "周星星"
+    id: 'zxx',
+    name: '周星星'
   },
   {
-    id: "zly",
-    name: "赵丽颖"
+    id: 'zly',
+    name: '赵丽颖'
   },
   {
-    id: "ym",
-    name: "姚明"
+    id: 'ym',
+    name: '姚明'
   }
 ];
 
@@ -65,8 +65,10 @@ const ArticleListContent = ({
     <div className={styles.description}>{content}</div>
     <div className={styles.extra}>
       <Avatar src={avatar} size="small" />
-      <a href={href}>{owner}</a> 发布在 <a href={href}>{href}</a>
-      <em>{moment(updatedAt).format("YYYY-MM-DD HH:mm")}</em>
+      <a href={href}>{owner}</a>
+      发布在
+      <a href={href}>{href}</a>
+      <em>{moment(updatedAt).format('YYYY-MM-DD HH:mm')}</em>
     </div>
   </div>
 );
@@ -82,7 +84,7 @@ class Articles extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: "list/fetch",
+      type: 'list/fetch',
       payload: {
         count: 5
       }
@@ -92,14 +94,14 @@ class Articles extends PureComponent {
   setOwner = () => {
     const { form } = this.props;
     form.setFieldsValue({
-      owner: ["wzj"]
+      owner: ['wzj']
     });
   };
 
   fetchMore = () => {
     const { dispatch } = this.props;
     dispatch({
-      type: "list/appendFetch",
+      type: 'list/appendFetch',
       payload: {
         count: pageSize
       }
@@ -115,17 +117,18 @@ class Articles extends PureComponent {
 
     const loadMore =
       list.length > 0 ? (
-        <div style={{ textAlign: "center", marginTop: 16 }}>
+        <div style={{ textAlign: 'center', marginTop: 16 }}>
           <Button
             onClick={this.fetchMore}
             style={{ paddingLeft: 48, paddingRight: 48 }}
           >
             {loading ? (
               <span>
-                <Icon type="loading" /> 加载中...
+                <Icon type="loading" />
+                加载中...
               </span>
             ) : (
-              "加载更多"
+              '加载更多'
             )}
           </Button>
         </div>
@@ -141,8 +144,8 @@ class Articles extends PureComponent {
               style={{ paddingBottom: 11 }}
             >
               <FormItem>
-                {getFieldDecorator("category", {
-                  initialValue: "cat1"
+                {getFieldDecorator('category', {
+                  initialValue: 'cat1'
                 })(
                   <TagSelect expandable>
                     <TagSelect.Option value="cat1">类目一</TagSelect.Option>
@@ -165,12 +168,12 @@ class Articles extends PureComponent {
               <Row>
                 <Col lg={16} md={24} sm={24} xs={24}>
                   <FormItem>
-                    {getFieldDecorator("owner", {
-                      initialValue: ["wjh", "zxx"]
+                    {getFieldDecorator('owner', {
+                      initialValue: ['wjh', 'zxx']
                     })(
                       <Select
                         mode="multiple"
-                        style={{ maxWidth: 286, width: "100%" }}
+                        style={{ maxWidth: 286, width: '100%' }}
                         placeholder="选择 owner"
                       >
                         {owners.map(owners => (
@@ -180,7 +183,11 @@ class Articles extends PureComponent {
                         ))}
                       </Select>
                     )}
-                    <a className={styles.selfTrigger} onClick={this.setOwner}>
+                    <a
+                      href="http://"
+                      className={styles.selfTrigger}
+                      onClick={this.setOwner}
+                    >
                       只看自己的
                     </a>
                   </FormItem>
@@ -191,10 +198,10 @@ class Articles extends PureComponent {
               <Row gutter={16}>
                 <Col xl={8} lg={10} md={12} sm={24} xs={24}>
                   <FormItem {...formItemLayout} label="活跃用户">
-                    {getFieldDecorator("user", {})(
+                    {getFieldDecorator('user', {})(
                       <Select
                         placeholder="不限"
-                        style={{ maxWidth: 200, width: "100%" }}
+                        style={{ maxWidth: 200, width: '100%' }}
                       >
                         <Option value="lisa">李三</Option>
                       </Select>
@@ -203,10 +210,10 @@ class Articles extends PureComponent {
                 </Col>
                 <Col xl={8} lg={10} md={12} sm={24} xs={24}>
                   <FormItem {...formItemLayout} label="好评度">
-                    {getFieldDecorator("rate", {})(
+                    {getFieldDecorator('rate', {})(
                       <Select
                         placeholder="不限"
-                        style={{ maxWidth: 200, width: "100%" }}
+                        style={{ maxWidth: 200, width: '100%' }}
                       >
                         <Option value="good">优秀</Option>
                       </Select>
@@ -220,7 +227,7 @@ class Articles extends PureComponent {
         <Card
           style={{ marginTop: 24 }}
           bordered={false}
-          bodyStyle={{ padding: "8px 32px 32px 32px" }}
+          bodyStyle={{ padding: '8px 32px 32px 32px' }}
         >
           <List
             size="large"
@@ -240,9 +247,7 @@ class Articles extends PureComponent {
               >
                 <List.Item.Meta
                   title={
-                    <a className={styles.listItemMetaTitle} href={item.href}>
-                      {item.title}
-                    </a>
+                    <a className={styles.listItemMetaTitle}>{item.title}</a>
                   }
                   description={
                     <span>

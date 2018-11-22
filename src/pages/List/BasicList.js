@@ -1,6 +1,6 @@
-import React, { PureComponent } from "react";
-import PageHeaderWrapper from "@/components/PageHeaderWrapper";
-import Result from "@/components/Result";
+import React, { PureComponent } from 'react';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import Result from '@/components/Result';
 import {
   Card,
   Row,
@@ -18,11 +18,11 @@ import {
   Form,
   DatePicker,
   Select
-} from "antd";
-import styles from "./BasicList.less";
-import { connect } from "dva";
-import moment from "moment";
-import { findDOMNode } from "react-dom";
+} from 'antd';
+import { connect } from 'dva';
+import moment from 'moment';
+import { findDOMNode } from 'react-dom';
+import styles from './BasicList.less';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -49,7 +49,7 @@ class BasicList extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: "list/fetch",
+      type: 'list/fetch',
       payload: {
         count: 5
       }
@@ -66,20 +66,20 @@ class BasicList extends PureComponent {
   deleteItem = id => {
     const { dispatch } = this.props;
     dispatch({
-      type: "list/submit",
+      type: 'list/submit',
       payload: { id }
     });
   };
 
   editAndDelete = (key, currentItem) => {
-    if (key === "edit") {
+    if (key === 'edit') {
       this.showEditModal(currentItem);
-    } else if (key === "delete") {
+    } else if (key === 'delete') {
       Modal.confirm({
-        title: "删除任务",
-        content: "确定删除该任务吗？",
-        okText: "确认",
-        cancelText: "取消",
+        title: '删除任务',
+        content: '确定删除该任务吗？',
+        okText: '确认',
+        cancelText: '取消',
         onOk: () => this.deleteItem(currentItem.id)
       });
     }
@@ -111,7 +111,7 @@ class BasicList extends PureComponent {
     e.preventDefault();
     const { dispatch, form } = this.props;
     const { current } = this.state;
-    const id = current ? current.id : "";
+    const id = current ? current.id : '';
 
     setTimeout(() => this.addBtn.blur(), 0);
     form.validateFields((err, fieldsValue) => {
@@ -120,7 +120,7 @@ class BasicList extends PureComponent {
         done: true
       });
       dispatch({
-        type: "list/submit",
+        type: 'list/submit',
         payload: { id, ...fieldsValue }
       });
     });
@@ -176,7 +176,7 @@ class BasicList extends PureComponent {
         </div>
         <div className={styles.listContentItem}>
           <span>开始时间</span>
-          <p>{moment(createdAt).format("YYYY-MM-DD HH:mm")}</p>
+          <p>{moment(createdAt).format('YYYY-MM-DD HH:mm')}</p>
         </div>
         <div className={styles.listContentItem}>
           <Progress
@@ -207,14 +207,14 @@ class BasicList extends PureComponent {
 
     const modalFooter = done
       ? {
-          footer: null,
-          onCancel: this.handleDone
-        }
+        footer: null,
+        onCancel: this.handleDone
+      }
       : {
-          okText: "保存",
-          onOk: this.handleSubmit,
-          onCancel: this.handleCancel
-        };
+        okText: '保存',
+        onOk: this.handleSubmit,
+        onCancel: this.handleCancel
+      };
 
     const getModalContent = () => {
       if (done) {
@@ -235,27 +235,27 @@ class BasicList extends PureComponent {
       return (
         <Form onSubmit={this.handleSubmit}>
           <FormItem label="任务名称" {...this.formLayout}>
-            {getFieldDecorator("title", {
-              rules: [{ required: true, message: "请输入任务名称" }],
+            {getFieldDecorator('title', {
+              rules: [{ required: true, message: '请输入任务名称' }],
               initialValue: current.title
             })(<Input placeholder="请输入" />)}
           </FormItem>
           <FormItem label="开始时间" {...this.formLayout}>
-            {getFieldDecorator("createAt", {
-              rules: [{ required: true, message: "请选择开始时间" }],
+            {getFieldDecorator('createAt', {
+              rules: [{ required: true, message: '请选择开始时间' }],
               initialValue: current.createdAt ? moment(current.createdAt) : null
             })(
               <DatePicker
                 showTime
                 placeholder="请选择"
                 format="YYYY-MM-DD HH:mm:ss"
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
               />
             )}
           </FormItem>
           <FormItem label="任务负责人" {...this.formLayout}>
-            {getFieldDecorator("owner", {
-              rules: [{ required: true, message: "请选择任务负责人" }],
+            {getFieldDecorator('owner', {
+              rules: [{ required: true, message: '请选择任务负责人' }],
               initialValue: current.owner
             })(
               <Select placeholder="请选择">
@@ -265,8 +265,8 @@ class BasicList extends PureComponent {
             )}
           </FormItem>
           <FormItem {...this.formLayout} label="产品描述">
-            {getFieldDecorator("subDescription", {
-              rules: [{ message: "请输入至少五个字符的产品描述！", min: 5 }],
+            {getFieldDecorator('subDescription', {
+              rules: [{ message: '请输入至少五个字符的产品描述！', min: 5 }],
               initialValue: current.subDescription
             })(<TextArea rows={4} placeholder="请输入至少五个字符" />)}
           </FormItem>
@@ -295,16 +295,18 @@ class BasicList extends PureComponent {
             className={styles.listCard}
             title="标准列表"
             style={{ marginTop: 24 }}
-            bodyStyle={{ padding: "0 32px 40px 32px" }}
+            bodyStyle={{ padding: '0 32px 40px 32px' }}
             extra={extraContent}
           >
             <Button
               type="dashed"
-              style={{ width: "100%", marginBottom: 8 }}
+              style={{ width: '100%', marginBottom: 8 }}
               icon="plus"
               onClick={this.showModal}
               ref={component => {
+                /* eslint-disable */
                 this.addBtn = findDOMNode(component);
+                /* eslint-enable */
               }}
             >
               添加
@@ -344,10 +346,10 @@ class BasicList extends PureComponent {
           </Card>
         </div>
         <Modal
-          title={done ? null : `任务${current ? "编辑" : "添加"}`}
+          title={done ? null : `任务${current ? '编辑' : '添加'}`}
           className={styles.standardListForm}
           width={640}
-          bodyStyle={done ? { padding: "72px 0" } : { padding: "28px 0 0" }}
+          bodyStyle={done ? { padding: '72px 0' } : { padding: '28px 0 0' }}
           destroyOnClose
           visible={visible}
           {...modalFooter}

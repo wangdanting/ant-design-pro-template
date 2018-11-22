@@ -1,6 +1,7 @@
-import { queryBasicProfile, queryAdvancedProfile } from "@/services/api";
+import { queryBasicProfile, queryAdvancedProfile } from '@/services/api';
+
 export default {
-  namespaced: "profile",
+  namespaced: 'profile',
 
   state: {
     basicGoods: [],
@@ -13,14 +14,14 @@ export default {
     *fetchBasic(_, { call, put }) {
       const response = yield call(queryBasicProfile);
       yield put({
-        type: "show",
+        type: 'show',
         payload: response
       });
     },
     *fetchAdvanced(_, { call, put }) {
       const response = yield call(queryAdvancedProfile);
       yield put({
-        type: "show",
+        type: 'show',
         payload: response
       });
     }

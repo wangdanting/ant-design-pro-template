@@ -1,5 +1,5 @@
-import React, { PureComponent, Fragment } from "react";
-import PageHeaderWrapper from "@/components/PageHeaderWrapper";
+import React, { PureComponent, Fragment } from 'react';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import {
   Card,
   Form,
@@ -19,11 +19,12 @@ import {
   Steps,
   Radio,
   message
-} from "antd";
-import styles from "./TableList.less";
-import { connect } from "dva";
-import StandardTable from "@/components/StandardTable";
-import moment from "moment";
+} from 'antd';
+import { connect } from 'dva';
+import StandardTable from '@/components/StandardTable';
+import moment from 'moment';
+import styles from './TableList.less';
+
 const Step = Steps.Step;
 
 const FormItem = Form.Item;
@@ -33,9 +34,9 @@ const { TextArea } = Input;
 const getValue = obj =>
   Object.keys(obj)
     .map(key => obj[key])
-    .join(",");
-const statusMap = ["default", "processing", "success", "error"];
-const status = ["关闭", "运行中", "已上线", "异常"];
+    .join(',');
+const statusMap = ['default', 'processing', 'success', 'error'];
+const status = ['关闭', '运行中', '已上线', '异常'];
 
 const CreateForm = Form.create()(props => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
@@ -55,11 +56,11 @@ const CreateForm = Form.create()(props => {
       onCancel={() => handleModalVisible()}
     >
       <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="描述">
-        {form.getFieldDecorator("desc", {
+        {form.getFieldDecorator('desc', {
           rules: [
             {
               required: true,
-              message: "请输入至少五个字符的规则描述！",
+              message: '请输入至少五个字符的规则描述！',
               min: 5
             }
           ]
@@ -79,11 +80,11 @@ class UpdateForm extends PureComponent {
         name: props.values.name,
         desc: props.values.desc,
         key: props.values.key,
-        target: "0",
-        template: "0",
-        type: "1",
-        time: "",
-        frequency: "month"
+        target: '0',
+        template: '0',
+        type: '1',
+        time: '',
+        frequency: 'month'
       },
       currentStep: 0
     };
@@ -132,27 +133,27 @@ class UpdateForm extends PureComponent {
     if (currentStep === 1) {
       return [
         <FormItem key="target" {...this.formLayout} label="监控对象">
-          {form.getFieldDecorator("target", {
+          {form.getFieldDecorator('target', {
             initialValue: formVals.target
           })(
-            <Select style={{ width: "100%" }}>
+            <Select style={{ width: '100%' }}>
               <Option value="0">表一</Option>
               <Option value="1">表二</Option>
             </Select>
           )}
         </FormItem>,
         <FormItem key="template" {...this.formLayout} label="规则模板">
-          {form.getFieldDecorator("template", {
+          {form.getFieldDecorator('template', {
             initialValue: formVals.template
           })(
-            <Select style={{ width: "100%" }}>
+            <Select style={{ width: '100%' }}>
               <Option value="0">规则模板一</Option>
               <Option value="1">规则模板二</Option>
             </Select>
           )}
         </FormItem>,
         <FormItem key="type" {...this.formLayout} label="规则类型">
-          {form.getFieldDecorator("type", {
+          {form.getFieldDecorator('type', {
             initialValue: formVals.type
           })(
             <RadioGroup>
@@ -166,11 +167,11 @@ class UpdateForm extends PureComponent {
     if (currentStep === 2) {
       return [
         <FormItem key="item" {...this.formLayout} label="开始时间">
-          {form.getFieldDecorator("time", {
-            rules: [{ required: true, message: "请选择开始时间！" }]
+          {form.getFieldDecorator('time', {
+            rules: [{ required: true, message: '请选择开始时间！' }]
           })(
             <DatePicker
-              style={{ width: "100%" }}
+              style={{ width: '100%' }}
               showTime
               format="YYYY-MM-DD HH:mm:ss"
               placeholder="选择开始时间"
@@ -178,10 +179,10 @@ class UpdateForm extends PureComponent {
           )}
         </FormItem>,
         <FormItem key="frequency" {...this.formLayout} label="调度周期">
-          {form.getFieldDecorator("frequency", {
+          {form.getFieldDecorator('frequency', {
             initialValue: formVals.frequency
           })(
-            <Select style={{ width: "100%" }}>
+            <Select style={{ width: '100%' }}>
               <Option value="month">月</Option>
               <Option value="week">周</Option>
             </Select>
@@ -191,17 +192,17 @@ class UpdateForm extends PureComponent {
     }
     return [
       <FormItem key="name" {...this.formLayout} label="规则名称">
-        {form.getFieldDecorator("name", {
-          rules: [{ required: true, message: "请输入规则名称！" }],
+        {form.getFieldDecorator('name', {
+          rules: [{ required: true, message: '请输入规则名称！' }],
           initialValue: formVals.name
         })(<Input placeholder="请输入" />)}
       </FormItem>,
       <FormItem key="desc" {...this.formLayout} label="规则描述">
-        {form.getFieldDecorator("desc", {
+        {form.getFieldDecorator('desc', {
           rules: [
             {
               required: true,
-              message: "请输入至少五个字符的规则描述！",
+              message: '请输入至少五个字符的规则描述！',
               min: 5
             }
           ],
@@ -215,7 +216,7 @@ class UpdateForm extends PureComponent {
     const { handleUpdateModalVisible } = this.props;
     if (currentStep === 1) {
       return [
-        <Button key="back" style={{ float: "left" }} onClick={this.backward}>
+        <Button key="back" style={{ float: 'left' }} onClick={this.backward}>
           上一步
         </Button>,
         <Button key="cancel" onClick={() => handleUpdateModalVisible()}>
@@ -232,7 +233,7 @@ class UpdateForm extends PureComponent {
     }
     if (currentStep === 2) {
       return [
-        <Button key="back" style={{ float: "left" }} onClick={this.backward}>
+        <Button key="back" style={{ float: 'left' }} onClick={this.backward}>
           上一步
         </Button>,
         <Button key="cancel" onClick={() => handleUpdateModalVisible()}>
@@ -268,10 +269,10 @@ class UpdateForm extends PureComponent {
     return (
       <Modal
         width={640}
-        bodyStyle={{ padding: "32px 40px 48px" }}
+        bodyStyle={{ padding: '32px 40px 48px' }}
         title="规则配置"
         destroyOnClose
-        visible={true}
+        visible={updateModalVisible}
         footer={this.renderFooter(currentStep)}
         onCancel={() => handleUpdateModalVisible()}
       >
@@ -302,25 +303,25 @@ class TableList extends PureComponent {
 
   columns = [
     {
-      title: "规则名称",
-      dataIndex: "name"
+      title: '规则名称',
+      dataIndex: 'name'
     },
     {
-      title: "描述",
-      dataIndex: "desc"
+      title: '描述',
+      dataIndex: 'desc'
     },
     {
-      title: "服务调用次数",
-      dataIndex: "callNo",
+      title: '服务调用次数',
+      dataIndex: 'callNo',
       sorter: true,
-      align: "right",
+      align: 'right',
       render: val => `${val} 万`,
       // mark to display a total number
       needTotal: true
     },
     {
-      title: "状态",
-      dataIndex: "status",
+      title: '状态',
+      dataIndex: 'status',
       filters: [
         {
           text: status[0],
@@ -344,13 +345,13 @@ class TableList extends PureComponent {
       }
     },
     {
-      title: "上次调度时间",
-      dataIndex: "updatedAt",
+      title: '上次调度时间',
+      dataIndex: 'updatedAt',
       sorter: true,
-      render: val => <span>{moment(val).format("YYYY-MM-DD HH:mm:ss")}</span>
+      render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>
     },
     {
-      title: "操作",
+      title: '操作',
       render: (text, record) => (
         <Fragment>
           <a
@@ -370,7 +371,7 @@ class TableList extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: "rule/fetch"
+      type: 'rule/fetch'
     });
   }
 
@@ -401,12 +402,10 @@ class TableList extends PureComponent {
     }
 
     dispatch({
-      type: "rule/fetch",
+      type: 'rule/fetch',
       payload: params
     });
   };
-
-  handleSearch() {}
 
   handleModalVisible = ({ isShow = false } = {}) => {
     this.setState({
@@ -417,12 +416,12 @@ class TableList extends PureComponent {
   handleAdd = fields => {
     const { dispatch } = this.props;
     dispatch({
-      type: "rule/add",
+      type: 'rule/add',
       payload: {
         desc: fields.desc
       }
     });
-    message.success("添加成功");
+    message.success('添加成功');
     this.handleModalVisible({ isShow: false });
   };
 
@@ -435,14 +434,64 @@ class TableList extends PureComponent {
   handleFormReset = () => {
     const { form, dispatch } = this.props;
     form.resetFields();
+    /* eslint-disable */
     this.setState({
       formValues: {}
     });
+    /* eslint-enable */
     dispatch({
-      type: "rule/fetch",
+      type: 'rule/fetch',
       payload: {}
     });
   };
+
+  handleSelectRows = rows => {
+    this.setState({
+      selectedRows: rows
+    });
+  };
+
+  handleMenuClick = e => {
+    const { dispatch } = this.props;
+    const { selectedRows } = this.state;
+
+    if (!selectedRows) return;
+
+    switch (e.key) {
+    case 'remove':
+      dispatch({
+        type: 'rule/remove',
+        payload: {
+          key: selectedRows.map(row => row.key)
+        },
+        callback: () => {
+          this.setState({
+            selectedRows: []
+          });
+        }
+      });
+      break;
+    default:
+      break;
+    }
+  };
+
+  handleUpdate = fields => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'rule/update',
+      payload: {
+        name: fields.name,
+        desc: fields.desc,
+        key: fields.key
+      }
+    });
+
+    message.success('配置成功');
+    this.handleUpdateModalVisible();
+  };
+
+  handleSearch() {}
 
   renderSimpleForm() {
     const {
@@ -453,13 +502,13 @@ class TableList extends PureComponent {
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="规则名称">
-              {getFieldDecorator("name")(<Input placeholder="请输入" />)}
+              {getFieldDecorator('name')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="使用状态">
-              {getFieldDecorator("status")(
-                <Select placeholder="请选择" style={{ width: "100%" }}>
+              {getFieldDecorator('status')(
+                <Select placeholder="请选择" style={{ width: '100%' }}>
                   <Option value="0">关闭</Option>
                   <Option value="1">运行中</Option>
                 </Select>
@@ -475,7 +524,8 @@ class TableList extends PureComponent {
                 重置
               </Button>
               <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-                展开 <Icon type="down" />
+                展开
+                <Icon type="down" />
               </a>
             </span>
           </Col>
@@ -493,13 +543,13 @@ class TableList extends PureComponent {
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="规则名称">
-              {getFieldDecorator("name")(<Input placeholder="请输入" />)}
+              {getFieldDecorator('name')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="使用状态">
-              {getFieldDecorator("status")(
-                <Select placeholder="请选择" style={{ width: "100%" }}>
+              {getFieldDecorator('status')(
+                <Select placeholder="请选择" style={{ width: '100%' }}>
                   <Option value="0">关闭</Option>
                   <Option value="1">运行中</Option>
                 </Select>
@@ -508,8 +558,8 @@ class TableList extends PureComponent {
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="调用次数">
-              {getFieldDecorator("number")(
-                <InputNumber style={{ width: "100%" }} />
+              {getFieldDecorator('number')(
+                <InputNumber style={{ width: '100%' }} />
               )}
             </FormItem>
           </Col>
@@ -517,9 +567,9 @@ class TableList extends PureComponent {
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="更新日期">
-              {getFieldDecorator("date")(
+              {getFieldDecorator('date')(
                 <DatePicker
-                  style={{ width: "100%" }}
+                  style={{ width: '100%' }}
                   placeholder="请输入更新日期"
                 />
               )}
@@ -527,8 +577,8 @@ class TableList extends PureComponent {
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="使用状态">
-              {getFieldDecorator("status3")(
-                <Select placeholder="请选择" style={{ width: "100%" }}>
+              {getFieldDecorator('status3')(
+                <Select placeholder="请选择" style={{ width: '100%' }}>
                   <Option value="0">关闭</Option>
                   <Option value="1">运行中</Option>
                 </Select>
@@ -537,8 +587,8 @@ class TableList extends PureComponent {
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="使用状态">
-              {getFieldDecorator("status4")(
-                <Select placeholder="请选择" style={{ width: "100%" }}>
+              {getFieldDecorator('status4')(
+                <Select placeholder="请选择" style={{ width: '100%' }}>
                   <Option value="0">关闭</Option>
                   <Option value="1">运行中</Option>
                 </Select>
@@ -546,8 +596,8 @@ class TableList extends PureComponent {
             </FormItem>
           </Col>
         </Row>
-        <div style={{ overflow: "hidden" }}>
-          <div style={{ float: "right", marginBottom: 24 }}>
+        <div style={{ overflow: 'hidden' }}>
+          <div style={{ float: 'right', marginBottom: 24 }}>
             <Button type="primary" htmlType="submit">
               查询
             </Button>
@@ -555,7 +605,8 @@ class TableList extends PureComponent {
               重置
             </Button>
             <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-              收起 <Icon type="up" />
+              收起
+              <Icon type="up" />
             </a>
           </div>
         </div>
@@ -567,54 +618,6 @@ class TableList extends PureComponent {
     const { expandForm } = this.state;
     return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
   }
-
-  handleSelectRows = rows => {
-    this.setState({
-      selectedRows: rows
-    });
-  };
-
-  handleMenuClick = e => {
-    const { dispatch } = this.props;
-    const { selectedRows } = this.state;
-
-    if (!selectedRows) return;
-
-    switch (e.key) {
-      case "remove":
-        dispatch({
-          type: "rule/remove",
-          payload: {
-            key: selectedRows.map(row => row.key)
-          },
-          callback: () => {
-            console.log(e.key, "eee");
-            this.setState({
-              selectedRows: []
-            });
-          }
-        });
-        break;
-      default:
-        break;
-    }
-  };
-
-  handleUpdate = fields => {
-    const { dispatch } = this.props;
-    dispatch({
-      type: "rule/update",
-      payload: {
-        name: fields.name,
-        desc: fields.desc,
-        key: fields.key
-      }
-    });
-
-    message.success("配置成功");
-    this.handleUpdateModalVisible();
-  };
-
   render() {
     const {
       modalVisible,
@@ -626,22 +629,6 @@ class TableList extends PureComponent {
       rule: { data },
       loading
     } = this.props;
-    const abc = {
-      avatar:
-        "https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png",
-      callNo: 138,
-      createdAt: "2017-07-22T00:00:00.000Z",
-      desc: "这是一段描述",
-      disabled: true,
-      href: "https://ant.design",
-      key: 42,
-      name: "TradeCode 42",
-      owner: "曲丽丽",
-      progress: 39,
-      status: 0,
-      title: "一个任务名称 42",
-      updatedAt: "2017-07-22T00:00:00.000Z"
-    };
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
         <Menu.Item key="remove">删除</Menu.Item>
@@ -667,7 +654,8 @@ class TableList extends PureComponent {
                   <Button>批量操作</Button>
                   <Dropdown overlay={menu}>
                     <Button>
-                      更多操作 <Icon type="down" />
+                      更多操作
+                      <Icon type="down" />
                     </Button>
                   </Dropdown>
                 </span>

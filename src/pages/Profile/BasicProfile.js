@@ -1,56 +1,56 @@
-import React, { PureComponent } from "react";
-import PageHeaderWrapper from "@/components/PageHeaderWrapper";
-import DescriptionList from "@/components/DescriptionList";
-import { connect } from "dva";
-import { Card, Divider, Table, Badge } from "antd";
+import React, { PureComponent } from 'react';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import DescriptionList from '@/components/DescriptionList';
+import { connect } from 'dva';
+import { Card, Divider, Table, Badge } from 'antd';
+
+import styles from './BasicProfile.less';
 
 const { Description } = DescriptionList;
 
-import styles from "./BasicProfile.less";
-
 const progressColumns = [
   {
-    title: "时间",
-    dataIndex: "time",
-    key: "time"
+    title: '时间',
+    dataIndex: 'time',
+    key: 'time'
   },
   {
-    title: "当前进度",
-    dataIndex: "rate",
-    key: "rate"
+    title: '当前进度',
+    dataIndex: 'rate',
+    key: 'rate'
   },
   {
-    title: "状态",
-    dataIndex: "status",
-    key: "status",
+    title: '状态',
+    dataIndex: 'status',
+    key: 'status',
     render: text =>
-      text === "success" ? (
+      text === 'success' ? (
         <Badge status="success" text="成功" />
       ) : (
         <Badge status="processing" text="进行中" />
       )
   },
   {
-    title: "操作员ID",
-    dataIndex: "operator",
-    key: "operator"
+    title: '操作员ID',
+    dataIndex: 'operator',
+    key: 'operator'
   },
   {
-    title: "耗时",
-    dataIndex: "cost",
-    key: "cost"
+    title: '耗时',
+    dataIndex: 'cost',
+    key: 'cost'
   }
 ];
 
 @connect(({ profile, loading }) => ({
   profile,
-  loading: loading.effects["profile/fetchBasic"]
+  loading: loading.effects['profile/fetchBasic']
 }))
 class BasicProfile extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: "profile/fetchBasic"
+      type: 'profile/fetchBasic'
     });
   }
 
@@ -66,7 +66,7 @@ class BasicProfile extends PureComponent {
         amount += Number(item.amount);
       });
       goodsData = basicGoods.concat({
-        id: "总计",
+        id: '总计',
         num,
         amount
       });
@@ -74,12 +74,12 @@ class BasicProfile extends PureComponent {
 
     const goodsColumns = [
       {
-        title: "商品编号",
-        dataIndex: "id",
-        key: "id",
+        title: '商品编号',
+        dataIndex: 'id',
+        key: 'id',
         render: (text, row, index) => {
           if (index < basicGoods.length) {
-            return <a href="">{text}</a>;
+            return <a href="http://">{text}</a>;
           }
           return {
             children: <span style={{ fontWeight: 600 }}>总计</span>,
@@ -90,29 +90,29 @@ class BasicProfile extends PureComponent {
         }
       },
       {
-        title: "商品名称",
-        dataIndex: "name",
-        key: "name",
+        title: '商品名称',
+        dataIndex: 'name',
+        key: 'name',
         render: renderContent
       },
       {
-        title: "商品条码",
-        dataIndex: "barcode",
-        key: "barcode",
+        title: '商品条码',
+        dataIndex: 'barcode',
+        key: 'barcode',
         render: renderContent
       },
       {
-        title: "单价",
-        dataIndex: "price",
-        key: "price",
-        align: "right",
+        title: '单价',
+        dataIndex: 'price',
+        key: 'price',
+        align: 'right',
         render: renderContent
       },
       {
-        title: "数量（件）",
-        dataIndex: "num",
-        key: "num",
-        align: "right",
+        title: '数量（件）',
+        dataIndex: 'num',
+        key: 'num',
+        align: 'right',
         render: (text, row, index) => {
           if (index < basicGoods.length) {
             return text;
@@ -121,10 +121,10 @@ class BasicProfile extends PureComponent {
         }
       },
       {
-        title: "金额",
-        dataIndex: "amount",
-        key: "amount",
-        align: "right",
+        title: '金额',
+        dataIndex: 'amount',
+        key: 'amount',
+        align: 'right',
         render: (text, row, index) => {
           if (index < basicGoods.length) {
             return text;
