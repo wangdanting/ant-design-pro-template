@@ -1,6 +1,6 @@
-import defaultSettings from "../defaultSettings";
+import defaultSettings from '../defaultSettings';
 
 export default {
-  namespaced: "setting",
+  namespaced: 'setting',
   state: defaultSettings
 };

@@ -1,31 +1,31 @@
-import request from "@/utils/request";
-import { stringify } from "querystring";
+import request from '@/utils/request';
+import { stringify } from 'querystring';
 
 export async function getFakeCaptcha(mobile) {
   return request(`/api/captcha?mobile=${mobile}`);
 }
 
 export async function fakeAccountLogin(params) {
-  return request("/api/login/account", {
-    method: "POST",
+  return request('/api/login/account', {
+    method: 'POST',
     body: params
   });
 }
 
 export async function fakeRegister(params) {
-  return request("/api/register", {
-    method: "POST",
+  return request('/api/register', {
+    method: 'POST',
     body: params
   });
 }
 
 export async function queryNotices() {
-  return request("/api/notices");
+  return request('/api/notices');
 }
 
 export async function fakeSubmitForm(params) {
-  return request("/api/forms", {
-    method: "POST",
+  return request('/api/forms', {
+    method: 'POST',
     boby: params
   });
 }
@@ -35,31 +35,31 @@ export async function queryRule(params) {
 }
 
 export async function addRule(params) {
-  return request("api/rule", {
-    method: "POST",
+  return request('api/rule', {
+    method: 'POST',
     body: {
       ...params,
-      method: "post"
+      method: 'post'
     }
   });
 }
 
 export async function removeRule(params) {
-  return request("/api/rule", {
-    method: "POST",
+  return request('/api/rule', {
+    method: 'POST',
     body: {
       ...params,
-      method: "delete"
+      method: 'delete'
     }
   });
 }
 
 export async function updateRule(params) {
-  return request("/api/rule", {
-    method: "POST",
+  return request('/api/rule', {
+    method: 'POST',
     body: {
       ...params,
-      method: "update"
+      method: 'update'
     }
   });
 }
@@ -71,10 +71,10 @@ export async function queryFakeList(params) {
 export async function removeFakeList(params) {
   const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
-    method: "POST",
+    method: 'POST',
     body: {
       ...restParams,
-      method: "delete"
+      method: 'delete'
     }
   });
 }
@@ -82,10 +82,10 @@ export async function removeFakeList(params) {
 export async function addFakeList(params) {
   const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
-    method: "POST",
+    method: 'POST',
     body: {
       ...restParams,
-      method: "post"
+      method: 'post'
     }
   });
 }
@@ -93,26 +93,26 @@ export async function addFakeList(params) {
 export async function updateFakeList(params) {
   const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
-    method: "POST",
+    method: 'POST',
     body: {
       ...restParams,
-      method: "update"
+      method: 'update'
     }
   });
 }
 
-export async function queryBasicProfile(params) {
-  return request("/api/profile/basic");
+export async function queryBasicProfile() {
+  return request('/api/profile/basic');
 }
 
 export async function queryAdvancedProfile() {
-  return request("/api/profile/advanced");
+  return request('/api/profile/advanced');
 }
 
 export async function queryProjectNotice() {
-  return request("/api/project/notice");
+  return request('/api/project/notice');
 }
 
 export async function fakeChartData() {
-  return request("/api/fake_chart_data");
+  return request('/api/fake_chart_data');
 }

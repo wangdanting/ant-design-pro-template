@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react";
-import numeral from "numeral";
+import React, { PureComponent } from 'react';
+import numeral from 'numeral';
 
-const yuan = val => `¥ ${numeral(val).format("0,0")}`;
+const yuan = val => `¥ ${numeral(val).format('0,0')}`;
 
 class Yuan extends PureComponent {
   componentDidMount() {

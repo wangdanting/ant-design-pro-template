@@ -1,6 +1,7 @@
-import { query as queryUsers, queryCurrent } from "@/services/user";
+import { queryCurrent } from '@/services/user';
+
 export default {
-  namespaced: "user",
+  namespaced: 'user',
 
   state: {
     currentUser: {}
@@ -10,7 +11,7 @@ export default {
     *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
       yield put({
-        type: "saveCurrentUser",
+        type: 'saveCurrentUser',
         payload: response
       });
     }
@@ -20,8 +21,8 @@ export default {
     saveCurrentUser(state, action) {
       return {
         ...state,
-        currentUser: action.payload || {},
-      }
+        currentUser: action.payload || {}
+      };
     },
     changeNotifyCount(state, action) {
       return {

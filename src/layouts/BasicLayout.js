@@ -1,21 +1,21 @@
-import React, { Fragment } from "react";
-import DocumentTitle from "react-document-title";
-import memoizeOne from "memoize-one";
-import isEqual from "lodash/isEqual";
-import pathToRegexp from "path-to-regexp";
-import { formatMessage } from "umi/locale";
-import { ContainerQuery } from "react-container-query";
-import Context from "./MenuContext";
-import classNames from "classnames";
-import { Layout } from "antd";
-import SiderMenu from "@/components/SiderMenu";
-import logo from "@/assets/logo.svg";
-import Authorized from "@/utils/Authorized";
-import { connect } from "dva";
-import { enquireScreen, unenquireScreen } from "enquire-js";
-import Header from "./Header";
-import Footer from "./Footer";
-import Exception403 from "../pages/Exception/403";
+import React, { Fragment } from 'react';
+import DocumentTitle from 'react-document-title';
+import memoizeOne from 'memoize-one';
+import isEqual from 'lodash/isEqual';
+import pathToRegexp from 'path-to-regexp';
+import { formatMessage } from 'umi/locale';
+import { ContainerQuery } from 'react-container-query';
+import classNames from 'classnames';
+import { Layout } from 'antd';
+import SiderMenu from '@/components/SiderMenu';
+import logo from '@/assets/logo.svg';
+import Authorized from '@/utils/Authorized';
+import { connect } from 'dva';
+import { enquireScreen, unenquireScreen } from 'enquire-js';
+import Context from './MenuContext';
+import Header from './Header';
+import Footer from './Footer';
+import Exception403 from '../pages/Exception/403';
 
 const { Content } = Layout;
 
@@ -23,7 +23,7 @@ const { Content } = Layout;
 function formatter(data, parentAuthority, parentName) {
   return data
     .map(item => {
-      let locale = "menu";
+      let locale = 'menu';
       if (parentName && item.name) {
         locale = `${parentName}.${item.name}`;
       } else if (item.name) {
@@ -55,26 +55,26 @@ function formatter(data, parentAuthority, parentName) {
 const memoizeOneFormatter = memoizeOne(formatter, isEqual);
 
 const query = {
-  "screen-xs": {
+  'screen-xs': {
     maxWidth: 575
   },
-  "screen-sm": {
+  'screen-sm': {
     minWidth: 576,
     maxWidth: 767
   },
-  "screen-md": {
+  'screen-md': {
     minWidth: 768,
     maxWidth: 991
   },
-  "screen-lg": {
+  'screen-lg': {
     minWidth: 992,
     maxWidth: 1199
   },
-  "screen-xl": {
+  'screen-xl': {
     minWidth: 1200,
     maxWidth: 1599
   },
-  "screen-xxl": {
+  'screen-xxl': {
     minWidth: 1600
   }
 };
@@ -99,7 +99,7 @@ class BasicLayout extends React.PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: "user/fetchCurrent"
+      type: 'user/fetchCurrent'
     });
     this.enquireHandler = enquireScreen(mobile => {
       const { isMobile } = this.state;
@@ -136,6 +136,14 @@ class BasicLayout extends React.PureComponent {
     return routerMap;
   }
 
+  getContext() {
+    const { location } = this.props;
+    return {
+      location,
+      breadcrumbNameMap: this.breadcrumbNameMap
+    };
+  }
+
   matchParamsPath = pathname => {
     const pathKey = Object.keys(this.breadcrumbNameMap).find(key =>
       pathToRegexp(key).test(pathname)
@@ -147,7 +155,7 @@ class BasicLayout extends React.PureComponent {
     const currRouterData = this.matchParamsPath(pathname);
 
     if (!currRouterData) {
-      return "Ant Design Pro";
+      return 'Ant Design Pro';
     }
 
     const message = formatMessage({
@@ -158,18 +166,10 @@ class BasicLayout extends React.PureComponent {
     return `${message} - Ant Design Pro`;
   };
 
-  getContext() {
-    const { location } = this.props;
-    return {
-      location,
-      breadcrumbNameMap: this.breadcrumbNameMap
-    };
-  }
-
   handleMenuCollapse = collapsed => {
     const { dispatch } = this.props;
     dispatch({
-      type: "global/changeLayoutCollapsed",
+      type: 'global/changeLayoutCollapsed',
       payload: collapsed
     });
   };
@@ -177,9 +177,9 @@ class BasicLayout extends React.PureComponent {
   getLayoutStyle = () => {
     const { isMobile } = this.state;
     const { fixSiderbar, collapsed, layout } = this.props;
-    if (fixSiderbar && layout !== "topmenu" && !isMobile) {
+    if (fixSiderbar && layout !== 'topmenu' && !isMobile) {
       return {
-        paddingLeft: collapsed ? "80px" : "256px"
+        paddingLeft: collapsed ? '80px' : '256px'
       };
     }
     return null;
@@ -188,7 +188,7 @@ class BasicLayout extends React.PureComponent {
   getContentStyle = () => {
     const { fixedHeader } = this.props;
     return {
-      margin: "24px 24px 0",
+      margin: '24px 24px 0',
       paddingTop: fixedHeader ? 64 : 0
     };
   };
@@ -200,8 +200,8 @@ class BasicLayout extends React.PureComponent {
       location: { pathname },
       children
     } = this.props;
-    const { menuData } = this.state;
-    const isTop = PropsLayout === "topmenu";
+    const { menuData, isMobile } = this.state;
+    const isTop = PropsLayout === 'topmenu';
     const routerConfig = this.matchParamsPath(pathname);
 
     const layout = (
@@ -219,7 +219,7 @@ class BasicLayout extends React.PureComponent {
         <Layout
           style={{
             ...this.getLayoutStyle(),
-            minHeight: "100vh"
+            minHeight: '100vh'
           }}
         >
           <Header

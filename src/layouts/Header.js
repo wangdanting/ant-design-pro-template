@@ -1,9 +1,10 @@
-import React, { PureComponent } from "react";
-import { Layout, message } from "antd";
-import { connect } from "dva";
-import styles from "./Header.less";
-import GlobalHeader from "@/components/GlobalHeader";
+import React, { PureComponent } from 'react';
+import { Layout, message } from 'antd';
+import { connect } from 'dva';
 import { formatMessage } from 'umi/locale';
+import router from 'umi/router';
+// import styles from './Header.less';
+import GlobalHeader from '@/components/GlobalHeader';
 
 const { Header } = Layout;
 
@@ -12,7 +13,7 @@ const { Header } = Layout;
   setting,
   collapsed: global.collapsed,
   notices: global.notices,
-  fetchingNotices: loading.effects["global/fetchNotices"]
+  fetchingNotices: loading.effects['global/fetchNotices']
 }))
 class HeaderView extends PureComponent {
   state = {
@@ -28,17 +29,21 @@ class HeaderView extends PureComponent {
     if (visible) {
       const { dispatch } = this.props;
       dispatch({
-        type: "global/fetchNotices"
+        type: 'global/fetchNotices'
       });
     }
   };
 
   handleNoticeClear = type => {
-    message.success(`${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({ id: `component.globalHeader.${type}` })}`);
+    message.success(
+      `${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage(
+        { id: `component.globalHeader.${type}` }
+      )}`
+    );
     const { dispatch } = this.props;
     dispatch({
       type: 'global/clearNotices',
-      payload: type,
+      payload: type
     });
   };
 
@@ -58,7 +63,7 @@ class HeaderView extends PureComponent {
     }
     if (key === 'logout') {
       dispatch({
-        type: 'login/logout',
+        type: 'login/logout'
       });
     }
   };
@@ -71,7 +76,7 @@ class HeaderView extends PureComponent {
     const HeaderDom = visible ? (
       <Header
         style={{ padding: 0 }}
-        className={fixedHeader ? "style.fixedHeader" : ""}
+        className={fixedHeader ? 'style.fixedHeader' : ''}
       >
         <GlobalHeader
           onCollapse={handleMenuCollapse}

@@ -1,7 +1,7 @@
-import { queryNotices } from "@/services/api";
+import { queryNotices } from '@/services/api';
 
 export default {
-  namespaced: "global",
+  namespaced: 'global',
 
   state: {
     collapsed: false,
@@ -12,24 +12,24 @@ export default {
     *fetchNotices(_, { call, put }) {
       const data = yield call(queryNotices);
       yield put({
-        type: "saveNotices",
+        type: 'saveNotices',
         payload: data
       });
       yield put({
-        type: "user/changeNotifyCount",
+        type: 'user/changeNotifyCount',
         payload: data.length
       });
     },
 
     *clearNotices({ payload }, { put, select }) {
       yield put({
-        type: "saveClearedNotices",
+        type: 'saveClearedNotices',
         payload
       });
       const count = yield select(state => state.global.notices.length);
       yield put({
         type: 'user/changeNotifyCount',
-        payload: count,
+        payload: count
       });
     }
   },
