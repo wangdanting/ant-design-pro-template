@@ -1,16 +1,15 @@
-import React, { PureComponent } from "react";
-import { connect } from "dva";
-import GridContent from "@/components/PageHeaderWrapper/GridContent";
-import { Row, Col, Card, Divider, Tag, Input, Icon, Spin, Avatar } from "antd";
-import Link from "umi/link";
-import router from "umi/router";
+import React, { PureComponent } from 'react';
+import { connect } from 'dva';
+import GridContent from '@/components/PageHeaderWrapper/GridContent';
+import { Row, Col, Card, Divider, Tag, Input, Icon, Spin, Avatar } from 'antd';
+import Link from 'umi/link';
+import router from 'umi/router';
 
-import styles from "./Center.less";
-import NoticeIcon from "@/components/NoticeIcon";
+import styles from './Center.less';
 
 const operationTabList = [
   {
-    key: "articles",
+    key: 'articles',
     tab: (
       <span>
         文章 <span style={{ fontSize: 14 }}>(8)</span>
@@ -18,7 +17,7 @@ const operationTabList = [
     )
   },
   {
-    key: "applications",
+    key: 'applications',
     tab: (
       <span>
         应用 <span style={{ fontSize: 14 }}>(8)</span>
@@ -26,7 +25,7 @@ const operationTabList = [
     )
   },
   {
-    key: "projects",
+    key: 'projects',
     tab: (
       <span>
         项目 <span style={{ fontSize: 14 }}>(8)</span>
@@ -37,33 +36,33 @@ const operationTabList = [
 
 @connect(({ loading, user, project }) => ({
   currentUser: user.currentUser,
-  currentUserLoading: loading.effects["user/fetchCurrent"],
+  currentUserLoading: loading.effects['user/fetchCurrent'],
   project,
-  projectLoading: loading.effects["project/fetchNotice"],
-  listLoading: loading.effects["list/fetch"]
+  projectLoading: loading.effects['project/fetchNotice'],
+  listLoading: loading.effects['list/fetch']
 }))
 class Center extends PureComponent {
   state = {
     newTags: [],
     inputVisible: false,
-    inputValue: ""
+    inputValue: ''
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: "user/fetchCurrent"
+      type: 'user/fetchCurrent'
     });
 
     dispatch({
-      type: "list/fetch",
+      type: 'list/fetch',
       payload: {
         count: 8
       }
     });
 
     dispatch({
-      type: "project/fetchNotice"
+      type: 'project/fetchNotice'
     });
   }
 
@@ -91,7 +90,7 @@ class Center extends PureComponent {
     this.setState({
       newTags,
       inputVisible: false,
-      inputValue: ""
+      inputValue: ''
     });
   };
 
@@ -102,17 +101,17 @@ class Center extends PureComponent {
   onTabChange = key => {
     const { match } = this.props;
     switch (key) {
-      case "articles":
-        router.push(`${match.url}/articles`);
-        break;
-      case "applications":
-        router.push(`${match.url}/applications`);
-        break;
-      case "projects":
-        router.push(`${match.url}/projects`);
-        break;
-      default:
-        break;
+    case 'articles':
+      router.push(`${match.url}/articles`);
+      break;
+    case 'applications':
+      router.push(`${match.url}/applications`);
+      break;
+    case 'projects':
+      router.push(`${match.url}/projects`);
+      break;
+    default:
+      break;
     }
   };
 
@@ -180,7 +179,7 @@ class Center extends PureComponent {
                     {!inputVisible && (
                       <Tag
                         onClick={this.showInput}
-                        style={{ background: "#fff", borderStyle: "dashed" }}
+                        style={{ background: '#fff', borderStyle: 'dashed' }}
                       >
                         <Icon type="plus" />
                       </Tag>
@@ -204,7 +203,7 @@ class Center extends PureComponent {
                   </div>
                 </div>
               ) : (
-                "loading..."
+                'loading...'
               )}
             </Card>
           </Col>
@@ -213,7 +212,7 @@ class Center extends PureComponent {
               className={styles.tabsCard}
               bordered={false}
               tabList={operationTabList}
-              activeTabKey={location.pathname.replace(`${match.path}`, "")}
+              activeTabKey={location.pathname.replace(`${match.path}`, '')}
               loading={listLoading}
               onTabChange={this.onTabChange}
             >

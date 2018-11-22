@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
-import PageHeaderWrapper from "@/components/PageHeaderWrapper";
-import { formatMessage, FormattedMessage } from "umi/locale";
+import React from 'react';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import { formatMessage, FormattedMessage } from 'umi/locale';
 import {
   Card,
   Form,
@@ -12,16 +12,17 @@ import {
   InputNumber,
   Select,
   Radio
-} from "antd";
-import { connect } from "dva";
-import styles from "./style.less";
+} from 'antd';
+import { connect } from 'dva';
+import styles from './style.less';
+
 const FormItem = Form.Item;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 const { Option } = Select;
 
 @connect(({ loading }) => ({
-  submitting: loading.effects["form/submitRegularForm"]
+  submitting: loading.effects['form/submitRegularForm']
 }))
 @Form.create()
 class BasicForm extends React.PureComponent {
@@ -31,7 +32,7 @@ class BasicForm extends React.PureComponent {
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         dispatch({
-          type: "form/submitRegularForm",
+          type: 'form/submitRegularForm',
           payload: values
         });
       }
@@ -78,16 +79,16 @@ class BasicForm extends React.PureComponent {
               {...formItemLayout}
               label={<FormattedMessage id="form.title.label" />}
             >
-              {getFieldDecorator("title", {
+              {getFieldDecorator('title', {
                 rules: [
                   {
                     required: true,
-                    message: formatMessage({ id: "validation.title.required" })
+                    message: formatMessage({ id: 'validation.title.required' })
                   }
                 ]
               })(
                 <Input
-                  placeholder={formatMessage({ id: "form.title.placeholder" })}
+                  placeholder={formatMessage({ id: 'form.title.placeholder' })}
                 />
               )}
             </FormItem>
@@ -95,19 +96,19 @@ class BasicForm extends React.PureComponent {
               {...formItemLayout}
               label={<FormattedMessage id="form.date.label" />}
             >
-              {getFieldDecorator("date", {
+              {getFieldDecorator('date', {
                 rules: [
                   {
                     required: true,
-                    message: formatMessage({ id: "validation.date.required" })
+                    message: formatMessage({ id: 'validation.date.required' })
                   }
                 ]
               })(
                 <RangePicker
-                  style={{ width: "100%" }}
+                  style={{ width: '100%' }}
                   placeholder={[
-                    formatMessage({ id: "form.date.placeholder.start" }),
-                    formatMessage({ id: "form.date.placeholder.end" })
+                    formatMessage({ id: 'form.date.placeholder.start' }),
+                    formatMessage({ id: 'form.date.placeholder.end' })
                   ]}
                 />
               )}
@@ -116,17 +117,17 @@ class BasicForm extends React.PureComponent {
               {...formItemLayout}
               label={<FormattedMessage id="form.goal.label" />}
             >
-              {getFieldDecorator("goal", {
+              {getFieldDecorator('goal', {
                 rules: [
                   {
                     required: true,
-                    message: formatMessage({ id: "validation.goal.required" })
+                    message: formatMessage({ id: 'validation.goal.required' })
                   }
                 ]
               })(
                 <TextArea
                   style={{ minHeight: 32 }}
-                  placeholder={formatMessage({ id: "form.goal.placeholder" })}
+                  placeholder={formatMessage({ id: 'form.goal.placeholder' })}
                   rows={4}
                 />
               )}
@@ -135,12 +136,12 @@ class BasicForm extends React.PureComponent {
               {...formItemLayout}
               label={<FormattedMessage id="form.standard.label" />}
             >
-              {getFieldDecorator("standard", {
+              {getFieldDecorator('standard', {
                 rules: [
                   {
                     required: true,
                     message: formatMessage({
-                      id: "validation.standard.required"
+                      id: 'validation.standard.required'
                     })
                   }
                 ]
@@ -148,7 +149,7 @@ class BasicForm extends React.PureComponent {
                 <TextArea
                   style={{ minHeight: 32 }}
                   placeholder={formatMessage({
-                    id: "form.standard.placeholder"
+                    id: 'form.standard.placeholder'
                   })}
                   rows={4}
                 />
@@ -172,9 +173,9 @@ class BasicForm extends React.PureComponent {
                 </span>
               }
             >
-              {getFieldDecorator("client")(
+              {getFieldDecorator('client')(
                 <Input
-                  placeholder={formatMessage({ id: "form.client.placeholder" })}
+                  placeholder={formatMessage({ id: 'form.client.placeholder' })}
                 />
               )}
             </FormItem>
@@ -189,10 +190,10 @@ class BasicForm extends React.PureComponent {
                 </span>
               }
             >
-              {getFieldDecorator("invites")(
+              {getFieldDecorator('invites')(
                 <Input
                   placeholder={formatMessage({
-                    id: "form.invites.placeholder"
+                    id: 'form.invites.placeholder'
                   })}
                 />
               )}
@@ -208,9 +209,9 @@ class BasicForm extends React.PureComponent {
                 </span>
               }
             >
-              {getFieldDecorator("weight")(
+              {getFieldDecorator('weight')(
                 <InputNumber
-                  placeholder={formatMessage({ id: "form.weight.placeholder" })}
+                  placeholder={formatMessage({ id: 'form.weight.placeholder' })}
                   min={0}
                   max={100}
                 />
@@ -223,8 +224,8 @@ class BasicForm extends React.PureComponent {
               help={<FormattedMessage id="form.public.label.help" />}
             >
               <div>
-                {getFieldDecorator("public", {
-                  initialValue: "1"
+                {getFieldDecorator('public', {
+                  initialValue: '1'
                 })(
                   <Radio.Group>
                     <Radio value="1">
@@ -239,16 +240,16 @@ class BasicForm extends React.PureComponent {
                   </Radio.Group>
                 )}
                 <FormItem style={{ marginBottom: 0 }}>
-                  {getFieldDecorator("publicUsers")(
+                  {getFieldDecorator('publicUsers')(
                     <Select
                       mode="multiple"
                       placeholder={formatMessage({
-                        id: "form.publicUsers.placeholder"
+                        id: 'form.publicUsers.placeholder'
                       })}
                       style={{
-                        margin: "8px 0",
+                        margin: '8px 0',
                         display:
-                          getFieldValue("public") === "2" ? "block" : "none"
+                          getFieldValue('public') === '2' ? 'block' : 'none'
                       }}
                     >
                       <Option value="1">

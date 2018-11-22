@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
-import { formatMessage, FormattedMessage } from "umi/locale";
-import { List } from "antd";
+import React, { Component, Fragment } from 'react';
+import { formatMessage, FormattedMessage } from 'umi/locale';
+import { List } from 'antd';
 // import { getTimeDistance } from '@/utils/utils';
 
 const passwordStrength = {
@@ -31,10 +31,10 @@ const passwordStrength = {
 class SecurityView extends Component {
   getData = () => [
     {
-      title: formatMessage({ id: "app.settings.security.password" }, {}),
+      title: formatMessage({ id: 'app.settings.security.password' }, {}),
       description: (
         <Fragment>
-          {formatMessage({ id: "app.settings.security.password-description" })}
+          {formatMessage({ id: 'app.settings.security.password-description' })}
           ：{passwordStrength.strong}
         </Fragment>
       ),
@@ -48,9 +48,9 @@ class SecurityView extends Component {
       ]
     },
     {
-      title: formatMessage({ id: "app.settings.security.phone" }, {}),
+      title: formatMessage({ id: 'app.settings.security.phone' }, {}),
       description: `${formatMessage(
-        { id: "app.settings.security.phone-description" },
+        { id: 'app.settings.security.phone-description' },
         {}
       )}：138****8293`,
       actions: [
@@ -63,9 +63,9 @@ class SecurityView extends Component {
       ]
     },
     {
-      title: formatMessage({ id: "app.settings.security.question" }, {}),
+      title: formatMessage({ id: 'app.settings.security.question' }, {}),
       description: formatMessage(
-        { id: "app.settings.security.question-description" },
+        { id: 'app.settings.security.question-description' },
         {}
       ),
       actions: [
@@ -78,9 +78,9 @@ class SecurityView extends Component {
       ]
     },
     {
-      title: formatMessage({ id: "app.settings.security.email" }, {}),
+      title: formatMessage({ id: 'app.settings.security.email' }, {}),
       description: `${formatMessage(
-        { id: "app.settings.security.email-description" },
+        { id: 'app.settings.security.email-description' },
         {}
       )}：ant***sign.com`,
       actions: [
@@ -93,9 +93,9 @@ class SecurityView extends Component {
       ]
     },
     {
-      title: formatMessage({ id: "app.settings.security.mfa" }, {}),
+      title: formatMessage({ id: 'app.settings.security.mfa' }, {}),
       description: formatMessage(
-        { id: "app.settings.security.mfa-description" },
+        { id: 'app.settings.security.mfa-description' },
         {}
       ),
       actions: [

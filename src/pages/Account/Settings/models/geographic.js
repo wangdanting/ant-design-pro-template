@@ -1,7 +1,7 @@
-import { queryProvince, queryCity } from "@/services/geographic";
+import { queryProvince, queryCity } from '@/services/geographic';
 
 export default {
-  namespace: "geographic",
+  namespace: 'geographic',
 
   state: {
     province: [],
@@ -12,31 +12,31 @@ export default {
   effects: {
     *fetchProvince(_, { call, put }) {
       yield put({
-        type: "changeLoading",
+        type: 'changeLoading',
         payload: true
       });
       const response = yield call(queryProvince);
       yield put({
-        type: "setProvince",
+        type: 'setProvince',
         payload: response
       });
       yield put({
-        type: "changeLoading",
+        type: 'changeLoading',
         payload: false
       });
     },
     *fetchCity({ payload }, { call, put }) {
       yield put({
-        type: "changeLoading",
+        type: 'changeLoading',
         payload: true
       });
       const response = yield call(queryCity, payload);
       yield put({
-        type: "setCity",
+        type: 'setCity',
         payload: response
       });
       yield put({
-        type: "changeLoading",
+        type: 'changeLoading',
         payload: false
       });
     }

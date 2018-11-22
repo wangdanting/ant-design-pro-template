@@ -1,9 +1,9 @@
-import React, { PureComponent } from "react";
-import { List, Card, Icon, Dropdown, Menu, Avatar, Tooltip } from "antd";
-import numeral from "numeral";
-import { connect } from "dva";
-import { formatWan } from "@/utils/utils";
-import stylesApplications from "../../List/Applications.less";
+import React, { PureComponent } from 'react';
+import { List, Card, Icon, Dropdown, Menu, Avatar, Tooltip } from 'antd';
+import numeral from 'numeral';
+import { connect } from 'dva';
+import { formatWan } from '@/utils/utils';
+import stylesApplications from '../../List/Applications.less';
 
 const itemMenu = (
   <Menu>
@@ -87,7 +87,7 @@ class Applications extends PureComponent {
               <div className={stylesApplications.cardItemContent}>
                 <CardInfo
                   activeUser={formatWan(item.activeUser)}
-                  newUser={numeral(item.newUser).format("0,0")}
+                  newUser={numeral(item.newUser).format('0,0')}
                 />
               </div>
             </Card>

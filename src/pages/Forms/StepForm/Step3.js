@@ -1,9 +1,9 @@
-import React, { PureComponent, Fragment } from "react";
-import Result from "@/components/Result";
-import { connect } from "dva";
-import { Row, Col, Button } from "antd";
-import styles from "./style.less";
-import router from "umi/router";
+import React, { PureComponent, Fragment } from 'react';
+import Result from '@/components/Result';
+import { connect } from 'dva';
+import { Row, Col, Button } from 'antd';
+import router from 'umi/router';
+import styles from './style.less';
 
 @connect(({ form }) => ({
   data: form.step
@@ -12,7 +12,7 @@ class Step3 extends PureComponent {
   render() {
     const { data } = this.props;
     const onFinish = () => {
-      router.push("/form/step-form/info");
+      router.push('/form/step-form/info');
     };
     const information = (
       <div className={styles.information}>

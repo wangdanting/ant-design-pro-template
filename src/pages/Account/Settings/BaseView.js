@@ -1,10 +1,10 @@
-import React, { PureComponent, Fragment } from "react";
-import { Form, Input, Select, Button, Upload } from "antd";
-import { connect } from "dva";
-import { formatMessage, FormattedMessage } from "umi/locale";
-import GeographicView from "./GeographicView";
-import PhoneView from "./PhoneView";
-import styles from "./BaseView.less";
+import React, { PureComponent, Fragment } from 'react';
+import { Form, Input, Select, Button, Upload } from 'antd';
+import { connect } from 'dva';
+import { formatMessage, FormattedMessage } from 'umi/locale';
+import GeographicView from './GeographicView';
+import PhoneView from './PhoneView';
+import styles from './BaseView.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -36,21 +36,21 @@ const AvatarView = ({ avatar }) => (
 const validatorGeographic = (rule, value, callback) => {
   const { province, city } = value;
   if (!province.key) {
-    callback("Please input your province!");
+    callback('Please input your province!');
   }
   if (!city.key) {
-    callback("Please input your city!");
+    callback('Please input your city!');
   }
   callback();
 };
 
 const validatorPhone = (rule, value, callback) => {
-  const values = value.split("-");
+  const values = value.split('-');
   if (!values[0]) {
-    callback("Please input your area code!");
+    callback('Please input your area code!');
   }
   if (!values[1]) {
-    callback("Please input your phone number!");
+    callback('Please input your phone number!');
   }
   callback();
 };
@@ -83,7 +83,7 @@ class BaseView extends PureComponent {
       return currentUser.avatar;
     }
     const url =
-      "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png";
+      'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
     return url;
   }
 
@@ -96,13 +96,13 @@ class BaseView extends PureComponent {
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
           <Form layout="vertical" onSubmit={this.handleSubmit} hideRequiredMark>
-            <FormItem label={formatMessage({ id: "app.settings.basic.email" })}>
-              {getFieldDecorator("email", {
+            <FormItem label={formatMessage({ id: 'app.settings.basic.email' })}>
+              {getFieldDecorator('email', {
                 rules: [
                   {
                     required: true,
                     message: formatMessage(
-                      { id: "app.settings.basic.email-message" },
+                      { id: 'app.settings.basic.email-message' },
                       {}
                     )
                   }
@@ -110,14 +110,14 @@ class BaseView extends PureComponent {
               })(<Input />)}
             </FormItem>
             <FormItem
-              label={formatMessage({ id: "app.settings.basic.nickname" })}
+              label={formatMessage({ id: 'app.settings.basic.nickname' })}
             >
-              {getFieldDecorator("name", {
+              {getFieldDecorator('name', {
                 rules: [
                   {
                     required: true,
                     message: formatMessage(
-                      { id: "app.settings.basic.nickname-message" },
+                      { id: 'app.settings.basic.nickname-message' },
                       {}
                     )
                   }
@@ -125,14 +125,14 @@ class BaseView extends PureComponent {
               })(<Input />)}
             </FormItem>
             <FormItem
-              label={formatMessage({ id: "app.settings.basic.profile" })}
+              label={formatMessage({ id: 'app.settings.basic.profile' })}
             >
-              {getFieldDecorator("profile", {
+              {getFieldDecorator('profile', {
                 rules: [
                   {
                     required: true,
                     message: formatMessage(
-                      { id: "app.settings.basic.profile-message" },
+                      { id: 'app.settings.basic.profile-message' },
                       {}
                     )
                   }
@@ -140,21 +140,21 @@ class BaseView extends PureComponent {
               })(
                 <Input.TextArea
                   placeholder={formatMessage({
-                    id: "app.settings.basic.profile-placeholder"
+                    id: 'app.settings.basic.profile-placeholder'
                   })}
                   rows={4}
                 />
               )}
             </FormItem>
             <FormItem
-              label={formatMessage({ id: "app.settings.basic.country" })}
+              label={formatMessage({ id: 'app.settings.basic.country' })}
             >
-              {getFieldDecorator("country", {
+              {getFieldDecorator('country', {
                 rules: [
                   {
                     required: true,
                     message: formatMessage(
-                      { id: "app.settings.basic.country-message" },
+                      { id: 'app.settings.basic.country-message' },
                       {}
                     )
                   }
@@ -166,14 +166,14 @@ class BaseView extends PureComponent {
               )}
             </FormItem>
             <FormItem
-              label={formatMessage({ id: "app.settings.basic.geographic" })}
+              label={formatMessage({ id: 'app.settings.basic.geographic' })}
             >
-              {getFieldDecorator("geographic", {
+              {getFieldDecorator('geographic', {
                 rules: [
                   {
                     required: true,
                     message: formatMessage(
-                      { id: "app.settings.basic.geographic-message" },
+                      { id: 'app.settings.basic.geographic-message' },
                       {}
                     )
                   },
@@ -184,27 +184,27 @@ class BaseView extends PureComponent {
               })(<GeographicView />)}
             </FormItem>
             <FormItem
-              label={formatMessage({ id: "app.settings.basic.address" })}
+              label={formatMessage({ id: 'app.settings.basic.address' })}
             >
-              {getFieldDecorator("address", {
+              {getFieldDecorator('address', {
                 rules: [
                   {
                     required: true,
                     message: formatMessage(
-                      { id: "app.settings.basic.address-message" },
+                      { id: 'app.settings.basic.address-message' },
                       {}
                     )
                   }
                 ]
               })(<Input />)}
             </FormItem>
-            <FormItem label={formatMessage({ id: "app.settings.basic.phone" })}>
-              {getFieldDecorator("phone", {
+            <FormItem label={formatMessage({ id: 'app.settings.basic.phone' })}>
+              {getFieldDecorator('phone', {
                 rules: [
                   {
                     required: true,
                     message: formatMessage(
-                      { id: "app.settings.basic.phone-message" },
+                      { id: 'app.settings.basic.phone-message' },
                       {}
                     )
                   },

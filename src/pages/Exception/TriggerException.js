@@ -1,6 +1,6 @@
-import React, { PureComponent } from "react";
-import { Button, Spin, Card } from "antd";
-import { connect } from "dva";
+import React, { PureComponent } from 'react';
+import { Button, Spin, Card } from 'antd';
+import { connect } from 'dva';
 
 @connect(state => ({
   isloading: state.error.isloading
@@ -16,7 +16,7 @@ class TriggerException extends PureComponent {
     });
     const { dispatch } = this.props;
     dispatch({
-      type: "error/query",
+      type: 'error/query',
       payload: {
         code
       }

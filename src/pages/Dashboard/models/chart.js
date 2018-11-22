@@ -1,7 +1,7 @@
-import { fakeChartData } from "@/services/api";
+import { fakeChartData } from '@/services/api';
 
 export default {
-  namespace: "chart",
+  namespace: 'chart',
 
   state: {
     visitData: [],
@@ -21,14 +21,14 @@ export default {
     *fetch(_, { call, put }) {
       const response = yield call(fakeChartData);
       yield put({
-        type: "save",
+        type: 'save',
         payload: response
       });
     },
     *fetchSalesData(_, { call, put }) {
       const response = yield call(fakeChartData);
       yield put({
-        type: "save",
+        type: 'save',
         payload: {
           salesData: response.salesData
         }

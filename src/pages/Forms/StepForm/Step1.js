@@ -1,8 +1,8 @@
-import React, { PureComponent, Fragment } from "react";
-import { Form, Input, Button, Select, Divider } from "antd";
-import styles from "./style.less";
-import { connect } from "dva";
-import router from "umi/router";
+import React, { PureComponent, Fragment } from 'react';
+import { Form, Input, Button, Select } from 'antd';
+import { connect } from 'dva';
+import router from 'umi/router';
+import styles from './style.less';
 
 const { Option } = Select;
 
@@ -28,10 +28,10 @@ class Step1 extends PureComponent {
     validateFields((err, values) => {
       if (!err) {
         dispatch({
-          type: "form/saveStepFormData",
+          type: 'form/saveStepFormData',
           payload: values
         });
-        router.push("/form/step-form/confirm");
+        router.push('/form/step-form/confirm');
       }
     });
   };
@@ -45,9 +45,9 @@ class Step1 extends PureComponent {
       <Fragment>
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
           <Form.Item {...formItemLayout} label="付款账户">
-            {getFieldDecorator("payAccount", {
+            {getFieldDecorator('payAccount', {
               initialValue: data.payAccount,
-              rules: [{ required: true, message: "请选择付款账户" }]
+              rules: [{ required: true, message: '请选择付款账户' }]
             })(
               <Select placeholder="test@example.com">
                 <Option value="ant-design@alipay.com">
@@ -62,34 +62,34 @@ class Step1 extends PureComponent {
                 <Option value="alipay">支付宝</Option>
                 <Option value="bank">银行账户</Option>
               </Select>
-              {getFieldDecorator("receiverAccount", {
+              {getFieldDecorator('receiverAccount', {
                 initialValue: data.receiverAccount,
                 rules: [
-                  { required: true, message: "请输入收款人账户" },
-                  { type: "email", message: "账户名应为邮箱格式" }
+                  { required: true, message: '请输入收款人账户' },
+                  { type: 'email', message: '账户名应为邮箱格式' }
                 ]
               })(
                 <Input
-                  style={{ width: "calc(100% - 100px)" }}
+                  style={{ width: 'calc(100% - 100px)' }}
                   placeholder="test@example.com"
                 />
               )}
             </Input.Group>
           </Form.Item>
           <Form.Item {...formItemLayout} label="收款人姓名">
-            {getFieldDecorator("receiverName", {
+            {getFieldDecorator('receiverName', {
               initialValue: data.receiverName,
-              rules: [{ required: true, message: "请输入收款人姓名" }]
+              rules: [{ required: true, message: '请输入收款人姓名' }]
             })(<Input placeholder="请输入收款人姓名" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="转账金额">
-            {getFieldDecorator("amount", {
+            {getFieldDecorator('amount', {
               initialValue: data.amount,
               rules: [
-                { required: true, message: "请输入转账金额" },
+                { required: true, message: '请输入转账金额' },
                 {
                   pattern: /^(\d+)((?:\.\d+)?)$/,
-                  message: "请输入合法金额数字"
+                  message: '请输入合法金额数字'
                 }
               ]
             })(<Input prefix="￥" placeholder="请输入金额" />)}

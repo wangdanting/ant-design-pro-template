@@ -1,8 +1,9 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react';
 
-import styles from "./Workplace.less";
+// import styles from './Workplace.less';
 
 class Workplace extends PureComponent {
+  state = {};
   render() {
     return <div>Workplace</div>;
   }

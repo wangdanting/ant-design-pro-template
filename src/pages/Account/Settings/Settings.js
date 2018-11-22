@@ -1,11 +1,11 @@
-import React, { PureComponent } from "react";
-import GridContent from "@/components/PageHeaderWrapper/GridContent";
-import { FormattedMessage } from "umi/locale";
-import { Menu } from "antd";
-import router from "umi/router";
-import { connect } from "dva";
+import React, { PureComponent } from 'react';
+import GridContent from '@/components/PageHeaderWrapper/GridContent';
+import { FormattedMessage } from 'umi/locale';
+import { Menu } from 'antd';
+import router from 'umi/router';
+import { connect } from 'dva';
 
-import styles from "./Settings.less";
+import styles from './Settings.less';
 
 const menuMap = {
   base: (
@@ -41,17 +41,17 @@ class Settings extends PureComponent {
   constructor(props) {
     super(props);
     const { match, location } = props;
-    const key = location.pathname.replace(`${match.path}`, "");
+    const key = location.pathname.replace(`${match.path}`, '');
     this.state = {
-      mode: "inline",
-      selectKey: menuMap[key] ? key : "base"
+      mode: 'inline',
+      selectKey: menuMap[key] ? key : 'base'
     };
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { match, location } = nextProps;
-    let selectKey = location.pathname.replace(`${match.path}/`, "");
-    selectKey = menuMap[selectKey] ? selectKey : "base";
+    let selectKey = location.pathname.replace(`${match.path}/`, '');
+    selectKey = menuMap[selectKey] ? selectKey : 'base';
     if (selectKey !== prevState.selectKey) {
       return { selectKey };
     }
@@ -59,12 +59,12 @@ class Settings extends PureComponent {
   }
 
   componentDidMount() {
-    window.addEventListener("resize", this.resize);
+    window.addEventListener('resize', this.resize);
     this.resize();
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.resize);
+    window.removeEventListener('resize', this.resize);
   }
 
   resize = () => {
@@ -108,7 +108,7 @@ class Settings extends PureComponent {
   render() {
     const { children, currentUser } = this.props;
     if (!currentUser.userid) {
-      return "";
+      return '';
     }
 
     const { mode, selectKey } = this.state;

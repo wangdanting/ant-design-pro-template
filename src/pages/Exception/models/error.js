@@ -1,10 +1,10 @@
-import queryError from "@/services/error";
+import queryError from '@/services/error';
 
 export default {
-  namespace: "error",
+  namespace: 'error',
 
   state: {
-    error: "",
+    error: '',
     isloading: false
   },
 
@@ -12,7 +12,7 @@ export default {
     *query({ payload }, { call, put }) {
       yield call(queryError, payload.code);
       yield put({
-        type: "trigger",
+        type: 'trigger',
         payload: payload.code
       });
     }

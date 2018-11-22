@@ -1,14 +1,14 @@
-import React, { PureComponent } from "react";
-import { Spin, Select } from "antd";
-import { connect } from "dva";
+import React, { PureComponent } from 'react';
+import { Spin, Select } from 'antd';
+import { connect } from 'dva';
 
-import styles from "./GeographicView.less";
+import styles from './GeographicView.less';
 
 const { Option } = Select;
 
 const nullSlectItem = {
-  label: "",
-  key: ""
+  label: '',
+  key: ''
 };
 
 @connect(({ geographic }) => {
@@ -23,7 +23,7 @@ class GeographicView extends PureComponent {
   componentDidMount = () => {
     const { dispatch } = this.props;
     dispatch({
-      type: "geographic/fetchProvince"
+      type: 'geographic/fetchProvince'
     });
   };
 
@@ -32,26 +32,16 @@ class GeographicView extends PureComponent {
 
     if (!props.value && !!value && !!value.province) {
       dispatch({
-        type: "geographic/fetchCity",
+        type: 'geographic/fetchCity',
         payload: value.province.key
       });
     }
   }
 
-  conversionObject() {
-    const { value } = this.props;
-    if (!value) {
-      return {
-        province: nullSlectItem,
-        city: nullSlectItem
-      };
-    }
-    const { province, city } = value;
-    return {
-      province: province || nullSlectItem,
-      city: city || nullSlectItem
-    };
-  }
+  getCityOption = () => {
+    const { city } = this.props;
+    return this.getOption(city);
+  };
 
   getOption = list => {
     if (!list || list.length < 1) {
@@ -76,18 +66,13 @@ class GeographicView extends PureComponent {
   selectProvinceItem = item => {
     const { dispatch, onChange } = this.props;
     dispatch({
-      type: "geographic/fetchCity",
+      type: 'geographic/fetchCity',
       payload: item.key
     });
     onChange({
       province: item,
       city: nullSlectItem
     });
-  };
-
-  getCityOption = () => {
-    const { city } = this.props;
-    return this.getOption(city);
   };
 
   selectCityItem = item => {
@@ -97,6 +82,21 @@ class GeographicView extends PureComponent {
       city: item
     });
   };
+
+  conversionObject() {
+    const { value } = this.props;
+    if (!value) {
+      return {
+        province: nullSlectItem,
+        city: nullSlectItem
+      };
+    }
+    const { province, city } = value;
+    return {
+      province: province || nullSlectItem,
+      city: city || nullSlectItem
+    };
+  }
 
   render() {
     const { province, city } = this.conversionObject();

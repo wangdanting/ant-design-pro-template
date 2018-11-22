@@ -1,8 +1,9 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react';
 
-import styles from "./Monitor.less";
+// import styles from './Monitor.less';
 
 class Monitor extends PureComponent {
+  state = {};
   render() {
     return <div>Monitor</div>;
   }

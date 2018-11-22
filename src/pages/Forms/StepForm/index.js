@@ -1,7 +1,8 @@
-import React, { PureComponent, Fragment } from "react";
-import PageHeaderWrapper from "@/components/PageHeaderWrapper";
-import styles from "../style.less";
-import { Card, Steps } from "antd";
+import React, { PureComponent, Fragment } from 'react';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import { Card, Steps } from 'antd';
+import styles from '../style.less';
+
 const { Step } = Steps;
 
 class StepForm extends PureComponent {
@@ -10,16 +11,16 @@ class StepForm extends PureComponent {
       location: { pathname }
     } = this.props;
 
-    const pathList = pathname.split("/");
+    const pathList = pathname.split('/');
     switch (pathList.pop()) {
-      case "info":
-        return 0;
-      case "confirm":
-        return 1;
-      case "result":
-        return 2;
-      default:
-        return 0;
+    case 'info':
+      return 0;
+    case 'confirm':
+      return 1;
+    case 'result':
+      return 2;
+    default:
+      return 0;
     }
   }
 

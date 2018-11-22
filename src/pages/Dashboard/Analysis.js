@@ -1,14 +1,14 @@
-import React, { PureComponent } from "react";
-import { Row, Col, Tooltip, Icon } from "antd";
-import { connect } from "dva";
-import numeral from "numeral";
-import { formatMessage, FormattedMessage } from "umi/locale";
-import GridContent from "@/components/PageHeaderWrapper/GridContent";
-import { ChartCard, Field, MiniArea } from "@/components/Charts";
-import Trend from "@/components/Trend";
-import Yuan from "@/utils/Yuan";
+import React, { PureComponent } from 'react';
+import { Row, Col, Tooltip, Icon } from 'antd';
+import { connect } from 'dva';
+import numeral from 'numeral';
+import { FormattedMessage } from 'umi/locale';
+import GridContent from '@/components/PageHeaderWrapper/GridContent';
+import { ChartCard, Field, MiniArea } from '@/components/Charts';
+import Trend from '@/components/Trend';
+import Yuan from '@/utils/Yuan';
 
-import styles from "./Analysis.less";
+import styles from './Analysis.less';
 
 const topColResponsiveProps = {
   xs: 24,
@@ -21,7 +21,7 @@ const topColResponsiveProps = {
 
 @connect(({ chart, loading }) => ({
   chart,
-  loading: loading.effects["chart/fetch"]
+  loading: loading.effects['chart/fetch']
 }))
 class Analysis extends PureComponent {
   state = {
@@ -32,7 +32,7 @@ class Analysis extends PureComponent {
     const { dispatch } = this.props;
     this.reqRef = requestAnimationFrame(() => {
       dispatch({
-        type: "chart/fetch"
+        type: 'chart/fetch'
       });
       this.timeoutId = setTimeout(() => {
         this.setState({
@@ -45,7 +45,7 @@ class Analysis extends PureComponent {
   componentWillUnmount() {
     const { dispatch } = this.props;
     dispatch({
-      type: "chart/clear"
+      type: 'chart/clear'
     });
     cancelAnimationFrame(this.reqRef);
     clearTimeout(this.timeoutId);
@@ -90,7 +90,7 @@ class Analysis extends PureComponent {
                       defaultMessage="Day Sales"
                     />
                   }
-                  value={`￥${numeral(12423).format("0,0")}`}
+                  value={`￥${numeral(12423).format('0,0')}`}
                 />
               }
               contentheight={46}
@@ -133,7 +133,7 @@ class Analysis extends PureComponent {
                   <Icon type="info-circle-o" />
                 </Tooltip>
               }
-              total={numeral(8846).format("0,0")}
+              total={numeral(8846).format('0,0')}
               footer={
                 <Field
                   label={
@@ -142,7 +142,7 @@ class Analysis extends PureComponent {
                       defaultMessage="Day Visits"
                     />
                   }
-                  value={numeral(1234).format("0,0")}
+                  value={numeral(1234).format('0,0')}
                 />
               }
               contentheight={46}

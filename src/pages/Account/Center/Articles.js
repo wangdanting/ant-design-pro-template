@@ -1,8 +1,8 @@
-import React, { PureComponent } from "react";
-import { connect } from "dva";
-import { List, Icon, Tag } from "antd";
-import ArticleListContent from "@/components/ArticleListContent";
-import styles from "./Article.less";
+import React, { PureComponent } from 'react';
+import { connect } from 'dva';
+import { List, Icon, Tag } from 'antd';
+import ArticleListContent from '@/components/ArticleListContent';
+import styles from './Article.less';
 
 @connect(({ list }) => ({
   list

@@ -1,9 +1,9 @@
-import React, { PureComponent } from "react";
-import { Form, Input, Button, Alert, Divider } from "antd";
-import styles from "./style.less";
-import { connect } from "dva";
-import { digitUppercase } from "@/utils/utils";
-import router from "umi/router";
+import React, { PureComponent } from 'react';
+import { Form, Input, Button, Alert, Divider } from 'antd';
+import { connect } from 'dva';
+import { digitUppercase } from '@/utils/utils';
+import router from 'umi/router';
+import styles from './style.less';
 
 const formItemLayout = {
   labelCol: {
@@ -15,30 +15,11 @@ const formItemLayout = {
 };
 
 @connect(({ form, loading }) => ({
-  submitting: loading.effects["form/submitStepForm"],
+  submitting: loading.effects['form/submitStepForm'],
   data: form.step
 }))
 @Form.create()
 class Step2 extends PureComponent {
-  onValidateForm = e => {
-    e.preventDefault();
-    const {
-      form: { validateFields },
-      dispatch
-    } = this.props;
-    validateFields((err, values) => {
-      if (!err) {
-        dispatch({
-          type: "form/submitStepForm",
-          payload: {
-            ...data,
-            ...values
-          }
-        });
-      }
-    });
-  };
-
   render() {
     const {
       data,
@@ -48,7 +29,7 @@ class Step2 extends PureComponent {
     } = this.props;
 
     const onPrev = () => {
-      router.push("/form/step-form/info");
+      router.push('/form/step-form/info');
     };
 
     const onValidateForm = e => {
@@ -56,7 +37,7 @@ class Step2 extends PureComponent {
       validateFields((err, values) => {
         if (!err) {
           dispatch({
-            type: "form/submitStepForm",
+            type: 'form/submitStepForm',
             payload: {
               ...data,
               ...values
@@ -105,21 +86,21 @@ class Step2 extends PureComponent {
             （{digitUppercase(data.amount)}）
           </span>
         </Form.Item>
-        <Divider style={{ margin: "24px 0" }} />
+        <Divider style={{ margin: '24px 0' }} />
         <Form.Item {...formItemLayout} label="支付密码">
-          {getFieldDecorator("password", {
-            initialValue: "123456",
+          {getFieldDecorator('password', {
+            initialValue: '123456',
             rules: [
               {
                 required: true,
-                message: "需要支付密码才能进行支付"
+                message: '需要支付密码才能进行支付'
               }
             ]
           })(
             <Input
               type="password"
               autoComplete="off"
-              style={{ width: "80%" }}
+              style={{ width: '80%' }}
             />
           )}
         </Form.Item>

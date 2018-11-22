@@ -1,6 +1,6 @@
-import React, { PureComponent, Fragment } from "react";
-import { Table, Button, Input, Divider, Popconfirm } from "antd";
-import isEqual from "lodash/isEqual";
+import React, { PureComponent, Fragment } from 'react';
+import { Table, Button, Input, Divider, Popconfirm, message } from 'antd';
+import isEqual from 'lodash/isEqual';
 
 class TableForm extends PureComponent {
   index = 0;
@@ -32,37 +32,6 @@ class TableForm extends PureComponent {
     return (newData || data).filter(item => item.key === key)[0];
   }
 
-  handleFieldChange(e, fieldName, key) {
-    const { data } = this.state;
-    const newData = data.concat();
-    const target = this.getRowByKey(key, newData);
-    if (target) {
-      target[fieldName] = e.target.value;
-      this.setState({ data: newData });
-    }
-  }
-
-  handleKeyPress(e, key) {
-    if (e.key === "Enter") {
-      this.saveRow(e, key);
-    }
-  }
-
-  newMember = () => {
-    const { data } = this.state;
-    const newData = data.concat();
-    newData.push({
-      key: `NEW_TEMP_ID_${this.index}`,
-      workId: "",
-      name: "",
-      department: "",
-      editable: true,
-      isNew: true
-    });
-    this.index += 1;
-    this.setState({ data: newData });
-  };
-
   toggleEditable = (e, key) => {
     e.preventDefault();
     const { data } = this.state;
@@ -77,6 +46,37 @@ class TableForm extends PureComponent {
       this.setState({ data: newData });
     }
   };
+
+  newMember = () => {
+    const { data } = this.state;
+    const newData = data.concat();
+    newData.push({
+      key: `NEW_TEMP_ID_${this.index}`,
+      workId: '',
+      name: '',
+      department: '',
+      editable: true,
+      isNew: true
+    });
+    this.index += 1;
+    this.setState({ data: newData });
+  };
+
+  handleFieldChange(e, fieldName, key) {
+    const { data } = this.state;
+    const newData = data.concat();
+    const target = this.getRowByKey(key, newData);
+    if (target) {
+      target[fieldName] = e.target.value;
+      this.setState({ data: newData });
+    }
+  }
+
+  handleKeyPress(e, key) {
+    if (e.key === 'Enter') {
+      this.saveRow(e, key);
+    }
+  }
 
   remove(key) {
     const { data } = this.state;
@@ -111,7 +111,7 @@ class TableForm extends PureComponent {
       }
       const target = this.getRowByKey(key) || {};
       if (!target.workId || !target.name || !target.department) {
-        message.error("请填写完整成员信息。");
+        message.error('请填写完整成员信息。');
         e.target.focus();
         this.setState({
           loading: false
@@ -129,17 +129,17 @@ class TableForm extends PureComponent {
   render() {
     const columns = [
       {
-        title: "成员姓名",
-        dataIndex: "name",
-        key: "name",
-        width: "20%",
+        title: '成员姓名',
+        dataIndex: 'name',
+        key: 'name',
+        width: '20%',
         render: (text, record) => {
           if (record.editable) {
             return (
               <Input
                 value={text}
                 autoFocus
-                onChange={e => this.handleFieldChange(e, "name", record.key)}
+                onChange={e => this.handleFieldChange(e, 'name', record.key)}
                 onKeyPress={e => this.handleKeyPress(e, record.key)}
                 placeholder="成员姓名"
               />
@@ -149,16 +149,16 @@ class TableForm extends PureComponent {
         }
       },
       {
-        title: "工号",
-        dataIndex: "workId",
-        key: "workId",
-        width: "20%",
+        title: '工号',
+        dataIndex: 'workId',
+        key: 'workId',
+        width: '20%',
         render: (text, record) => {
           if (record.editable) {
             return (
               <Input
                 value={text}
-                onChange={e => this.handleFieldChange(e, "workId", record.key)}
+                onChange={e => this.handleFieldChange(e, 'workId', record.key)}
                 onKeyPress={e => this.handleKeyPress(e, record.key)}
                 placeholder="工号"
               />
@@ -168,17 +168,17 @@ class TableForm extends PureComponent {
         }
       },
       {
-        title: "所属部门",
-        dataIndex: "department",
-        key: "department",
-        width: "40%",
+        title: '所属部门',
+        dataIndex: 'department',
+        key: 'department',
+        width: '40%',
         render: (text, record) => {
           if (record.editable) {
             return (
               <Input
                 value={text}
                 onChange={e =>
-                  this.handleFieldChange(e, "department", record.key)
+                  this.handleFieldChange(e, 'department', record.key)
                 }
                 onKeyPress={e => this.handleKeyPress(e, record.key)}
                 placeholder="所属部门"
@@ -189,8 +189,8 @@ class TableForm extends PureComponent {
         }
       },
       {
-        title: "操作",
-        key: "action",
+        title: '操作',
+        key: 'action',
         render: (text, record) => {
           const { loading } = this.state;
           if (!!record.editable && loading) {
@@ -235,7 +235,6 @@ class TableForm extends PureComponent {
       }
     ];
     const { loading, data } = this.state;
-    console.log(data, "data");
     return (
       <Fragment>
         <Table
@@ -245,7 +244,7 @@ class TableForm extends PureComponent {
           pagination={false}
         />
         <Button
-          style={{ width: "100%", marginTop: 16, marginBottom: 8 }}
+          style={{ width: '100%', marginTop: 16, marginBottom: 8 }}
           type="dashed"
           onClick={this.newMember}
           icon="plus"
