@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Row, Col } from 'antd';
+import omit from 'omit.js';
 import ItemMap from './map';
 import LoginContext from './LoginContext';
-import omit from 'omit.js';
 import styles from './index.less';
 
 const FormItem = Form.Item;
 class WrapFormItem extends Component {
   static defaultProps = {
-    buttonText: '获取验证码',
+    buttonText: '获取验证码'
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      count: 0,
+      count: 0
     };
   }
 
@@ -31,7 +31,7 @@ class WrapFormItem extends Component {
 
   getFormItemOptions = ({ rules, defaultValue, customprops }) => {
     const options = {
-      rules: rules || customprops.rules,
+      rules: rules || customprops.rules
     };
     if (defaultValue) {
       options.initialValue = defaultValue;
@@ -50,7 +50,7 @@ class WrapFormItem extends Component {
     } else {
       this.runGetCaptchaCountDown();
     }
-  }
+  };
 
   runGetCaptchaCountDown = () => {
     const { countDown } = this.props;
@@ -63,13 +63,13 @@ class WrapFormItem extends Component {
         clearInterval(this.interval);
       }
     }, 1000);
-  }
+  };
 
   render() {
     const { count } = this.state;
 
     const {
-      form: { getFieldDecorator },
+      form: { getFieldDecorator }
     } = this.props;
 
     const {
@@ -93,7 +93,9 @@ class WrapFormItem extends Component {
         <FormItem>
           <Row gutter={8}>
             <Col span={16}>
-              {getFieldDecorator(name, options)(<Input {...customprops} {...inputProps} />)}
+              {getFieldDecorator(name, options)(
+                <Input {...customprops} {...inputProps} />
+              )}
             </Col>
             <Col span={8}>
               <Button
@@ -107,7 +109,7 @@ class WrapFormItem extends Component {
             </Col>
           </Row>
         </FormItem>
-      )
+      );
     }
 
     return (
@@ -116,7 +118,7 @@ class WrapFormItem extends Component {
           <Input {...customprops} {...otherProps} />
         )}
       </FormItem>
-    )
+    );
   }
 }
 
@@ -136,7 +138,7 @@ Object.keys(ItemMap).forEach(key => {
         />
       )}
     </LoginContext.Consumer>
-  )
+  );
 });
 
 export default LoginItem;

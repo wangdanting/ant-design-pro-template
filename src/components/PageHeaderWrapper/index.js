@@ -1,17 +1,17 @@
-import React, { Fragment } from "react";
-import PageHeader from "@/components/PageHeader";
-import MenuContext from "@/layouts/MenuContext";
-import { connect } from "dva";
-import { FormattedMessage } from "umi/locale";
-import styles from "./index.less";
-import GridContent from "./GridContent";
+import React from 'react';
+import PageHeader from '@/components/PageHeader';
+import MenuContext from '@/layouts/MenuContext';
+import { connect } from 'dva';
+import { FormattedMessage } from 'umi/locale';
+import styles from './index.less';
+import GridContent from './GridContent';
 
 const PageHeaderWrapper = ({ children, contentWidth, ...restProps }) => (
   <div>
     <MenuContext.Consumer>
       {value => (
         <PageHeader
-          wide={contentWidth === "Fixed"}
+          wide={contentWidth === 'Fixed'}
           {...value}
           itemRender={item => {
             if (item.locale) {

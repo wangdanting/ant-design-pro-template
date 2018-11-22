@@ -14,5 +14,5 @@ class GridContent extends PureComponent {
 }
 
 export default connect(({ setting }) => ({
-  contentWidth: setting.contentWidth,
+  contentWidth: setting.contentWidth
 }))(GridContent);

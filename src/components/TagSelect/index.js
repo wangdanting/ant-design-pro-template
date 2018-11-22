@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react";
-import styles from "./index.less";
-import classNames from "classnames";
-import { Tag, Icon } from "antd";
+import React, { PureComponent } from 'react';
+import classNames from 'classnames';
+import { Tag, Icon } from 'antd';
+import styles from './index.less';
 
 const CheckableTag = Tag.CheckableTag;
 
@@ -26,12 +26,6 @@ class TagSelect extends PureComponent {
     };
   }
 
-  isTagSelectOption = node =>
-    node &&
-    node.type &&
-    (node.type.isTagSelectOption ||
-      node.type.displayName === "TagSelectOption");
-
   getAllTags() {
     let { children } = this.props;
     children = React.Children.toArray(children);
@@ -40,6 +34,12 @@ class TagSelect extends PureComponent {
       .map(child => child.props.value);
     return checkTags || [];
   }
+
+  isTagSelectOption = node =>
+    node &&
+    node.type &&
+    (node.type.isTagSelectOption ||
+      node.type.displayName === 'TagSelectOption');
 
   onChange = value => {
     const { onChange } = this.props;
@@ -111,8 +111,8 @@ class TagSelect extends PureComponent {
           })}
         {expandable && (
           <a className={styles.trigger} onClick={this.handleExpand}>
-            {expand ? "收起" : "展开"}
-            <Icon type={expand ? "up" : "down"} />
+            {expand ? '收起' : '展开'}
+            <Icon type={expand ? 'up' : 'down'} />
           </a>
         )}
       </div>

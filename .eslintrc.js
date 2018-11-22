@@ -22,6 +22,7 @@ module.exports = {
     semi: ["error", "always"],
     "import/no-unresolved": [2, { ignore: ["^@/", "^umi/"] }],
     "react/prop-types": 0,
+    "react/forbid-prop-types": 0,
     "react/jsx-filename-extension": [1, { extensions: [".js"] }],
     "react/jsx-wrap-multilines": 0,
     "jsx-a11y/anchor-is-valid": 0,

@@ -1,10 +1,10 @@
-import React, { PureComponent } from "react";
-import { Layout } from "antd";
-import classNames from "classnames";
-import styles from "./index.less";
-import Link from "umi/link";
-import BaseMenu, { getMenuMatches } from "./BaseMenu";
-import { urlToList } from "../_utils/pathTools";
+import React, { PureComponent } from 'react';
+import { Layout } from 'antd';
+import classNames from 'classnames';
+import Link from 'umi/link';
+import styles from './index.less';
+import BaseMenu, { getMenuMatches } from './BaseMenu';
+import { urlToList } from '../_utils/pathTools';
 
 const { Sider } = Layout;
 
@@ -63,7 +63,7 @@ export default class SiderMenu extends PureComponent {
 
     const siderClassName = classNames(styles.sider, {
       [styles.fixSiderbar]: fixSiderbar,
-      [styles.light]: theme === "light"
+      [styles.light]: theme === 'light'
     });
 
     return (
@@ -88,7 +88,7 @@ export default class SiderMenu extends PureComponent {
           mode="inline"
           handleOpenChange={this.handleOpenChange}
           onOpenChange={this.handleOpenChange}
-          style={{ padding: "16px 0", width: "100%", overflowX: "hidden" }}
+          style={{ padding: '16px 0', width: '100%', overflowX: 'hidden' }}
           {...defaultProps}
         />
       </Sider>

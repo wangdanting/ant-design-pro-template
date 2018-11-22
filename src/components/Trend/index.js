@@ -1,7 +1,7 @@
-import React from "react";
-import { Icon } from "antd";
-import classNames from "classnames";
-import styles from "./index.less";
+import React from 'react';
+import { Icon } from 'antd';
+import classNames from 'classnames';
+import styles from './index.less';
 
 const Trend = ({
   colorful = true,
@@ -24,7 +24,7 @@ const Trend = ({
     <div
       {...rest}
       className={classString}
-      title={typeof children === "string" ? children : ""}
+      title={typeof children === 'string' ? children : ''}
     >
       <span>{children}</span>
       {flag && (

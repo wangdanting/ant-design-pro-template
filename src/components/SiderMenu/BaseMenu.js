@@ -1,12 +1,12 @@
-import React, { PureComponent } from "react";
-import { Menu, Icon } from "antd";
-import memoizeOne from "memoize-one";
-import isEqual from "lodash/isEqual";
-import { urlToList } from "../_utils/pathTools";
-import pathToRegexp from "path-to-regexp";
-import { formatMessage } from "umi/locale";
-import Link from "umi/link";
-import styles from "./index.less";
+import React, { PureComponent } from 'react';
+import { Menu, Icon } from 'antd';
+import memoizeOne from 'memoize-one';
+import isEqual from 'lodash/isEqual';
+import pathToRegexp from 'path-to-regexp';
+import { formatMessage } from 'umi/locale';
+import Link from 'umi/link';
+import { urlToList } from '../_utils/pathTools';
+import styles from './index.less';
 
 const SubMenu = Menu.SubMenu;
 
@@ -15,10 +15,10 @@ const SubMenu = Menu.SubMenu;
 // icon: 'http://demo.com/icon.png'
 // icon: <Icon type='setting'/>
 const getIcon = icon => {
-  if (typeof icon === "string" && icon.indexOf("http") === 0) {
+  if (typeof icon === 'string' && icon.indexOf('http') === 0) {
     return <img src={icon} alt="icon" className={styles.icon} />;
   }
-  if (typeof icon === "string") {
+  if (typeof icon === 'string') {
     return <Icon type={icon} />;
   }
   return icon;
@@ -66,10 +66,10 @@ export default class BaseMenu extends PureComponent {
   };
 
   conversionPath = path => {
-    if (path && path.indexOf("http") === 0) {
+    if (path && path.indexOf('http') === 0) {
       return path;
     }
-    return `/${path || ""}`.replace(/\/+/g, "/");
+    return `/${path || ''}`.replace(/\/+/g, '/');
   };
 
   // Judge whether it is http link, return a or Link
@@ -97,8 +97,8 @@ export default class BaseMenu extends PureComponent {
         onClick={
           isMobile
             ? () => {
-                onCollapse(true);
-              }
+              onCollapse(true);
+            }
             : undefined
         }
       >
@@ -183,7 +183,7 @@ export default class BaseMenu extends PureComponent {
         onOpenChange={handleOpenChange}
         selectedKeys={selectedKeys}
         style={style}
-        className={mode === "horizontal" ? "top-nav-menu" : ""}
+        className={mode === 'horizontal' ? 'top-nav-menu' : ''}
         {...props}
       >
         {this.getNavMenuItems(menuData)}

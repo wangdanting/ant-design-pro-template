@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import LoginContext from './LoginContext';
 import classNames from 'classnames';
+import { Form, Tabs } from 'antd';
+import LoginContext from './LoginContext';
 import styles from './index.less';
 import LoginTab from './LoginTab';
 import LoginItem from './LoginItem';
 import LoginSubmit from './LoginSubmit';
-import { Form, Tabs } from 'antd';
 
 class Login extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class Login extends Component {
     this.state = {
       type: props.defaultActiveKey,
       tabs: [],
-      active: {},
+      active: {}
     };
   }
 
@@ -24,14 +24,14 @@ class Login extends Component {
       tabUtil: {
         addTab: id => {
           this.setState({
-            tabs: [...tabs, id],
+            tabs: [...tabs, id]
           });
         },
         removeTab: id => {
           this.setState({
-            tabs: tabs.filter(currentId => currentId !== id),
+            tabs: tabs.filter(currentId => currentId !== id)
           });
-        },
+        }
       },
       form,
       updateActive: activeItem => {
@@ -42,13 +42,13 @@ class Login extends Component {
           active[type] = [activeItem];
         }
         this.setState({
-          active,
+          active
         });
-      },
+      }
     };
   };
 
-  onSwitch = (type) => {
+  onSwitch = type => {
     this.setState({
       type
     });
@@ -57,12 +57,11 @@ class Login extends Component {
     onTabChange(type);
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     const { active, type } = this.state;
     const { form, onSubmit } = this.props;
     const activeFileds = active[type];
-    console.log(activeFileds, 'activeFileds');
     form.validateFields(activeFileds, { force: true }, (err, values) => {
       onSubmit(err, values);
     });
@@ -78,7 +77,7 @@ class Login extends Component {
         return;
       }
       // eslint-disable-next-line
-      if (item.type.typeName === 'LoginTab') {
+      if (item.type.typeName === "LoginTab") {
         TabChildren.push(item);
       } else {
         otherChildren.push(item);
@@ -102,12 +101,12 @@ class Login extends Component {
                 {otherChildren}
               </Fragment>
             ) : (
-                [...children]
-              )}
+              [...children]
+            )}
           </Form>
         </div>
       </LoginContext.Provider>
-    )
+    );
   }
 }
 
@@ -115,6 +114,6 @@ Login.Tab = LoginTab;
 Login.Submit = LoginSubmit;
 Object.keys(LoginItem).forEach(item => {
   Login[item] = LoginItem[item];
-})
+});
 
 export default Form.create()(Login);

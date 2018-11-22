@@ -1,19 +1,19 @@
-import React, { PureComponent } from "react";
-import { Card } from "antd";
-import classNames from "classnames";
-import styles from "./index.less";
+import React, { PureComponent } from 'react';
+import { Card } from 'antd';
+import classNames from 'classnames';
+import styles from './index.less';
 
 const renderTotal = total => {
   let totalDom;
   switch (typeof total) {
-    case "undefined":
-      totalDom = null;
-      break;
-    case "function":
-      totalDom = <div className={styles.total}>{total()}</div>;
-      break;
-    default:
-      totalDom = <div className={styles.total}>{total}</div>;
+  case 'undefined':
+    totalDom = null;
+    break;
+  case 'function':
+    totalDom = <div className={styles.total}>{total()}</div>;
+    break;
+  default:
+    totalDom = <div className={styles.total}>{total}</div>;
   }
   return totalDom;
 };
@@ -52,7 +52,7 @@ class ChartCard extends PureComponent {
         {children && (
           <div
             className={styles.content}
-            style={{ height: contentheight || "auto" }}
+            style={{ height: contentheight || 'auto' }}
           >
             <div className={contentheight && styles.contentFixed}>
               {children}
@@ -76,7 +76,7 @@ class ChartCard extends PureComponent {
     return (
       <Card
         loading={loading}
-        bodyStyle={{ padding: "20px 24px 8px 24px" }}
+        bodyStyle={{ padding: '20px 24px 8px 24px' }}
         {...rest}
       >
         {this.renderConnet()}

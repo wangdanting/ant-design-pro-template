@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./NoticeList.less";
-import { Avatar, List } from "antd";
-import classNames from "classnames";
+import React from 'react';
+import { Avatar, List } from 'antd';
+import classNames from 'classnames';
+import styles from './NoticeList.less';
 
 export default function NoticeList({
   data = [],
@@ -30,7 +30,7 @@ export default function NoticeList({
           });
 
           const leftIcon = item.avatar ? (
-            typeof item.avatar === "string" ? (
+            typeof item.avatar === 'string' ? (
               <Avatar className={styles.avatar} src={item.avatar} />
             ) : (
               item.avatar

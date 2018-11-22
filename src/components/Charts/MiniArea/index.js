@@ -1,6 +1,6 @@
-import React, { PureComponent } from "react";
-import { Chart } from "bizcharts";
-import styles from "../index.less";
+import React, { PureComponent } from 'react';
+import { Chart } from 'bizcharts';
+import styles from '../index.less';
 
 class MiniArea extends PureComponent {
   render() {

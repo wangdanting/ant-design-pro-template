@@ -1,6 +1,6 @@
-import React, { PureComponent, Fragment } from "react";
-import styles from "./index.less";
-import { Table, Alert } from "antd";
+import React, { PureComponent, Fragment } from 'react';
+import { Table, Alert } from 'antd';
+import styles from './index.less';
 
 function initTotalList(columns) {
   const totalList = [];
@@ -56,7 +56,6 @@ class StandardTable extends PureComponent {
   };
 
   handleTableChange = (pagination, filters, sorter) => {
-    console.log("ppp");
     const { onChange } = this.props;
     if (onChange) {
       onChange(pagination, filters, sorter);
@@ -88,7 +87,7 @@ class StandardTable extends PureComponent {
           <Alert
             message={
               <Fragment>
-                已选择{" "}
+                已选择{' '}
                 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a>
                 项&nbsp;&nbsp;
                 {needTotalList.map(item => (
@@ -110,7 +109,7 @@ class StandardTable extends PureComponent {
           />
         </div>
         <Table
-          rowKey={rowKey || "key"}
+          rowKey={rowKey || 'key'}
           rowSelection={rowSelection}
           dataSource={list}
           pagination={paginationProps}

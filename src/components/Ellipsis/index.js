@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Tooltip } from "antd";
-import classNames from "classnames";
-import styles from "./index.less";
+import React, { Component } from 'react';
+import { Tooltip } from 'antd';
+import classNames from 'classnames';
+import styles from './index.less';
 
 /* eslint react/no-did-mount-set-state: 0 */
 /* eslint no-param-reassign: 0 */
@@ -9,12 +9,12 @@ import styles from "./index.less";
 const isSupportLineClamp = document.body.style.webkitLineClamp !== undefined;
 
 const TooltipOverlayStyle = {
-  overflowWrap: "break-word",
-  wordWrap: "break-word"
+  overflowWrap: 'break-word',
+  wordWrap: 'break-word'
 };
 
-export const getStrFullLength = (str = "") =>
-  str.split("").reduce((pre, cur) => {
+export const getStrFullLength = (str = '') =>
+  str.split('').reduce((pre, cur) => {
     const charCode = cur.charCodeAt(0);
     if (charCode >= 0 && charCode <= 128) {
       return pre + 1;
@@ -22,9 +22,9 @@ export const getStrFullLength = (str = "") =>
     return pre + 2;
   }, 0);
 
-export const cutStrByFullLength = (str = "", maxLength) => {
+export const cutStrByFullLength = (str = '', maxLength) => {
   let showLength = 0;
-  return str.split("").reduce((pre, cur) => {
+  return str.split('').reduce((pre, cur) => {
     const charCode = cur.charCodeAt(0);
     if (charCode >= 0 && charCode <= 128) {
       showLength += 1;
@@ -35,7 +35,7 @@ export const cutStrByFullLength = (str = "", maxLength) => {
       return pre + cur;
     }
     return pre;
-  }, "");
+  }, '');
 };
 
 const getTooltip = ({ tooltip, overlayStyle, title, children }) => {
@@ -56,8 +56,8 @@ const EllipsisText = ({
   fullWidthRecognition,
   ...other
 }) => {
-  if (typeof text !== "string") {
-    throw new Error("Ellipsis children must be string.");
+  if (typeof text !== 'string') {
+    throw new Error('Ellipsis children must be string.');
   }
   const textLength = fullWidthRecognition
     ? getStrFullLength(text)
@@ -65,10 +65,10 @@ const EllipsisText = ({
   if (textLength <= length || length < 0) {
     return <span {...other}>{text}</span>;
   }
-  const tail = "...";
+  const tail = '...';
   let displayText;
   if (length - tail.length <= 0) {
-    displayText = "";
+    displayText = '';
   } else {
     displayText = fullWidthRecognition
       ? cutStrByFullLength(text, length)
@@ -91,7 +91,7 @@ const EllipsisText = ({
 
 export default class Ellipsis extends Component {
   state = {
-    text: "",
+    text: '',
     targetCount: 0
   };
 
@@ -141,7 +141,7 @@ export default class Ellipsis extends Component {
   };
 
   bisection = (th, m, b, e, text, shadowNode) => {
-    const suffix = "...";
+    const suffix = '...';
     let mid = m;
     let end = e;
     let begin = b;
@@ -226,7 +226,7 @@ export default class Ellipsis extends Component {
         <EllipsisText
           className={cls}
           length={length}
-          text={children || ""}
+          text={children || ''}
           tooltip={tooltip}
           fullWidthRecognition={fullWidthRecognition}
           {...restProps}
@@ -260,7 +260,7 @@ export default class Ellipsis extends Component {
     const childNode = (
       <span ref={this.handleNode}>
         {targetCount > 0 && text.substring(0, targetCount)}
-        {targetCount > 0 && targetCount < text.length && "..."}
+        {targetCount > 0 && targetCount < text.length && '...'}
       </span>
     );
 

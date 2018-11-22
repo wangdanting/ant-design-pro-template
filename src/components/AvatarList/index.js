@@ -1,8 +1,8 @@
-import React, { PureComponent } from "react";
-import classNames from "classnames";
-import { Tooltip, Avatar } from "antd";
+import React from 'react';
+import classNames from 'classnames';
+import { Tooltip, Avatar } from 'antd';
 
-import styles from "./index.less";
+import styles from './index.less';
 
 const AvatarList = ({ children, size, ...other }) => {
   const childrenWithProps = React.Children.map(children, child =>
@@ -20,15 +20,15 @@ const AvatarList = ({ children, size, ...other }) => {
 
 const Item = ({ src, size, tips, onClick = () => {} }) => {
   const cls = classNames(styles.avatarItem, {
-    [styles.avatarItemLarge]: size === "large",
-    [styles.avatarItemSmall]: size === "small",
-    [styles.avatarItemMini]: size === "mini"
+    [styles.avatarItemLarge]: size === 'large',
+    [styles.avatarItemSmall]: size === 'small',
+    [styles.avatarItemMini]: size === 'mini'
   });
   return (
     <li className={cls} onClick={onClick}>
       {tips ? (
         <Tooltip title={tips}>
-          <Avatar src={src} size={size} style={{ cursor: "pointer" }} />
+          <Avatar src={src} size={size} style={{ cursor: 'pointer' }} />
         </Tooltip>
       ) : (
         <Avatar src={src} size={size} />

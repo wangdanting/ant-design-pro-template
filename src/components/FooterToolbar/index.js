@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-import styles from "./index.less";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import styles from './index.less';
 
 export default class FooterToolbar extends Component {
   static contextTypes = {
@@ -13,16 +13,16 @@ export default class FooterToolbar extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener("resize", this.resizeFooterToolbar);
+    window.addEventListener('resize', this.resizeFooterToolbar);
     this.resizeFooterToolbar();
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.resizeFooterToolbar);
+    window.removeEventListener('resize', this.resizeFooterToolbar);
   }
 
   resizeFooterToolbar = () => {
-    const sider = document.querySelector(".ant-layout-sider");
+    const sider = document.querySelector('.ant-layout-sider');
     if (sider == null) {
       return;
     }

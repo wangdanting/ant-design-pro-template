@@ -1,8 +1,8 @@
-import React, { PureComponent } from "react";
-import styles from "./index.less";
-import { Popover, Badge, Icon, Tabs, Spin } from "antd";
-import classNames from "classnames";
-import List from "./NoticeList";
+import React, { PureComponent } from 'react';
+import { Popover, Badge, Icon, Tabs, Spin } from 'antd';
+import classNames from 'classnames';
+import styles from './index.less';
+import List from './NoticeList';
 
 const { TabPane } = Tabs;
 
@@ -73,7 +73,7 @@ class NoticeIcon extends PureComponent {
       <span className={noticeButtonClass}>
         <Badge
           count={count}
-          style={{ boxShadow: "none" }}
+          style={{ boxShadow: 'none' }}
           className={styles.badge}
         >
           {NoticeBellIcon}

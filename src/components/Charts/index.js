@@ -1,6 +1,6 @@
-import ChartCard from "./ChartCard";
-import Field from "./Field";
-import MiniArea from "./MiniArea";
+import ChartCard from './ChartCard';
+import Field from './Field';
+import MiniArea from './MiniArea';
 
 const Charts = {
   ChartCard,

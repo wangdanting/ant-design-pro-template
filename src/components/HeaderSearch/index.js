@@ -1,10 +1,10 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { Input, Icon, AutoComplete } from "antd";
-import classNames from "classnames";
-import Debounce from "lodash-decorators/debounce";
-import Bind from "lodash-decorators/bind";
-import styles from "./index.less";
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { Input, Icon, AutoComplete } from 'antd';
+import classNames from 'classnames';
+import Debounce from 'lodash-decorators/debounce';
+import Bind from 'lodash-decorators/bind';
+import styles from './index.less';
 
 export default class HeaderSearch extends PureComponent {
   static propTypes = {
@@ -22,15 +22,15 @@ export default class HeaderSearch extends PureComponent {
     defaultActiveFirstOption: false,
     onPressEnter: () => {},
     onSearch: () => {},
-    className: "",
-    placeholder: "",
+    className: '',
+    placeholder: '',
     dataSource: [],
     defaultOpen: false,
     onVisibleChange: () => {}
   };
 
   static getDerivedStateFromProps(props) {
-    if ("open" in props) {
+    if ('open' in props) {
       return {
         searchMode: props.open
       };
@@ -42,7 +42,7 @@ export default class HeaderSearch extends PureComponent {
     super(props);
     this.state = {
       searchMode: props.defaultOpen,
-      value: ""
+      value: ''
     };
   }
 
@@ -51,7 +51,7 @@ export default class HeaderSearch extends PureComponent {
   }
 
   onKeyDown = e => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       const { onPressEnter } = this.props;
       const { value } = this.state;
       this.timeout = setTimeout(() => {
@@ -82,7 +82,7 @@ export default class HeaderSearch extends PureComponent {
   leaveSearchMode = () => {
     this.setState({
       searchMode: false,
-      value: ""
+      value: ''
     });
   };
 
@@ -110,7 +110,7 @@ export default class HeaderSearch extends PureComponent {
         className={classNames(className, styles.headerSearch)}
         onClick={this.enterSearchMode}
         onTransitionEnd={({ propertyName }) => {
-          if (propertyName === "width" && !searchMode) {
+          if (propertyName === 'width' && !searchMode) {
             const { onVisibleChange } = this.props;
             onVisibleChange(searchMode);
           }

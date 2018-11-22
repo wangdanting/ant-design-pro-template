@@ -1,6 +1,6 @@
-import React from "react";
-import classNames from "classnames";
-import styles from "./index.less";
+import React from 'react';
+import classNames from 'classnames';
+import styles from './index.less';
 
 const StandardFormRow = ({ title, children, last, block, grid, ...rest }) => {
   const cls = classNames(styles.standardFormRow, {
