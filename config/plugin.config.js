@@ -12,17 +12,20 @@ export default config => {
   config.plugin('merge-less').use(MergeLessPlugin, [
     {
       stylesDir,
-      outFile,
-    },
+      outFile
+    }
   ]);
 
   config.plugin('ant-design-theme').use(AntDesignThemePlugin, [
     {
       antDir: path.join(__dirname, '../node_modules/antd'),
       stylesDir,
-      varFile: path.join(__dirname, '../node_modules/antd/lib/style/themes/default.less'),
+      varFile: path.join(
+        __dirname,
+        '../node_modules/antd/lib/style/themes/default.less'
+      ),
       mainLessFile: outFile, //     themeVariables: ['@primary-color'],
-      indexFileName: 'index.html',
-    },
+      indexFileName: 'index.html'
+    }
   ]);
 };

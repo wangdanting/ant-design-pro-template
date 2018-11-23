@@ -13,6 +13,7 @@ class PageHeader extends PureComponent {
       onTabChange(key);
     }
   };
+
   render() {
     const {
       className,
@@ -27,7 +28,7 @@ class PageHeader extends PureComponent {
       tabList,
       tabActiveKey,
       tabDefaultActiveKey,
-      tabBarExtraContent
+      tabBarExtraContent,
     } = this.props;
     const clsString = classNames(styles.pageHeader, className);
     const activeKeyProps = {};
@@ -57,9 +58,7 @@ class PageHeader extends PureComponent {
                 </div>
                 <div className={styles.row}>
                   {content && <div className={styles.content}>{content}</div>}
-                  {extraContent && (
-                    <div className={styles.extraContent}>{extraContent}</div>
-                  )}
+                  {extraContent && <div className={styles.extraContent}>{extraContent}</div>}
                 </div>
               </div>
             </div>

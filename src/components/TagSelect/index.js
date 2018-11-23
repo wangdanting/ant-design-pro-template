@@ -3,14 +3,10 @@ import classNames from 'classnames';
 import { Tag, Icon } from 'antd';
 import styles from './index.less';
 
-const CheckableTag = Tag.CheckableTag;
+const { CheckableTag } = Tag;
 
 const TagSelectOption = ({ children, checked, onChange, value }) => (
-  <CheckableTag
-    checked={checked}
-    key={value}
-    onChange={checked => onChange(value, checked)}
-  >
+  <CheckableTag checked={checked} key={value} onChange={check => onChange(value, check)}>
     {children}
   </CheckableTag>
 );
@@ -22,7 +18,7 @@ class TagSelect extends PureComponent {
     super(props);
     this.state = {
       expand: false,
-      value: props.value || props.defaultValue || []
+      value: props.value || props.defaultValue || [],
     };
   }
 
@@ -38,8 +34,7 @@ class TagSelect extends PureComponent {
   isTagSelectOption = node =>
     node &&
     node.type &&
-    (node.type.isTagSelectOption ||
-      node.type.displayName === 'TagSelectOption');
+    (node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption');
 
   onChange = value => {
     const { onChange } = this.props;
@@ -72,7 +67,7 @@ class TagSelect extends PureComponent {
 
   handleExpand = () => {
     this.setState(prevState => ({
-      expand: !prevState.expand
+      expand: !prevState.expand,
     }));
   };
 
@@ -83,17 +78,13 @@ class TagSelect extends PureComponent {
     const checkedAll = this.getAllTags().length === value.length;
     const cls = classNames(styles.tagSelect, className, {
       [styles.hasExpandTag]: expandable,
-      [styles.expanded]: expand
+      [styles.expanded]: expand,
     });
 
     return (
       <div className={cls} style={style}>
         {hideCheckAll ? null : (
-          <CheckableTag
-            checked={checkedAll}
-            key="tag-select-__all__"
-            onChange={this.onSelectAll}
-          >
+          <CheckableTag checked={checkedAll} key="tag-select-__all__" onChange={this.onSelectAll}>
             全部
           </CheckableTag>
         )}
@@ -104,7 +95,7 @@ class TagSelect extends PureComponent {
                 key: `tag-select-${child.props.value}`,
                 value: child.props.value,
                 checked: value.indexOf(child.props.value) > -1,
-                onChange: this.handleTagChange
+                onChange: this.handleTagChange,
               });
             }
             return child;

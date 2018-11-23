@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env APP_TYPE=site umi dev",
-    "lint": "eslint --ext .js src/components"
+    "lint": "eslint --ext .js src"
   },
   "author": "wangdanting",
   "license": "ISC",
@@ -49,5 +49,13 @@
     "eslint-plugin-react": "^7.11.1",
     "umi": "^2.1.2",
     "umi-plugin-react": "^1.1.1"
-  }
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ]
 }

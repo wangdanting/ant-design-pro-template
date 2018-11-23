@@ -7,32 +7,35 @@ import defaultSettings from '../src/defaultSettings';
 export default {
   plugins: [
     // 插件有参数时为数组，数组的第二项是参数，类似 babel 插件
-    ['umi-plugin-react', {
-      antd: true,
-      dva: {
-        hmr: true,
-      },
-      targets: {
-        ie: 11,
-      },
-      locale: {
-        enable: true, // default false
-        default: 'zh-CN', // default zh-CN
-        baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
-      },
-      dynamicImport: {
-        loadingComponent: './components/PageLoading/index',
-      },
-      ...(!process.env.TEST && os.platform() === 'darwin'
-        ? {
-          dll: {
-            include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
-            exclude: ['@babel/runtime'],
-          },
-          hardSource: true,
-        }
-        : {}),
-    }],
+    [
+      'umi-plugin-react',
+      {
+        antd: true,
+        dva: {
+          hmr: true
+        },
+        targets: {
+          ie: 11
+        },
+        locale: {
+          enable: true, // default false
+          default: 'zh-CN', // default zh-CN
+          baseNavigator: true // default true, when it is true, will use `navigator.language` overwrite default
+        },
+        dynamicImport: {
+          loadingComponent: './components/PageLoading/index'
+        },
+        ...(!process.env.TEST && os.platform() === 'darwin'
+          ? {
+            dll: {
+              include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
+              exclude: ['@babel/runtime']
+            },
+            hardSource: true
+          }
+          : {})
+      }
+    ]
   ],
 
   // 路由配置
@@ -41,17 +44,17 @@ export default {
   disableRedirectHoist: true,
   // 兼容 ie11
   targets: {
-    ie: 11,
+    ie: 11
   },
   // 通过 webpack-chain 的 API 扩展或修改 webpack 配置。
   chainWebpack: webpackplugin,
   // 配置主题
   theme: {
-    "@primary-color": defaultSettings.primaryColor,
+    '@primary-color': defaultSettings.primaryColor
   },
   // 通过 webpack 的 DefinePlugin 传递给代码，值会自动做 JSON.stringify 处理
   define: {
-    APP_TYPE: process.env.APP_TYPE || '',
+    APP_TYPE: process.env.APP_TYPE || ''
   },
   // 代理请求到其他服务器
   proxy: {
@@ -65,22 +68,23 @@ export default {
   manifest: {
     name: 'ant-design-pro',
     background_color: '#FFF',
-    description: 'An out-of-box UI solution for enterprise applications as a React boilerplate.',
+    description:
+      'An out-of-box UI solution for enterprise applications as a React boilerplate.',
     display: 'standalone',
     start_url: '/index.html',
     icons: [
       {
         src: '/favicon.png',
         sizes: '48x48',
-        type: 'image/png',
-      },
-    ],
+        type: 'image/png'
+      }
+    ]
   },
   // 忽略 moment 的 locale 文件，用于减少尺寸
   ignoreMomentLocale: true,
   // 给 less-loader 的额外配置项
   lessLoaderOptions: {
-    javascriptEnabled: true,
+    javascriptEnabled: true
   },
   // 给 css-loader 的额外配置项
   cssLoaderOptions: {
@@ -103,9 +107,9 @@ export default {
         return `antd-pro${arr.join('-')}-${localName}`.replace(/--/g, '-');
       }
       return localName;
-    },
+    }
   },
   cssnano: {
-    mergeRules: false,
-  },
+    mergeRules: false
+  }
 };

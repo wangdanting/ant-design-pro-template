@@ -20,16 +20,7 @@ const renderTotal = total => {
 
 class ChartCard extends PureComponent {
   renderConnet = () => {
-    const {
-      contentheight,
-      title,
-      avatar,
-      action,
-      total,
-      footer,
-      children,
-      loading
-    } = this.props;
+    const { contentheight, title, avatar, action, total, footer, children, loading } = this.props;
     if (loading) {
       return false;
     }
@@ -37,7 +28,7 @@ class ChartCard extends PureComponent {
       <div className={styles.chartCard}>
         <div
           className={classNames(styles.chartTop, {
-            [styles.chartTopMargin]: !children && !footer
+            [styles.chartTopMargin]: !children && !footer,
           })}
         >
           <div className={styles.avatar}>{avatar}</div>
@@ -50,19 +41,14 @@ class ChartCard extends PureComponent {
           </div>
         </div>
         {children && (
-          <div
-            className={styles.content}
-            style={{ height: contentheight || 'auto' }}
-          >
-            <div className={contentheight && styles.contentFixed}>
-              {children}
-            </div>
+          <div className={styles.content} style={{ height: contentheight || 'auto' }}>
+            <div className={contentheight && styles.contentFixed}>{children}</div>
           </div>
         )}
         {footer && (
           <div
             className={classNames(styles.footer, {
-              [styles.footerMargin]: !children
+              [styles.footerMargin]: !children,
             })}
           >
             {footer}
@@ -71,14 +57,11 @@ class ChartCard extends PureComponent {
       </div>
     );
   };
+
   render() {
     const { loading = false, ...rest } = this.props;
     return (
-      <Card
-        loading={loading}
-        bodyStyle={{ padding: '20px 24px 8px 24px' }}
-        {...rest}
-      >
+      <Card loading={loading} bodyStyle={{ padding: '20px 24px 8px 24px' }} {...rest}>
         {this.renderConnet()}
       </Card>
     );

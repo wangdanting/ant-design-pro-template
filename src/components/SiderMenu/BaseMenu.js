@@ -8,7 +8,7 @@ import Link from 'umi/link';
 import { urlToList } from '../_utils/pathTools';
 import styles from './index.less';
 
-const SubMenu = Menu.SubMenu;
+const { SubMenu } = Menu;
 
 // Allow menu.js config icon as string or ReactNode
 // icon: 'setting'
@@ -25,8 +25,7 @@ const getIcon = icon => {
 };
 
 export const getMenuMatches = memoizeOne(
-  (flatMenuKeys, path) =>
-    flatMenuKeys.filter(item => item && pathToRegexp(item).test(path)),
+  (flatMenuKeys, path) => flatMenuKeys.filter(item => item && pathToRegexp(item).test(path)),
   isEqual
 );
 
@@ -51,9 +50,7 @@ export default class BaseMenu extends PureComponent {
 
   // Get the currently selected menu
   getSelectedMenuKeys = pathname =>
-    urlToList(pathname).map(itemPath =>
-      getMenuMatches(this.flatMenuKeys, itemPath).pop()
-    );
+    urlToList(pathname).map(itemPath => getMenuMatches(this.flatMenuKeys, itemPath).pop());
 
   // permission to check
   checkPermissionItem = (authority, ItemDom) => {
@@ -111,11 +108,7 @@ export default class BaseMenu extends PureComponent {
   // get SubMenu or Menu.Item
   getSubMenuOrItem = item => {
     // doc: add hideChildrenInMenu
-    if (
-      item.children &&
-      !item.hideChildrenInMenu &&
-      item.children.some(child => child.name)
-    ) {
+    if (item.children && !item.hideChildrenInMenu && item.children.some(child => child.name)) {
       const name = item.locale ? formatMessage({ id: item.locale }) : item.name;
       return (
         <SubMenu
@@ -161,7 +154,7 @@ export default class BaseMenu extends PureComponent {
       handleOpenChange,
       style,
       menuData,
-      location: { pathname }
+      location: { pathname },
     } = this.props;
     // if pathname can't match, use the nearest parent's key
     let selectedKeys = this.getSelectedMenuKeys(pathname);
@@ -171,7 +164,7 @@ export default class BaseMenu extends PureComponent {
     let props = {};
     if (openKeys) {
       props = {
-        openKeys
+        openKeys,
       };
     }
 
