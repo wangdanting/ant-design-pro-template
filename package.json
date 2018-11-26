@@ -9,7 +9,8 @@
     "lint": "eslint --ext .js src && npm run lint:style",
     "lint-fix": "eslint --fix --ext .js src && npm run lint:style",
     "lint-staged": "lint-staged",
-    "lint-staged:js": "eslint --ext .js"
+    "lint-staged:js": "eslint --ext .js",
+    "prettier": "prettier --write './src/**/*'"
   },
   "author": "wangdanting",
   "license": "ISC",
@@ -53,6 +54,10 @@
     "eslint-plugin-react": "^7.11.1",
     "husky": "^1.2.0",
     "lint-staged": "^8.1.0",
+    "prettier": "^1.15.2",
+    "stylelint": "^9.8.0",
+    "stylelint-config-prettier": "^4.0.0",
+    "stylelint-config-standard": "^18.2.0",
     "umi": "^2.1.2",
     "umi-plugin-react": "^1.1.1"
   },
@@ -73,7 +78,7 @@
     "**/*.less": "stylelint --syntax less"
   },
   "husky": {
-    "hooks": {  
+    "hooks": {
       "pre-commit": "npm run  lint-staged"
     }
   }
