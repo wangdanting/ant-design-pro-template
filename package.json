@@ -47,6 +47,8 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-markdown": "^1.0.0-rc.0",
     "eslint-plugin-react": "^7.11.1",
+    "husky": "^1.2.0",
+    "lint-staged": "^8.1.0",
     "umi": "^2.1.2",
     "umi-plugin-react": "^1.1.1"
   },
@@ -57,5 +59,13 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 10"
-  ]
+  ],
+  "lint-staged": {
+    "*.js": ["eslint --fix", "git add"]
+  },
+  "husky": {
+    "hooks": {  
+      "pre-commit": "lint-staged"
+     }
+  }
 }

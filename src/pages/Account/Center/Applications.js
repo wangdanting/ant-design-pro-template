@@ -8,20 +8,12 @@ import stylesApplications from '../../List/Applications.less';
 const itemMenu = (
   <Menu>
     <Menu.Item>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="http://www.alipay.com/"
-      >
+      <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
         1st menu item
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="http://www.taobao.com/"
-      >
+      <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
         2nd menu item
       </a>
     </Menu.Item>
@@ -47,12 +39,12 @@ const CardInfo = ({ activeUser, newUser }) => (
 );
 
 @connect(({ list }) => ({
-  list
+  list,
 }))
 class Applications extends PureComponent {
   render() {
     const {
-      list: { list }
+      list: { list },
     } = this.props;
     return (
       <List
@@ -77,13 +69,10 @@ class Applications extends PureComponent {
                 </Tooltip>,
                 <Dropdown overlay={itemMenu}>
                   <Icon type="ellipsis" />
-                </Dropdown>
+                </Dropdown>,
               ]}
             >
-              <Card.Meta
-                avatar={<Avatar size="small" src={item.avatar} />}
-                title={item.title}
-              />
+              <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
               <div className={stylesApplications.cardItemContent}>
                 <CardInfo
                   activeUser={formatWan(item.activeUser)}
