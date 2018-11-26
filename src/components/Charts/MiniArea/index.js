@@ -7,9 +7,7 @@ class MiniArea extends PureComponent {
     const { height, animate = true } = this.props;
     return (
       <div className={styles.miniChart} style={{ height }}>
-        <div className={styles.chartContent}>
-          {height > 0 && <Chart animate={animate} />}
-        </div>
+        <div className={styles.chartContent}>{height > 0 && <Chart animate={animate} />}</div>
       </div>
     );
   }

@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react';
 
 class Monitor extends PureComponent {
   state = {};
+
   render() {
     return <div>Monitor</div>;
   }

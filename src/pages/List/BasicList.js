@@ -38,7 +38,7 @@ const { Search, TextArea } = Input;
 class BasicList extends PureComponent {
   state = {
     visible: false,
-    done: false //是否操作成功
+    done: false // 是否操作成功
   };
 
   formLayout = {

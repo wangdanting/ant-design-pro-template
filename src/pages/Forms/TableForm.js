@@ -13,7 +13,7 @@ class TableForm extends PureComponent {
       data: props.value,
       loading: false,
       /* eslint-disable-next-line react/no-unused-state */
-      value: props.value
+      value: props.value,
     };
   }
 
@@ -23,7 +23,7 @@ class TableForm extends PureComponent {
     }
     return {
       data: nextProps.value,
-      value: nextProps.value
+      value: nextProps.value,
     };
   }
 
@@ -56,7 +56,7 @@ class TableForm extends PureComponent {
       name: '',
       department: '',
       editable: true,
-      isNew: true
+      isNew: true,
     });
     this.index += 1;
     this.setState({ data: newData });
@@ -86,7 +86,7 @@ class TableForm extends PureComponent {
 
   cancel(e, key) {
     this.clickedCancel = true;
-    e.preventDefault;
+    e.preventDefault();
     const { data } = this.state;
     const newData = data.concat();
     const target = this.getRowByKey(key, newData);
@@ -102,7 +102,7 @@ class TableForm extends PureComponent {
   saveRow(e, key) {
     e.persist();
     this.setState({
-      loading: true
+      loading: true,
     });
     setTimeout(() => {
       if (this.clickedCancel) {
@@ -114,14 +114,14 @@ class TableForm extends PureComponent {
         message.error('请填写完整成员信息。');
         e.target.focus();
         this.setState({
-          loading: false
+          loading: false,
         });
         return;
       }
       delete target.isNew;
       this.toggleEditable(e, key);
       this.setState({
-        loading: false
+        loading: false,
       });
     }, 500);
   }
@@ -146,7 +146,7 @@ class TableForm extends PureComponent {
             );
           }
           return text;
-        }
+        },
       },
       {
         title: '工号',
@@ -165,7 +165,7 @@ class TableForm extends PureComponent {
             );
           }
           return text;
-        }
+        },
       },
       {
         title: '所属部门',
@@ -177,16 +177,14 @@ class TableForm extends PureComponent {
             return (
               <Input
                 value={text}
-                onChange={e =>
-                  this.handleFieldChange(e, 'department', record.key)
-                }
+                onChange={e => this.handleFieldChange(e, 'department', record.key)}
                 onKeyPress={e => this.handleKeyPress(e, record.key)}
                 placeholder="所属部门"
               />
             );
           }
           return text;
-        }
+        },
       },
       {
         title: '操作',
@@ -202,10 +200,7 @@ class TableForm extends PureComponent {
                 <span>
                   <a onClick={e => this.saveRow(e, record.key)}>添加</a>
                   <Divider type="vertical" />
-                  <Popconfirm
-                    title="是否要删除此行？"
-                    onConfirm={() => this.remove(record.key)}
-                  >
+                  <Popconfirm title="是否要删除此行？" onConfirm={() => this.remove(record.key)}>
                     <a>删除</a>
                   </Popconfirm>
                 </span>
@@ -223,26 +218,18 @@ class TableForm extends PureComponent {
             <span>
               <a onClick={e => this.toggleEditable(e, record.key)}>编辑</a>
               <Divider type="vertical" />
-              <Popconfirm
-                title="是否要删除此行？"
-                onConfirm={() => this.remove(record.key)}
-              >
+              <Popconfirm title="是否要删除此行？" onConfirm={() => this.remove(record.key)}>
                 <a>删除</a>
               </Popconfirm>
             </span>
           );
-        }
-      }
+        },
+      },
     ];
     const { loading, data } = this.state;
     return (
       <Fragment>
-        <Table
-          loading={loading}
-          dataSource={data}
-          columns={columns}
-          pagination={false}
-        />
+        <Table loading={loading} dataSource={data} columns={columns} pagination={false} />
         <Button
           style={{ width: '100%', marginTop: 16, marginBottom: 8 }}
           type="dashed"

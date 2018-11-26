@@ -8,34 +8,21 @@ import { connect } from 'dva';
 import styles from './Settings.less';
 
 const menuMap = {
-  base: (
-    <FormattedMessage
-      id="app.settings.menuMap.basic"
-      defaultMessage="Basic Settings"
-    />
-  ),
+  base: <FormattedMessage id="app.settings.menuMap.basic" defaultMessage="Basic Settings" />,
   security: (
-    <FormattedMessage
-      id="app.settings.menuMap.security"
-      defaultMessage="Security Settings"
-    />
+    <FormattedMessage id="app.settings.menuMap.security" defaultMessage="Security Settings" />
   ),
-  binding: (
-    <FormattedMessage
-      id="app.settings.menuMap.binding"
-      defaultMessage="Account Binding"
-    />
-  ),
+  binding: <FormattedMessage id="app.settings.menuMap.binding" defaultMessage="Account Binding" />,
   notification: (
     <FormattedMessage
       id="app.settings.menuMap.notification"
       defaultMessage="New Message Notification"
     />
-  )
+  ),
 };
 
 @connect(({ user }) => ({
-  currentUser: user.currentUser
+  currentUser: user.currentUser,
 }))
 class Settings extends PureComponent {
   constructor(props) {
@@ -44,7 +31,7 @@ class Settings extends PureComponent {
     const key = location.pathname.replace(`${match.path}`, '');
     this.state = {
       mode: 'inline',
-      selectKey: menuMap[key] ? key : 'base'
+      selectKey: menuMap[key] ? key : 'base',
     };
   }
 
@@ -68,10 +55,8 @@ class Settings extends PureComponent {
   }
 
   resize = () => {
-    if (!this.main) {
-      return;
-    }
-
+    // if (!this.main) {
+    // }
     // requestAnimationFrame(() => {
     //   let mode = "inline";
     //   const { offsetWidth } = this.main;
@@ -87,16 +72,13 @@ class Settings extends PureComponent {
     // });
   };
 
-  getmenu = () => {
-    return Object.keys(menuMap).map(item => (
-      <Menu.Item key={item}>{menuMap[item]}</Menu.Item>
-    ));
-  };
+  getmenu = () =>
+    Object.keys(menuMap).map(item => <Menu.Item key={item}>{menuMap[item]}</Menu.Item>);
 
   selectKey = ({ key }) => {
     router.push(`/account/settings/${key}`);
     this.setState({
-      selectKey: key
+      selectKey: key,
     });
   };
 
@@ -121,11 +103,7 @@ class Settings extends PureComponent {
           }}
         >
           <div className={styles.leftmenu}>
-            <Menu
-              mode={mode}
-              selectedKeys={[selectKey]}
-              onClick={this.selectKey}
-            >
+            <Menu mode={mode} selectedKeys={[selectKey]} onClick={this.selectKey}>
               {this.getmenu()}
             </Menu>
           </div>

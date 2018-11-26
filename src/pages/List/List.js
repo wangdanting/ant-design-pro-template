@@ -3,7 +3,7 @@ import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { Input } from 'antd';
 import router from 'umi/router';
 
-const Search = Input.Search;
+const { Search } = Input;
 class List extends PureComponent {
   handleTabChange = key => {
     const { match } = this.props;
@@ -44,16 +44,16 @@ class List extends PureComponent {
     const tabList = [
       {
         key: 'articles',
-        tab: '文章'
+        tab: '文章',
       },
       {
         key: 'projects',
-        tab: '项目'
+        tab: '项目',
       },
       {
         key: 'applications',
-        tab: '应用'
-      }
+        tab: '应用',
+      },
     ];
     return (
       <PageHeaderWrapper

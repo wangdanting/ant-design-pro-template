@@ -10,12 +10,12 @@ const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 
 @connect(({ login, loading }) => ({
   login,
-  submitting: loading.effects['login/login']
+  submitting: loading.effects['login/login'],
 }))
 class LoginPage extends Component {
   state = {
     type: 'account',
-    autoLogin: true
+    autoLogin: true,
   };
 
   handleSubmit = (err, values) => {
@@ -26,8 +26,8 @@ class LoginPage extends Component {
         type: 'login/login',
         payload: {
           ...values,
-          type
-        }
+          type,
+        },
       });
     }
   };
@@ -41,7 +41,7 @@ class LoginPage extends Component {
           const { dispatch } = this.props;
           dispatch({
             type: 'login/getCaptcha',
-            payload: values.mobile
+            payload: values.mobile,
           });
         }
       });
@@ -49,23 +49,18 @@ class LoginPage extends Component {
 
   onTabChange = type => {
     this.setState({
-      type
+      type,
     });
   };
 
   changeAutoLogin = e => {
     this.setState({
-      autoLogin: e.target.checked
+      autoLogin: e.target.checked,
     });
   };
 
   renderMessage = content => (
-    <Alert
-      style={{ marginButton: 24 }}
-      message={content}
-      type="error"
-      showIcon
-    />
+    <Alert style={{ marginButton: 24 }} message={content} type="error" showIcon />
   );
 
   render() {
@@ -81,45 +76,33 @@ class LoginPage extends Component {
             this.loginForm = form;
           }}
         >
-          <Tab
-            key="account"
-            tab={formatMessage({ id: 'app.login.tab-login-credentials' })}
-          >
+          <Tab key="account" tab={formatMessage({ id: 'app.login.tab-login-credentials' })}>
             {login.status === 'error' &&
               login.type === 'account' &&
               !submitting &&
               this.renderMessage(
                 formatMessage({
-                  id: 'app.login.message-invalid-verification-code'
+                  id: 'app.login.message-invalid-verification-code',
                 })
               )}
             <UserName name="userName" placeholder="username: admin or user" />
             <Password
               name="password"
               placeholder="password: ant.design"
-              onPressEnter={() =>
-                this.loginForm.validateFields(this.handleSubmit)
-              }
+              onPressEnter={() => this.loginForm.validateFields(this.handleSubmit)}
             />
           </Tab>
-          <Tab
-            key="mobile"
-            tab={formatMessage({ id: 'app.login.tab-login-mobile' })}
-          >
+          <Tab key="mobile" tab={formatMessage({ id: 'app.login.tab-login-mobile' })}>
             {login.status === 'error' &&
               login.type === 'mobile' &&
               !submitting &&
               this.renderMessage(
                 formatMessage({
-                  id: 'app.login.message-invalid-verification-code'
+                  id: 'app.login.message-invalid-verification-code',
                 })
               )}
             <Mobile name="mobile" />
-            <Captcha
-              name="captcha"
-              countDown={120}
-              onGetCaptcha={this.onGetCaptcha}
-            />
+            <Captcha name="captcha" countDown={120} onGetCaptcha={this.onGetCaptcha} />
           </Tab>
           <div>
             <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
@@ -134,21 +117,9 @@ class LoginPage extends Component {
           </Submit>
           <div className={styles.other}>
             <FormattedMessage id="app.login.sign-in-with" />
-            <Icon
-              type="alipay-circle"
-              className={styles.icon}
-              theme="outlined"
-            />
-            <Icon
-              type="taobao-circle"
-              className={styles.icon}
-              theme="outlined"
-            />
-            <Icon
-              type="weibo-circle"
-              className={styles.icon}
-              theme="outlined"
-            />
+            <Icon type="alipay-circle" className={styles.icon} theme="outlined" />
+            <Icon type="taobao-circle" className={styles.icon} theme="outlined" />
+            <Icon type="weibo-circle" className={styles.icon} theme="outlined" />
             <Link className={styles.register} to="/User/Register">
               <FormattedMessage id="app.login.signup" />
             </Link>

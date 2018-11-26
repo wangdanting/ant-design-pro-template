@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react';
 
 class Workplace extends PureComponent {
   state = {};
+
   render() {
     return <div>Workplace</div>;
   }

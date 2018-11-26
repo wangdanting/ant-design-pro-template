@@ -3,18 +3,7 @@ import StandardFormRow from '@/components/StandardFormRow';
 import TagSelect from '@/components/TagSelect';
 import { connect } from 'dva';
 import moment from 'moment';
-import {
-  Card,
-  Form,
-  Row,
-  Col,
-  Select,
-  List,
-  Icon,
-  Tag,
-  Avatar,
-  Button
-} from 'antd';
+import { Card, Form, Row, Col, Select, List, Icon, Tag, Avatar, Button } from 'antd';
 import styles from './Articles.less';
 
 const FormItem = Form.Item;
@@ -23,32 +12,32 @@ const { Option } = Select;
 const owners = [
   {
     id: 'wzj',
-    name: '我自己'
+    name: '我自己',
   },
   {
     id: 'wjh',
-    name: '吴家豪'
+    name: '吴家豪',
   },
   {
     id: 'zxx',
-    name: '周星星'
+    name: '周星星',
   },
   {
     id: 'zly',
-    name: '赵丽颖'
+    name: '赵丽颖',
   },
   {
     id: 'ym',
-    name: '姚明'
-  }
+    name: '姚明',
+  },
 ];
 
 const formItemLayout = {
   wrapperCol: {
     xs: { span: 24 },
     sm: { span: 24 },
-    md: { span: 12 }
-  }
+    md: { span: 12 },
+  },
 };
 
 const IconText = ({ type, text }) => (
@@ -58,9 +47,7 @@ const IconText = ({ type, text }) => (
   </span>
 );
 
-const ArticleListContent = ({
-  data: { content, updatedAt, avatar, owner, href }
-}) => (
+const ArticleListContent = ({ data: { content, updatedAt, avatar, owner, href } }) => (
   <div className={styles.listContent}>
     <div className={styles.description}>{content}</div>
     <div className={styles.extra}>
@@ -77,7 +64,7 @@ const pageSize = 5;
 
 @connect(({ list, loading }) => ({
   list,
-  loading: loading.models.list
+  loading: loading.models.list,
 }))
 @Form.create()
 class Articles extends PureComponent {
@@ -86,15 +73,15 @@ class Articles extends PureComponent {
     dispatch({
       type: 'list/fetch',
       payload: {
-        count: 5
-      }
+        count: 5,
+      },
     });
   }
 
   setOwner = () => {
     const { form } = this.props;
     form.setFieldsValue({
-      owner: ['wzj']
+      owner: ['wzj'],
     });
   };
 
@@ -103,8 +90,8 @@ class Articles extends PureComponent {
     dispatch({
       type: 'list/appendFetch',
       payload: {
-        count: pageSize
-      }
+        count: pageSize,
+      },
     });
   };
 
@@ -112,16 +99,13 @@ class Articles extends PureComponent {
     const {
       form: { getFieldDecorator },
       list: { list },
-      loading
+      loading,
     } = this.props;
 
     const loadMore =
       list.length > 0 ? (
         <div style={{ textAlign: 'center', marginTop: 16 }}>
-          <Button
-            onClick={this.fetchMore}
-            style={{ paddingLeft: 48, paddingRight: 48 }}
-          >
+          <Button onClick={this.fetchMore} style={{ paddingLeft: 48, paddingRight: 48 }}>
             {loading ? (
               <span>
                 <Icon type="loading" />
@@ -138,14 +122,10 @@ class Articles extends PureComponent {
       <Fragment>
         <Card bordered={false}>
           <Form layout="inline">
-            <StandardFormRow
-              title="所属类目"
-              block
-              style={{ paddingBottom: 11 }}
-            >
+            <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
               <FormItem>
                 {getFieldDecorator('category', {
-                  initialValue: 'cat1'
+                  initialValue: 'cat1',
                 })(
                   <TagSelect expandable>
                     <TagSelect.Option value="cat1">类目一</TagSelect.Option>
@@ -169,25 +149,21 @@ class Articles extends PureComponent {
                 <Col lg={16} md={24} sm={24} xs={24}>
                   <FormItem>
                     {getFieldDecorator('owner', {
-                      initialValue: ['wjh', 'zxx']
+                      initialValue: ['wjh', 'zxx'],
                     })(
                       <Select
                         mode="multiple"
                         style={{ maxWidth: 286, width: '100%' }}
                         placeholder="选择 owner"
                       >
-                        {owners.map(owners => (
-                          <Option key={owners.id} value={owners.id}>
-                            {owners.name}
+                        {owners.map(owner => (
+                          <Option key={owner.id} value={owner.id}>
+                            {owner.name}
                           </Option>
                         ))}
                       </Select>
                     )}
-                    <a
-                      href="http://"
-                      className={styles.selfTrigger}
-                      onClick={this.setOwner}
-                    >
+                    <a href="http://" className={styles.selfTrigger} onClick={this.setOwner}>
                       只看自己的
                     </a>
                   </FormItem>
@@ -199,10 +175,7 @@ class Articles extends PureComponent {
                 <Col xl={8} lg={10} md={12} sm={24} xs={24}>
                   <FormItem {...formItemLayout} label="活跃用户">
                     {getFieldDecorator('user', {})(
-                      <Select
-                        placeholder="不限"
-                        style={{ maxWidth: 200, width: '100%' }}
-                      >
+                      <Select placeholder="不限" style={{ maxWidth: 200, width: '100%' }}>
                         <Option value="lisa">李三</Option>
                       </Select>
                     )}
@@ -211,10 +184,7 @@ class Articles extends PureComponent {
                 <Col xl={8} lg={10} md={12} sm={24} xs={24}>
                   <FormItem {...formItemLayout} label="好评度">
                     {getFieldDecorator('rate', {})(
-                      <Select
-                        placeholder="不限"
-                        style={{ maxWidth: 200, width: '100%' }}
-                      >
+                      <Select placeholder="不限" style={{ maxWidth: 200, width: '100%' }}>
                         <Option value="good">优秀</Option>
                       </Select>
                     )}
@@ -242,13 +212,11 @@ class Articles extends PureComponent {
                 actions={[
                   <IconText type="star-o" text={item.star} />,
                   <IconText type="like-o" text={item.like} />,
-                  <IconText type="message" text={item.message} />
+                  <IconText type="message" text={item.message} />,
                 ]}
               >
                 <List.Item.Meta
-                  title={
-                    <a className={styles.listItemMetaTitle}>{item.title}</a>
-                  }
+                  title={<a className={styles.listItemMetaTitle}>{item.title}</a>}
                   description={
                     <span>
                       <Tag>Ant Design</Tag>

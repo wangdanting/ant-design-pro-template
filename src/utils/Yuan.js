@@ -20,7 +20,13 @@ class Yuan extends PureComponent {
   };
 
   render() {
-    return <span ref={ref => (this.main = ref)} />;
+    return (
+      <span
+        ref={ref => {
+          this.main = ref;
+        }}
+      />
+    );
   }
 }
 

@@ -9,7 +9,7 @@ export default {
   namespace: 'login',
 
   state: {
-    status: undefined
+    status: undefined,
   },
 
   effects: {
@@ -17,7 +17,7 @@ export default {
       const response = yield call(fakeAccountLogin, payload);
       yield put({
         type: 'changeLoginStatus',
-        payload: response
+        payload: response,
       });
 
       if (response.status === 'ok') {
@@ -51,19 +51,19 @@ export default {
         type: 'changeLoginStatus',
         payload: {
           status: false,
-          currentAuthority: 'guest'
-        }
+          currentAuthority: 'guest',
+        },
       });
       reloadAuthorized();
       yield put(
         routerRedux.push({
           pathname: '/user/login',
           search: stringify({
-            redirect: window.location.href
-          })
+            redirect: window.location.href,
+          }),
         })
       );
-    }
+    },
   },
 
   reducers: {
@@ -72,8 +72,8 @@ export default {
       return {
         ...state,
         status: payload.status,
-        type: payload.type
+        type: payload.type,
       };
-    }
-  }
+    },
+  },
 };

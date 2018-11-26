@@ -19,6 +19,7 @@ class CardList extends PureComponent {
       }
     });
   }
+
   render() {
     const {
       list: { list },

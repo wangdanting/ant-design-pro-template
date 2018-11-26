@@ -8,7 +8,7 @@ import styles from './Register.less';
 
 const FormItem = Form.Item;
 const InputGroup = Input.Group;
-const Option = Select.Option;
+const { Option } = Select;
 
 const passwordStatusMap = {
   ok: (
@@ -25,18 +25,18 @@ const passwordStatusMap = {
     <div className={styles.error}>
       <FormattedMessage id="validation.password.strength.short" />
     </div>
-  )
+  ),
 };
 
 const passwordProgressMap = {
   ok: 'success',
   pass: 'normal',
-  poor: 'exception'
+  poor: 'exception',
 };
 
 @connect(({ register, loading }) => ({
   register,
-  submitting: loading.effects['register/submit']
+  submitting: loading.effects['register/submit'],
 }))
 class Register extends Component {
   state = {
@@ -44,7 +44,7 @@ class Register extends Component {
     confirmDirty: false,
     visible: false,
     help: '',
-    prefix: '86'
+    prefix: '86',
   };
 
   componentDidUpdate() {
@@ -54,8 +54,8 @@ class Register extends Component {
       router.push({
         pathname: '/user/register-result',
         state: {
-          account
-        }
+          account,
+        },
       });
     }
   }
@@ -69,16 +69,16 @@ class Register extends Component {
     if (!value) {
       this.setState({
         help: formatMessage({ id: 'validation.password.required' }),
-        visible: !!value
+        visible: !!value,
       });
       callback('error');
     } else {
       this.setState({
-        help: ''
+        help: '',
       });
       if (!visible) {
         this.setState({
-          visible: !!value
+          visible: !!value,
         });
       }
       if (value.length < 6) {
@@ -133,7 +133,7 @@ class Register extends Component {
 
   changePrefix = value => {
     this.setState({
-      prefix: value
+      prefix: value,
     });
   };
 
@@ -159,8 +159,8 @@ class Register extends Component {
           type: 'register/submit',
           payload: {
             ...values,
-            prefix
-          }
+            prefix,
+          },
         });
       }
     });
@@ -182,20 +182,17 @@ class Register extends Component {
               rules: [
                 {
                   required: true,
-                  message: formatMessage({ id: 'validation.email.required' })
+                  message: formatMessage({ id: 'validation.email.required' }),
                 },
                 {
                   type: 'email',
                   message: formatMessage({
-                    id: 'validation.email.wrong-format'
-                  })
-                }
-              ]
+                    id: 'validation.email.wrong-format',
+                  }),
+                },
+              ],
             })(
-              <Input
-                size="large"
-                placeholder={formatMessage({ id: 'form.email.placeholder' })}
-              />
+              <Input size="large" placeholder={formatMessage({ id: 'form.email.placeholder' })} />
             )}
           </FormItem>
           <FormItem help={help}>
@@ -216,15 +213,15 @@ class Register extends Component {
               {getFieldDecorator('password', {
                 rules: [
                   {
-                    validator: this.checkPassword
-                  }
-                ]
+                    validator: this.checkPassword,
+                  },
+                ],
               })(
                 <Input
                   size="large"
                   type="password"
                   placeholder={formatMessage({
-                    id: 'form.password.placeholder'
+                    id: 'form.password.placeholder',
                   })}
                 />
               )}
@@ -236,19 +233,19 @@ class Register extends Component {
                 {
                   required: true,
                   message: formatMessage({
-                    id: 'validation.confirm-password.required'
-                  })
+                    id: 'validation.confirm-password.required',
+                  }),
                 },
                 {
-                  validator: this.checkConfirm
-                }
-              ]
+                  validator: this.checkConfirm,
+                },
+              ],
             })(
               <Input
                 size="large"
                 type="password"
                 placeholder={formatMessage({
-                  id: 'form.confirm-password.placeholder'
+                  id: 'form.confirm-password.placeholder',
                 })}
               />
             )}
@@ -269,22 +266,22 @@ class Register extends Component {
                   {
                     required: true,
                     message: formatMessage({
-                      id: 'validation.phone-number.required'
-                    })
+                      id: 'validation.phone-number.required',
+                    }),
                   },
                   {
                     pattern: /^1\d{10}$/,
                     message: formatMessage({
-                      id: 'validation.phone-number.wrong-format'
-                    })
-                  }
-                ]
+                      id: 'validation.phone-number.wrong-format',
+                    }),
+                  },
+                ],
               })(
                 <Input
                   size="large"
                   style={{ width: '75%' }}
                   placeholder={formatMessage({
-                    id: 'form.phone-number.placeholder'
+                    id: 'form.phone-number.placeholder',
                   })}
                 />
               )}
@@ -298,15 +295,15 @@ class Register extends Component {
                     {
                       required: true,
                       message: formatMessage({
-                        id: 'validation.verification-code.required'
-                      })
-                    }
-                  ]
+                        id: 'validation.verification-code.required',
+                      }),
+                    },
+                  ],
                 })(
                   <Input
                     size="large"
                     placeholder={formatMessage({
-                      id: 'form.verification-code.placeholder'
+                      id: 'form.verification-code.placeholder',
                     })}
                   />
                 )}
@@ -321,7 +318,7 @@ class Register extends Component {
                   {count
                     ? `${count} s`
                     : formatMessage({
-                      id: 'app.register.get-verification-code'
+                      id: 'app.register.get-verification-code',
                     })}
                 </Button>
               </Col>

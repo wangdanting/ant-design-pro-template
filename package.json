@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env APP_TYPE=site umi dev",
-    "lint": "eslint --ext .js src"
+    "lint:style": "stylelint \"src/**/*.less\" --syntax less",
+    "lint": "eslint --ext .js src && npm run lint:style",
+    "lint-fix": "eslint --fix --ext .js src && npm run lint:style",
+    "lint-staged": "lint-staged"
   },
   "author": "wangdanting",
   "license": "ISC",
   "dependencies": {
-    "@babel/runtime": "^7.1.2",
+    "@babel/runtime": "^7.1.5",
     "antd": "^3.10.0",
     "bizcharts": "^3.2.5-beta.4",
     "classnames": "^2.2.6",
@@ -66,6 +69,6 @@
   "husky": {
     "hooks": {  
       "pre-commit": "lint-staged"
-     }
+    }
   }
 }

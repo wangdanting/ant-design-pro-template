@@ -35,7 +35,7 @@ module.exports = {
     'import/no-extraneous-dependencies': [2, { optionalDependencies: true }],
     // 'linebreak-style': 0,
   },
-  // settings: {
-  //   polyfills: ['url'],
-  // },
+  settings: {
+    polyfills: ['fetch', 'url', 'promises'],
+  },
 };
