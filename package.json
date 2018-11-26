@@ -8,7 +8,8 @@
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
     "lint": "eslint --ext .js src && npm run lint:style",
     "lint-fix": "eslint --fix --ext .js src && npm run lint:style",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "lint-staged:js": "eslint --ext .js"
   },
   "author": "wangdanting",
   "license": "ISC",
@@ -64,11 +65,16 @@
     "not ie <= 10"
   ],
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"]
+    "**/*.{js, jsx, less}": [
+      "prettier --write",
+      "git add"
+    ],
+    "**/*.{js, jsx}": "npm run lint-staged:js",
+    "**/*.less": "stylelint --syntax less"
   },
   "husky": {
     "hooks": {  
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run  lint-staged"
     }
   }
 }
