@@ -1,19 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import numeral from 'numeral';
-import {
-  Row,
-  Col,
-  Form,
-  Card,
-  Select,
-  Icon,
-  Avatar,
-  List,
-  Tooltip,
-  Dropdown,
-  Menu
-} from 'antd';
+import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Dropdown, Menu } from 'antd';
 import StandardFormRow from '@/components/StandardFormRow';
 import TagSelect from '@/components/TagSelect';
 import { formatWan } from '@/utils/utils';
@@ -25,7 +13,7 @@ const FormItem = Form.Item;
 
 @connect(({ list, loading }) => ({
   list,
-  loading: loading.models.list
+  loading: loading.models.list,
 }))
 @Form.create()
 class Applications extends PureComponent {
@@ -34,8 +22,8 @@ class Applications extends PureComponent {
     dispatch({
       type: 'list/fetch',
       payload: {
-        count: 8
-      }
+        count: 8,
+      },
     });
   }
 
@@ -43,42 +31,30 @@ class Applications extends PureComponent {
     const {
       list: { list },
       loading,
-      form: { getFieldDecorator }
+      form: { getFieldDecorator },
     } = this.props;
 
     const formItemLayout = {
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 }
-      }
+        sm: { span: 16 },
+      },
     };
 
     const itemMenu = (
       <Menu>
         <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://www.alipay.com/"
-          >
+          <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
             1st menu item
           </a>
         </Menu.Item>
         <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://www.taobao.com/"
-          >
+          <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
             2nd menu item
           </a>
         </Menu.Item>
         <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://www.tmall.com/"
-          >
+          <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
             3d menu item
           </a>
         </Menu.Item>
@@ -102,11 +78,7 @@ class Applications extends PureComponent {
       <div className={styles.filterCardList}>
         <Card bordered={false}>
           <Form layout="inline">
-            <StandardFormRow
-              title="所属类目"
-              block
-              style={{ paddingBottom: 11 }}
-            >
+            <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
               <FormItem>
                 {getFieldDecorator('category')(
                   <TagSelect expandable>
@@ -131,10 +103,7 @@ class Applications extends PureComponent {
                 <Col lg={8} md={10} sm={10} xs={24}>
                   <FormItem {...formItemLayout} label="作者">
                     {getFieldDecorator('author', {})(
-                      <Select
-                        placeholder="不限"
-                        style={{ maxWidth: 200, width: '100%' }}
-                      >
+                      <Select placeholder="不限" style={{ maxWidth: 200, width: '100%' }}>
                         <Option value="lisa">王昭君</Option>
                       </Select>
                     )}
@@ -143,10 +112,7 @@ class Applications extends PureComponent {
                 <Col lg={8} md={10} sm={10} xs={24}>
                   <FormItem {...formItemLayout} label="好评度">
                     {getFieldDecorator('rate', {})(
-                      <Select
-                        placeholder="不限"
-                        style={{ maxWidth: 200, width: '100%' }}
-                      >
+                      <Select placeholder="不限" style={{ maxWidth: 200, width: '100%' }}>
                         <Option value="good">优秀</Option>
                         <Option value="normal">普通</Option>
                       </Select>
@@ -180,13 +146,10 @@ class Applications extends PureComponent {
                   </Tooltip>,
                   <Dropdown overlay={itemMenu}>
                     <Icon type="ellipsis" />
-                  </Dropdown>
+                  </Dropdown>,
                 ]}
               >
-                <Card.Meta
-                  avatar={<Avatar size="small" src={item.avatar} />}
-                  title={item.title}
-                />
+                <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
                 <div className={styles.cardItemContent}>
                   <CardInfo
                     activeUser={formatWan(item.activeUser)}

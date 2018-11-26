@@ -6,7 +6,7 @@ import router from 'umi/router';
 import styles from './style.less';
 
 @connect(({ form }) => ({
-  data: form.step
+  data: form.step,
 }))
 class Step3 extends PureComponent {
   render() {

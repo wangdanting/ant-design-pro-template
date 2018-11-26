@@ -6,18 +6,12 @@ import { List } from 'antd';
 const passwordStrength = {
   strong: (
     <font className="strong">
-      <FormattedMessage
-        id="app.settings.security.strong"
-        defaultMessage="Strong"
-      />
+      <FormattedMessage id="app.settings.security.strong" defaultMessage="Strong" />
     </font>
   ),
   medium: (
     <font className="medium">
-      <FormattedMessage
-        id="app.settings.security.medium"
-        defaultMessage="Medium"
-      />
+      <FormattedMessage id="app.settings.security.medium" defaultMessage="Medium" />
     </font>
   ),
   weak: (
@@ -25,7 +19,7 @@ const passwordStrength = {
       <FormattedMessage id="app.settings.security.weak" defaultMessage="Weak" />
       Weak
     </font>
-  )
+  ),
 };
 
 class SecurityView extends Component {
@@ -34,18 +28,15 @@ class SecurityView extends Component {
       title: formatMessage({ id: 'app.settings.security.password' }, {}),
       description: (
         <Fragment>
-          {formatMessage({ id: 'app.settings.security.password-description' })}
-          ：{passwordStrength.strong}
+          {formatMessage({ id: 'app.settings.security.password-description' })}：
+          {passwordStrength.strong}
         </Fragment>
       ),
       actions: [
         <a>
-          <FormattedMessage
-            id="app.settings.security.modify"
-            defaultMessage="Modify"
-          />
-        </a>
-      ]
+          <FormattedMessage id="app.settings.security.modify" defaultMessage="Modify" />
+        </a>,
+      ],
     },
     {
       title: formatMessage({ id: 'app.settings.security.phone' }, {}),
@@ -55,27 +46,18 @@ class SecurityView extends Component {
       )}：138****8293`,
       actions: [
         <a>
-          <FormattedMessage
-            id="app.settings.security.modify"
-            defaultMessage="Modify"
-          />
-        </a>
-      ]
+          <FormattedMessage id="app.settings.security.modify" defaultMessage="Modify" />
+        </a>,
+      ],
     },
     {
       title: formatMessage({ id: 'app.settings.security.question' }, {}),
-      description: formatMessage(
-        { id: 'app.settings.security.question-description' },
-        {}
-      ),
+      description: formatMessage({ id: 'app.settings.security.question-description' }, {}),
       actions: [
         <a>
-          <FormattedMessage
-            id="app.settings.security.set"
-            defaultMessage="Set"
-          />
-        </a>
-      ]
+          <FormattedMessage id="app.settings.security.set" defaultMessage="Set" />
+        </a>,
+      ],
     },
     {
       title: formatMessage({ id: 'app.settings.security.email' }, {}),
@@ -85,28 +67,19 @@ class SecurityView extends Component {
       )}：ant***sign.com`,
       actions: [
         <a>
-          <FormattedMessage
-            id="app.settings.security.modify"
-            defaultMessage="Modify"
-          />
-        </a>
-      ]
+          <FormattedMessage id="app.settings.security.modify" defaultMessage="Modify" />
+        </a>,
+      ],
     },
     {
       title: formatMessage({ id: 'app.settings.security.mfa' }, {}),
-      description: formatMessage(
-        { id: 'app.settings.security.mfa-description' },
-        {}
-      ),
+      description: formatMessage({ id: 'app.settings.security.mfa-description' }, {}),
       actions: [
         <a>
-          <FormattedMessage
-            id="app.settings.security.bind"
-            defaultMessage="Bind"
-          />
-        </a>
-      ]
-    }
+          <FormattedMessage id="app.settings.security.bind" defaultMessage="Bind" />
+        </a>,
+      ],
+    },
   ];
 
   render() {
@@ -117,10 +90,7 @@ class SecurityView extends Component {
           dataSource={this.getData()}
           renderItem={item => (
             <List.Item actions={item.actions}>
-              <List.Item.Meta
-                title={item.title}
-                description={item.description}
-              />
+              <List.Item.Meta title={item.title} description={item.description} />
             </List.Item>
           )}
         />

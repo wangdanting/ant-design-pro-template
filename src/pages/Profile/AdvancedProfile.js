@@ -18,7 +18,7 @@ import {
   Badge,
   Tooltip,
   Divider,
-  Table
+  Table,
 } from 'antd';
 
 import styles from './AdvancedProfile.less';
@@ -27,8 +27,7 @@ const ButtonGroup = Button.Group;
 const { Description } = DescriptionList;
 const { Step } = Steps;
 
-const getWindowWidth = () =>
-  document.innerWidth || document.documentElement.clientWidth;
+const getWindowWidth = () => document.innerWidth || document.documentElement.clientWidth;
 
 const menu = (
   <Menu>
@@ -82,12 +81,12 @@ const extra = (
 const tabList = [
   {
     key: 'detail',
-    tab: '详情'
+    tab: '详情',
   },
   {
     key: 'rule',
-    tab: '规则'
-  }
+    tab: '规则',
+  },
 ];
 
 const desc1 = (
@@ -116,10 +115,7 @@ const popoverContent = (
   <div style={{ width: 160 }}>
     吴加号
     <span className={styles.textSecondary} style={{ float: 'right' }}>
-      <Badge
-        status="default"
-        text={<span style={{ color: 'rgba(0, 0, 0, 0.45)' }}>未响应</span>}
-      />
+      <Badge status="default" text={<span style={{ color: 'rgba(0, 0, 0, 0.45)' }}>未响应</span>} />
     </span>
     <div className={styles.textSecondary} style={{ marginTop: 4 }}>
       耗时：2小时25分钟
@@ -139,28 +135,28 @@ const customDot = (dot, { status }) =>
 const operationTabList = [
   {
     key: 'tab1',
-    tab: '操作日志一'
+    tab: '操作日志一',
   },
   {
     key: 'tab2',
-    tab: '操作日志二'
+    tab: '操作日志二',
   },
   {
     key: 'tab3',
-    tab: '操作日志三'
-  }
+    tab: '操作日志三',
+  },
 ];
 
 const columns = [
   {
     title: '操作类型',
     dataIndex: 'type',
-    key: 'type'
+    key: 'type',
   },
   {
     title: '操作人',
     dataIndex: 'name',
-    key: 'name'
+    key: 'name',
   },
   {
     title: '执行结果',
@@ -171,34 +167,34 @@ const columns = [
         <Badge status="success" text="成功" />
       ) : (
         <Badge status="error" text="驳回" />
-      )
+      ),
   },
   {
     title: '操作时间',
     dataIndex: 'updatedAt',
-    key: 'updatedAt'
+    key: 'updatedAt',
   },
   {
     title: '备注',
     dataIndex: 'memo',
-    key: 'memo'
-  }
+    key: 'memo',
+  },
 ];
 
 @connect(({ profile, loading }) => ({
   profile,
-  loading: loading.effects['profile/fetchAdvanced']
+  loading: loading.effects['profile/fetchAdvanced'],
 }))
 class AdvancedProfile extends PureComponent {
   state = {
     operationkey: 'tab1',
-    stepDirection: 'horizontal'
+    stepDirection: 'horizontal',
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'profile/fetchAdvanced'
+      type: 'profile/fetchAdvanced',
     });
 
     this.setStepDirection();
@@ -217,11 +213,11 @@ class AdvancedProfile extends PureComponent {
     const w = getWindowWidth();
     if (stepDirection !== 'vertical' && w <= 576) {
       this.setState({
-        stepDirection: 'vertical'
+        stepDirection: 'vertical',
       });
     } else if (stepDirection !== 'horizontal' && w > 576) {
       this.setState({
-        stepDirection: 'horizontal'
+        stepDirection: 'horizontal',
       });
     }
   }
@@ -233,11 +229,7 @@ class AdvancedProfile extends PureComponent {
   render() {
     const { stepDirection, operationkey } = this.state;
     const { profile, loading } = this.props;
-    const {
-      advancedOperation1,
-      advancedOperation2,
-      advancedOperation3
-    } = profile;
+    const { advancedOperation1, advancedOperation2, advancedOperation3 } = profile;
     const contentList = {
       tab1: (
         <Table
@@ -262,17 +254,14 @@ class AdvancedProfile extends PureComponent {
           dataSource={advancedOperation3}
           columns={columns}
         />
-      )
+      ),
     };
 
     return (
       <PageHeaderWrapper
         title="单号：234231029431"
         logo={
-          <img
-            alt=""
-            src="https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png"
-          />
+          <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png" />
         }
         action={action}
         content={description}
@@ -320,11 +309,7 @@ class AdvancedProfile extends PureComponent {
           </DescriptionList>
           <h4 style={{ marginBottom: 16 }}>信息组</h4>
           <Card type="inner" title="多层级信息组">
-            <DescriptionList
-              size="small"
-              style={{ marginBottom: 16 }}
-              title="组名称"
-            >
+            <DescriptionList size="small" style={{ marginBottom: 16 }} title="组名称">
               <Description term="负责人">林东东</Description>
               <Description term="角色码">1234567</Description>
               <Description term="所属部门">XX公司 - YY部</Description>
@@ -334,12 +319,7 @@ class AdvancedProfile extends PureComponent {
               </Description>
             </DescriptionList>
             <Divider style={{ margin: '16px 0' }} />
-            <DescriptionList
-              size="small"
-              style={{ marginBottom: 16 }}
-              title="组名称"
-              col="1"
-            >
+            <DescriptionList size="small" style={{ marginBottom: 16 }} title="组名称" col="1">
               <Description term="学名">
                 Citrullus lanatus (Thunb.) Matsum. et
                 Nakai一年生蔓生藤本；茎、枝粗壮，具明显的棱。卷须较粗..
@@ -352,11 +332,7 @@ class AdvancedProfile extends PureComponent {
             </DescriptionList>
           </Card>
         </Card>
-        <Card
-          title="用户近半年来电记录"
-          style={{ marginBottom: 24 }}
-          bordered={false}
-        >
+        <Card title="用户近半年来电记录" style={{ marginBottom: 24 }} bordered={false}>
           <div className={styles.noData}>
             <Icon type="frown-o" />
             暂无数据

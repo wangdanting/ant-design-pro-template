@@ -5,7 +5,7 @@ export default {
 
   state: {
     error: '',
-    isloading: false
+    isloading: false,
   },
 
   effects: {
@@ -13,16 +13,16 @@ export default {
       yield call(queryError, payload.code);
       yield put({
         type: 'trigger',
-        payload: payload.code
+        payload: payload.code,
       });
-    }
+    },
   },
 
   reducers: {
     trigger(state, action) {
       return {
-        error: action.payload
+        error: action.payload,
       };
-    }
-  }
+    },
+  },
 };

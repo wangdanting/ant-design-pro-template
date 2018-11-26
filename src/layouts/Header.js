@@ -13,11 +13,11 @@ const { Header } = Layout;
   setting,
   collapsed: global.collapsed,
   notices: global.notices,
-  fetchingNotices: loading.effects['global/fetchNotices']
+  fetchingNotices: loading.effects['global/fetchNotices'],
 }))
 class HeaderView extends PureComponent {
   state = {
-    visible: true
+    visible: true,
   };
 
   // getHeaderWidth = () => {
@@ -29,21 +29,21 @@ class HeaderView extends PureComponent {
     if (visible) {
       const { dispatch } = this.props;
       dispatch({
-        type: 'global/fetchNotices'
+        type: 'global/fetchNotices',
       });
     }
   };
 
   handleNoticeClear = type => {
     message.success(
-      `${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage(
-        { id: `component.globalHeader.${type}` }
-      )}`
+      `${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({
+        id: `component.globalHeader.${type}`,
+      })}`
     );
     const { dispatch } = this.props;
     dispatch({
       type: 'global/clearNotices',
-      payload: type
+      payload: type,
     });
   };
 
@@ -63,7 +63,7 @@ class HeaderView extends PureComponent {
     }
     if (key === 'logout') {
       dispatch({
-        type: 'login/logout'
+        type: 'login/logout',
       });
     }
   };
@@ -74,10 +74,7 @@ class HeaderView extends PureComponent {
     const { visible } = this.state;
     // const width = this.getHeaderWidth();
     const HeaderDom = visible ? (
-      <Header
-        style={{ padding: 0 }}
-        className={fixedHeader ? 'style.fixedHeader' : ''}
-      >
+      <Header style={{ padding: 0 }} className={fixedHeader ? 'style.fixedHeader' : ''}>
         <GlobalHeader
           onCollapse={handleMenuCollapse}
           onNoticeVisibleChange={this.handleNoticeVisibleChange}

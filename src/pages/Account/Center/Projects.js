@@ -6,12 +6,12 @@ import AvatarList from '@/components/AvatarList';
 import stylesProjects from '../../List/Projects.less';
 
 @connect(({ list }) => ({
-  list
+  list,
 }))
 class Projects extends PureComponent {
   render() {
     const {
-      list: { list }
+      list: { list },
     } = this.props;
     return (
       <List
@@ -26,10 +26,7 @@ class Projects extends PureComponent {
               hoverable
               cover={<img alt={item.title} src={item.cover} />}
             >
-              <Card.Meta
-                title={<a>{item.title}</a>}
-                description={item.subDescription}
-              />
+              <Card.Meta title={<a>{item.title}</a>} description={item.subDescription} />
               <div className={stylesProjects.cardItemContent}>
                 <span>{moment(item.updatedAt).fromNow()}</span>
                 <div className={stylesProjects.avatarList}>

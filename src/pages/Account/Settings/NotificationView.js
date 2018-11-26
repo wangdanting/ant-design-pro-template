@@ -14,28 +14,19 @@ class NotificationView extends Component {
     return [
       {
         title: formatMessage({ id: 'app.settings.notification.password' }, {}),
-        description: formatMessage(
-          { id: 'app.settings.notification.password-description' },
-          {}
-        ),
-        actions: [Action]
+        description: formatMessage({ id: 'app.settings.notification.password-description' }, {}),
+        actions: [Action],
       },
       {
         title: formatMessage({ id: 'app.settings.notification.messages' }, {}),
-        description: formatMessage(
-          { id: 'app.settings.notification.messages-description' },
-          {}
-        ),
-        actions: [Action]
+        description: formatMessage({ id: 'app.settings.notification.messages-description' }, {}),
+        actions: [Action],
       },
       {
         title: formatMessage({ id: 'app.settings.notification.todo' }, {}),
-        description: formatMessage(
-          { id: 'app.settings.notification.todo-description' },
-          {}
-        ),
-        actions: [Action]
-      }
+        description: formatMessage({ id: 'app.settings.notification.todo-description' }, {}),
+        actions: [Action],
+      },
     ];
   };
 
@@ -47,10 +38,7 @@ class NotificationView extends Component {
           dataSource={this.getData()}
           renderItem={item => (
             <List.Item actions={item.actions}>
-              <List.Item.Meta
-                title={item.title}
-                description={item.description}
-              />
+              <List.Item.Meta title={item.title} description={item.description} />
             </List.Item>
           )}
         />

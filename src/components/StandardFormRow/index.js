@@ -6,7 +6,7 @@ const StandardFormRow = ({ title, children, last, block, grid, ...rest }) => {
   const cls = classNames(styles.standardFormRow, {
     [styles.standardFormRowBlock]: block,
     [styles.standardFormRowLast]: last,
-    [styles.standardFormRowGrid]: grid
+    [styles.standardFormRowGrid]: grid,
   });
 
   return (

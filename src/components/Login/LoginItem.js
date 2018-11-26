@@ -8,13 +8,13 @@ import styles from './index.less';
 const FormItem = Form.Item;
 class WrapFormItem extends Component {
   static defaultProps = {
-    buttonText: '获取验证码'
+    buttonText: '获取验证码',
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      count: 0
+      count: 0,
     };
   }
 
@@ -31,7 +31,7 @@ class WrapFormItem extends Component {
 
   getFormItemOptions = ({ rules, defaultValue, customprops }) => {
     const options = {
-      rules: rules || customprops.rules
+      rules: rules || customprops.rules,
     };
     if (defaultValue) {
       options.initialValue = defaultValue;
@@ -69,7 +69,7 @@ class WrapFormItem extends Component {
     const { count } = this.state;
 
     const {
-      form: { getFieldDecorator }
+      form: { getFieldDecorator },
     } = this.props;
 
     const {
@@ -93,9 +93,7 @@ class WrapFormItem extends Component {
         <FormItem>
           <Row gutter={8}>
             <Col span={16}>
-              {getFieldDecorator(name, options)(
-                <Input {...customprops} {...inputProps} />
-              )}
+              {getFieldDecorator(name, options)(<Input {...customprops} {...inputProps} />)}
             </Col>
             <Col span={8}>
               <Button
@@ -114,9 +112,7 @@ class WrapFormItem extends Component {
 
     return (
       <FormItem>
-        {getFieldDecorator(name, options)(
-          <Input {...customprops} {...otherProps} />
-        )}
+        {getFieldDecorator(name, options)(<Input {...customprops} {...otherProps} />)}
       </FormItem>
     );
   }

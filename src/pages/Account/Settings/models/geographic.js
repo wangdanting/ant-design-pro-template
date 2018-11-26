@@ -6,60 +6,60 @@ export default {
   state: {
     province: [],
     city: [],
-    isLoading: false
+    isLoading: false,
   },
 
   effects: {
     *fetchProvince(_, { call, put }) {
       yield put({
         type: 'changeLoading',
-        payload: true
+        payload: true,
       });
       const response = yield call(queryProvince);
       yield put({
         type: 'setProvince',
-        payload: response
+        payload: response,
       });
       yield put({
         type: 'changeLoading',
-        payload: false
+        payload: false,
       });
     },
     *fetchCity({ payload }, { call, put }) {
       yield put({
         type: 'changeLoading',
-        payload: true
+        payload: true,
       });
       const response = yield call(queryCity, payload);
       yield put({
         type: 'setCity',
-        payload: response
+        payload: response,
       });
       yield put({
         type: 'changeLoading',
-        payload: false
+        payload: false,
       });
-    }
+    },
   },
 
   reducers: {
     changeLoading(state, action) {
       return {
         ...state,
-        isLoading: action.payload
+        isLoading: action.payload,
       };
     },
     setProvince(state, action) {
       return {
         ...state,
-        province: action.payload
+        province: action.payload,
       };
     },
     setCity(state, action) {
       return {
         ...state,
-        city: action.payload
+        city: action.payload,
       };
-    }
-  }
+    },
+  },
 };

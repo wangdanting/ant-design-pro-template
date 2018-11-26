@@ -7,7 +7,7 @@ import styles from './index.less';
 class Exception extends React.PureComponent {
   static defaultProps = {
     backText: 'back to home',
-    redirect: '/'
+    redirect: '/',
   };
 
   constructor(props) {
@@ -47,7 +47,7 @@ class Exception extends React.PureComponent {
                 linkElement,
                 {
                   to: redirect,
-                  href: redirect
+                  href: redirect,
                 },
                 <Button type="primary">{backText}</Button>
               )}

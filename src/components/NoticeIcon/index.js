@@ -12,7 +12,7 @@ class NoticeIcon extends PureComponent {
   static defaultProps = {
     onTabChange: () => {},
     onItemClick: () => {},
-    onClear: () => {}
+    onClear: () => {},
   };
 
   onTabChange = tabType => {
@@ -59,23 +59,13 @@ class NoticeIcon extends PureComponent {
   }
 
   render() {
-    const {
-      className,
-      count,
-      bell,
-      onPopupVisibleChange,
-      popupAlign
-    } = this.props;
+    const { className, count, bell, onPopupVisibleChange, popupAlign } = this.props;
     const noticeButtonClass = classNames(className, styles.noticeButton);
     const NoticeBellIcon = bell || <Icon type="bell" className={styles.icon} />;
     const notificationBox = this.getNotificationBox();
     const trigger = (
       <span className={noticeButtonClass}>
-        <Badge
-          count={count}
-          style={{ boxShadow: 'none' }}
-          className={styles.badge}
-        >
+        <Badge count={count} style={{ boxShadow: 'none' }} className={styles.badge}>
           {NoticeBellIcon}
         </Badge>
       </span>

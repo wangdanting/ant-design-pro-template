@@ -5,7 +5,7 @@ import MiniArea from './MiniArea';
 const Charts = {
   ChartCard,
   Field,
-  MiniArea
+  MiniArea,
 };
 
 export { Charts as default, ChartCard, Field, MiniArea };

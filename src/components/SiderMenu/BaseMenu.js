@@ -94,8 +94,8 @@ export default class BaseMenu extends PureComponent {
         onClick={
           isMobile
             ? () => {
-              onCollapse(true);
-            }
+                onCollapse(true);
+              }
             : undefined
         }
       >

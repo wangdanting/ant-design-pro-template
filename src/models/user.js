@@ -4,7 +4,7 @@ export default {
   namespaced: 'user',
 
   state: {
-    currentUser: {}
+    currentUser: {},
   },
 
   effects: {
@@ -12,16 +12,16 @@ export default {
       const response = yield call(queryCurrent);
       yield put({
         type: 'saveCurrentUser',
-        payload: response
+        payload: response,
       });
-    }
+    },
   },
 
   reducers: {
     saveCurrentUser(state, action) {
       return {
         ...state,
-        currentUser: action.payload || {}
+        currentUser: action.payload || {},
       };
     },
     changeNotifyCount(state, action) {
@@ -29,9 +29,9 @@ export default {
         ...state,
         currentUser: {
           ...state.currentUser,
-          notifyCount: action.payload
-        }
+          notifyCount: action.payload,
+        },
       };
-    }
-  }
+    },
+  },
 };

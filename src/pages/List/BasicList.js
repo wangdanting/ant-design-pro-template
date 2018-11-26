@@ -17,7 +17,7 @@ import {
   Modal,
   Form,
   DatePicker,
-  Select
+  Select,
 } from 'antd';
 import { connect } from 'dva';
 import moment from 'moment';
@@ -32,18 +32,18 @@ const { Search, TextArea } = Input;
 
 @connect(({ list, loading }) => ({
   list,
-  loading: loading.models.list
+  loading: loading.models.list,
 }))
 @Form.create()
 class BasicList extends PureComponent {
   state = {
     visible: false,
-    done: false // 是否操作成功
+    done: false, // 是否操作成功
   };
 
   formLayout = {
     labelCol: { span: 7 },
-    wrapperCol: { span: 13 }
+    wrapperCol: { span: 13 },
   };
 
   componentDidMount() {
@@ -51,15 +51,15 @@ class BasicList extends PureComponent {
     dispatch({
       type: 'list/fetch',
       payload: {
-        count: 5
-      }
+        count: 5,
+      },
     });
   }
 
   showEditModal = item => {
     this.setState({
       visible: true,
-      current: item
+      current: item,
     });
   };
 
@@ -67,7 +67,7 @@ class BasicList extends PureComponent {
     const { dispatch } = this.props;
     dispatch({
       type: 'list/submit',
-      payload: { id }
+      payload: { id },
     });
   };
 
@@ -80,7 +80,7 @@ class BasicList extends PureComponent {
         content: '确定删除该任务吗？',
         okText: '确认',
         cancelText: '取消',
-        onOk: () => this.deleteItem(currentItem.id)
+        onOk: () => this.deleteItem(currentItem.id),
       });
     }
   };
@@ -89,21 +89,21 @@ class BasicList extends PureComponent {
     setTimeout(() => this.addBtn.blur(), 0);
     this.setState({
       done: false,
-      visible: false
+      visible: false,
     });
   };
 
   handleCancel = () => {
     setTimeout(() => this.addBtn.blur(), 0);
     this.setState({
-      visible: false
+      visible: false,
     });
   };
 
   showModal = () => {
     this.setState({
       visible: true,
-      current: undefined
+      current: undefined,
     });
   };
 
@@ -117,11 +117,11 @@ class BasicList extends PureComponent {
     form.validateFields((err, fieldsValue) => {
       if (err) return;
       this.setState({
-        done: true
+        done: true,
       });
       dispatch({
         type: 'list/submit',
-        payload: { id, ...fieldsValue }
+        payload: { id, ...fieldsValue },
       });
     });
   };
@@ -129,11 +129,11 @@ class BasicList extends PureComponent {
   render() {
     const {
       list: { list },
-      loading
+      loading,
     } = this.props;
 
     const {
-      form: { getFieldDecorator }
+      form: { getFieldDecorator },
     } = this.props;
 
     const { visible, done, current = {} } = this.state;
@@ -153,11 +153,7 @@ class BasicList extends PureComponent {
           <RadioButton value="progress">进行中</RadioButton>
           <RadioButton value="waiting">等待中</RadioButton>
         </RadioGroup>
-        <Search
-          className={styles.extraContentSearch}
-          placeholder="请输入"
-          onSearch={() => ({})}
-        />
+        <Search className={styles.extraContentSearch} placeholder="请输入" onSearch={() => ({})} />
       </div>
     );
 
@@ -165,7 +161,7 @@ class BasicList extends PureComponent {
       showSizeChanger: true,
       showQuickJumper: true,
       pageSize: 5,
-      total: 50
+      total: 50,
     };
 
     const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
@@ -179,12 +175,7 @@ class BasicList extends PureComponent {
           <p>{moment(createdAt).format('YYYY-MM-DD HH:mm')}</p>
         </div>
         <div className={styles.listContentItem}>
-          <Progress
-            percent={percent}
-            status={status}
-            strokeWidth={6}
-            style={{ width: 180 }}
-          />
+          <Progress percent={percent} status={status} strokeWidth={6} style={{ width: 180 }} />
         </div>
       </div>
     );
@@ -207,14 +198,14 @@ class BasicList extends PureComponent {
 
     const modalFooter = done
       ? {
-        footer: null,
-        onCancel: this.handleDone
-      }
+          footer: null,
+          onCancel: this.handleDone,
+        }
       : {
-        okText: '保存',
-        onOk: this.handleSubmit,
-        onCancel: this.handleCancel
-      };
+          okText: '保存',
+          onOk: this.handleSubmit,
+          onCancel: this.handleCancel,
+        };
 
     const getModalContent = () => {
       if (done) {
@@ -237,13 +228,13 @@ class BasicList extends PureComponent {
           <FormItem label="任务名称" {...this.formLayout}>
             {getFieldDecorator('title', {
               rules: [{ required: true, message: '请输入任务名称' }],
-              initialValue: current.title
+              initialValue: current.title,
             })(<Input placeholder="请输入" />)}
           </FormItem>
           <FormItem label="开始时间" {...this.formLayout}>
             {getFieldDecorator('createAt', {
               rules: [{ required: true, message: '请选择开始时间' }],
-              initialValue: current.createdAt ? moment(current.createdAt) : null
+              initialValue: current.createdAt ? moment(current.createdAt) : null,
             })(
               <DatePicker
                 showTime
@@ -256,7 +247,7 @@ class BasicList extends PureComponent {
           <FormItem label="任务负责人" {...this.formLayout}>
             {getFieldDecorator('owner', {
               rules: [{ required: true, message: '请选择任务负责人' }],
-              initialValue: current.owner
+              initialValue: current.owner,
             })(
               <Select placeholder="请选择">
                 <SelectOption value="付晓晓">付晓晓</SelectOption>
@@ -267,7 +258,7 @@ class BasicList extends PureComponent {
           <FormItem {...this.formLayout} label="产品描述">
             {getFieldDecorator('subDescription', {
               rules: [{ message: '请输入至少五个字符的产品描述！', min: 5 }],
-              initialValue: current.subDescription
+              initialValue: current.subDescription,
             })(<TextArea rows={4} placeholder="请输入至少五个字符" />)}
           </FormItem>
         </Form>
@@ -329,13 +320,11 @@ class BasicList extends PureComponent {
                     >
                       编辑
                     </a>,
-                    <MoreBtn current={item} />
+                    <MoreBtn current={item} />,
                   ]}
                 >
                   <List.Item.Meta
-                    avatar={
-                      <Avatar src={item.logo} shape="square" size="large" />
-                    }
+                    avatar={<Avatar src={item.logo} shape="square" size="large" />}
                     title={<a href={item.href}>{item.title}</a>}
                     description={item.subDescription}
                   />

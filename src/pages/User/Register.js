@@ -318,8 +318,8 @@ class Register extends Component {
                   {count
                     ? `${count} s`
                     : formatMessage({
-                      id: 'app.register.get-verification-code',
-                    })}
+                        id: 'app.register.get-verification-code',
+                      })}
                 </Button>
               </Col>
             </Row>

@@ -8,7 +8,7 @@ const { Option } = Select;
 
 const nullSlectItem = {
   label: '',
-  key: ''
+  key: '',
 };
 
 @connect(({ geographic }) => {
@@ -16,14 +16,14 @@ const nullSlectItem = {
   return {
     province,
     city,
-    isLoading
+    isLoading,
   };
 })
 class GeographicView extends PureComponent {
   componentDidMount = () => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'geographic/fetchProvince'
+      type: 'geographic/fetchProvince',
     });
   };
 
@@ -33,7 +33,7 @@ class GeographicView extends PureComponent {
     if (!props.value && !!value && !!value.province) {
       dispatch({
         type: 'geographic/fetchCity',
-        payload: value.province.key
+        payload: value.province.key,
       });
     }
   }
@@ -67,11 +67,11 @@ class GeographicView extends PureComponent {
     const { dispatch, onChange } = this.props;
     dispatch({
       type: 'geographic/fetchCity',
-      payload: item.key
+      payload: item.key,
     });
     onChange({
       province: item,
-      city: nullSlectItem
+      city: nullSlectItem,
     });
   };
 
@@ -79,7 +79,7 @@ class GeographicView extends PureComponent {
     const { value, onChange } = this.props;
     onChange({
       province: value.province,
-      city: item
+      city: item,
     });
   };
 
@@ -88,13 +88,13 @@ class GeographicView extends PureComponent {
     if (!value) {
       return {
         province: nullSlectItem,
-        city: nullSlectItem
+        city: nullSlectItem,
       };
     }
     const { province, city } = value;
     return {
       province: province || nullSlectItem,
-      city: city || nullSlectItem
+      city: city || nullSlectItem,
     };
   }
 

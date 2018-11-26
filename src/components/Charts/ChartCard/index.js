@@ -6,14 +6,14 @@ import styles from './index.less';
 const renderTotal = total => {
   let totalDom;
   switch (typeof total) {
-  case 'undefined':
-    totalDom = null;
-    break;
-  case 'function':
-    totalDom = <div className={styles.total}>{total()}</div>;
-    break;
-  default:
-    totalDom = <div className={styles.total}>{total}</div>;
+    case 'undefined':
+      totalDom = null;
+      break;
+    case 'function':
+      totalDom = <div className={styles.total}>{total()}</div>;
+      break;
+    default:
+      totalDom = <div className={styles.total}>{total}</div>;
   }
   return totalDom;
 };

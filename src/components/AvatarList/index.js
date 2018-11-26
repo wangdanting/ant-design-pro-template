@@ -7,7 +7,7 @@ import styles from './index.less';
 const AvatarList = ({ children, size, ...other }) => {
   const childrenWithProps = React.Children.map(children, child =>
     React.cloneElement(child, {
-      size
+      size,
     })
   );
 
@@ -22,7 +22,7 @@ const Item = ({ src, size, tips, onClick = () => {} }) => {
   const cls = classNames(styles.avatarItem, {
     [styles.avatarItemLarge]: size === 'large',
     [styles.avatarItemSmall]: size === 'small',
-    [styles.avatarItemMini]: size === 'mini'
+    [styles.avatarItemMini]: size === 'mini',
   });
   return (
     <li className={cls} onClick={onClick}>

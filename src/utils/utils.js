@@ -31,7 +31,7 @@ export function formatWan(val) {
             fontSize: 14,
             fontStyle: 'normal',
             lineHeight: 20,
-            marginLeft: 2
+            marginLeft: 2,
           }}
         >
           万

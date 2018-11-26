@@ -13,7 +13,7 @@ class Login extends Component {
     this.state = {
       type: props.defaultActiveKey,
       tabs: [],
-      active: {}
+      active: {},
     };
   }
 
@@ -24,14 +24,14 @@ class Login extends Component {
       tabUtil: {
         addTab: id => {
           this.setState({
-            tabs: [...tabs, id]
+            tabs: [...tabs, id],
           });
         },
         removeTab: id => {
           this.setState({
-            tabs: tabs.filter(currentId => currentId !== id)
+            tabs: tabs.filter(currentId => currentId !== id),
           });
-        }
+        },
       },
       form,
       updateActive: activeItem => {
@@ -42,15 +42,15 @@ class Login extends Component {
           active[type] = [activeItem];
         }
         this.setState({
-          active
+          active,
         });
-      }
+      },
     };
   };
 
   onSwitch = type => {
     this.setState({
-      type
+      type,
     });
 
     const { onTabChange } = this.props;
@@ -77,7 +77,7 @@ class Login extends Component {
         return;
       }
       // eslint-disable-next-line
-      if (item.type.typeName === "LoginTab") {
+      if (item.type.typeName === 'LoginTab') {
         TabChildren.push(item);
       } else {
         otherChildren.push(item);

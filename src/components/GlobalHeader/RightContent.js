@@ -29,7 +29,7 @@ class GlobalHeaderRight extends PureComponent {
           tode: '',
           processing: 'blue',
           urgent: 'red',
-          doing: 'gold'
+          doing: 'gold',
         }[newNotice.status];
         newNotice.extra = (
           <Tag color={color} style={{ marginRight: 0 }}>
@@ -49,7 +49,7 @@ class GlobalHeaderRight extends PureComponent {
       onNoticeVisibleChange,
       fetchingNotices,
       onNoticeClear,
-      onMenuClick
+      onMenuClick,
     } = this.props;
     let className = styles.right;
     if (theme === 'dark') {
@@ -60,24 +60,15 @@ class GlobalHeaderRight extends PureComponent {
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item key="userCenter">
           <Icon type="user" />
-          <FormattedMessage
-            id="menu.account.center"
-            defaultMessage="account center"
-          />
+          <FormattedMessage id="menu.account.center" defaultMessage="account center" />
         </Menu.Item>
         <Menu.Item key="userinfo">
           <Icon type="setting" />
-          <FormattedMessage
-            id="menu.account.settings"
-            defaultMessage="account settings"
-          />
+          <FormattedMessage id="menu.account.settings" defaultMessage="account settings" />
         </Menu.Item>
         <Menu.Item key="triggerError">
           <Icon type="close-circle" />
-          <FormattedMessage
-            id="menu.account.trigger"
-            defaultMessage="Trigger Error"
-          />
+          <FormattedMessage id="menu.account.trigger" defaultMessage="Trigger Error" />
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout">
@@ -94,13 +85,13 @@ class GlobalHeaderRight extends PureComponent {
           dataSource={[
             formatMessage({ id: 'component.globalHeader.search.example1' }),
             formatMessage({ id: 'component.globalHeader.search.example2' }),
-            formatMessage({ id: 'component.globalHeader.search.example3' })
+            formatMessage({ id: 'component.globalHeader.search.example3' }),
           ]}
           onSearch={value => {
-            console.log("input", value); // eslint-disable-line
+            console.log('input', value); // eslint-disable-line
           }}
           onPressEnter={value => {
-            console.log("enter", value); // eslint-disable-line
+            console.log('enter', value); // eslint-disable-line
           }}
         />
         <Tooltip title={formatMessage({ id: 'component.globalHeader.help' })}>
@@ -120,7 +111,7 @@ class GlobalHeaderRight extends PureComponent {
           loading={fetchingNotices}
           locale={{
             emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
-            clear: formatMessage({ id: 'component.noticeIcon.clear' })
+            clear: formatMessage({ id: 'component.noticeIcon.clear' }),
           }}
           onItemClick={(item, tabProps) => {
             console.log(item, tabProps); // eslint-disable-line
@@ -133,7 +124,7 @@ class GlobalHeaderRight extends PureComponent {
             title={formatMessage({ id: 'component.globalHeader.notification' })}
             name="notification"
             emptyText={formatMessage({
-              id: 'component.globalHeader.notification.empty'
+              id: 'component.globalHeader.notification.empty',
             })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
           />
@@ -142,7 +133,7 @@ class GlobalHeaderRight extends PureComponent {
             title={formatMessage({ id: 'component.globalHeader.message' })}
             name="message"
             emptyText={formatMessage({
-              id: 'component.globalHeader.message.empty'
+              id: 'component.globalHeader.message.empty',
             })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
           />
@@ -151,7 +142,7 @@ class GlobalHeaderRight extends PureComponent {
             title={formatMessage({ id: 'component.globalHeader.event' })}
             name="event"
             emptyText={formatMessage({
-              id: 'component.globalHeader.event.empty'
+              id: 'component.globalHeader.event.empty',
             })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
           />

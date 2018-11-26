@@ -8,17 +8,17 @@ class List extends PureComponent {
   handleTabChange = key => {
     const { match } = this.props;
     switch (key) {
-    case 'articles':
-      router.push(`${match.path}/articles`);
-      break;
-    case 'applications':
-      router.push(`${match.url}/applications`);
-      break;
-    case 'projects':
-      router.push(`${match.url}/projects`);
-      break;
-    default:
-      break;
+      case 'articles':
+        router.push(`${match.path}/articles`);
+        break;
+      case 'applications':
+        router.push(`${match.url}/applications`);
+        break;
+      case 'projects':
+        router.push(`${match.url}/projects`);
+        break;
+      default:
+        break;
     }
   };
 

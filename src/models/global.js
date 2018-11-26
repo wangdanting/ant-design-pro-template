@@ -5,7 +5,7 @@ export default {
 
   state: {
     collapsed: false,
-    notices: []
+    notices: [],
   },
 
   effects: {
@@ -13,45 +13,45 @@ export default {
       const data = yield call(queryNotices);
       yield put({
         type: 'saveNotices',
-        payload: data
+        payload: data,
       });
       yield put({
         type: 'user/changeNotifyCount',
-        payload: data.length
+        payload: data.length,
       });
     },
 
     *clearNotices({ payload }, { put, select }) {
       yield put({
         type: 'saveClearedNotices',
-        payload
+        payload,
       });
       const count = yield select(state => state.global.notices.length);
       yield put({
         type: 'user/changeNotifyCount',
-        payload: count
+        payload: count,
       });
-    }
+    },
   },
 
   reducers: {
     changeLayoutCollapsed(state, { payload }) {
       return {
         ...state,
-        collapsed: payload
+        collapsed: payload,
       };
     },
     saveNotices(state, { payload }) {
       return {
         ...state,
-        notices: payload
+        notices: payload,
       };
     },
     saveClearedNotices(state, { payload }) {
       return {
         ...state,
-        notices: state.notices.filter(item => item.type !== payload)
+        notices: state.notices.filter(item => item.type !== payload),
       };
-    }
-  }
+    },
+  },
 };

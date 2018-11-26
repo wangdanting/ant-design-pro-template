@@ -13,11 +13,7 @@ export default class SelectLang extends PureComponent {
     const { className } = this.props;
     const selectedLang = getLocale();
     const langMenu = (
-      <Menu
-        className={styles.menu}
-        selectedKeys={[selectedLang]}
-        onClick={this.changLang}
-      >
+      <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={this.changLang}>
         <Menu.Item key="zh-CN">
           <FormattedMessage id="lang.simplified-chinese" />
         </Menu.Item>

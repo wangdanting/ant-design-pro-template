@@ -6,8 +6,8 @@ export default {
   state: {
     data: {
       list: [],
-      pagination: {}
-    }
+      pagination: {},
+    },
   },
 
   effects: {
@@ -15,14 +15,14 @@ export default {
       const response = yield call(queryRule, payload);
       yield put({
         type: 'save',
-        payload: response
+        payload: response,
       });
     },
     *add({ payload, callback }, { call, put }) {
       const response = yield call(addRule, payload);
       yield put({
         type: 'save',
-        payload: response
+        payload: response,
       });
       if (callback) callback();
     },
@@ -30,7 +30,7 @@ export default {
       const response = yield call(removeRule, payload);
       yield put({
         type: 'save',
-        payload: response
+        payload: response,
       });
       if (callback) callback();
     },
@@ -38,18 +38,18 @@ export default {
       const response = yield call(updateRule, payload);
       yield put({
         type: 'save',
-        payload: response
+        payload: response,
       });
       if (callback) callback();
-    }
+    },
   },
 
   reducers: {
     save(state, action) {
       return {
         ...state,
-        data: action.payload
+        data: action.payload,
       };
-    }
-  }
+    },
+  },
 };

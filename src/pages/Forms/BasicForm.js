@@ -11,7 +11,7 @@ import {
   Icon,
   InputNumber,
   Select,
-  Radio
+  Radio,
 } from 'antd';
 import { connect } from 'dva';
 import styles from './style.less';
@@ -22,7 +22,7 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 @connect(({ loading }) => ({
-  submitting: loading.effects['form/submitRegularForm']
+  submitting: loading.effects['form/submitRegularForm'],
 }))
 @Form.create()
 class BasicForm extends React.PureComponent {
@@ -33,7 +33,7 @@ class BasicForm extends React.PureComponent {
       if (!err) {
         dispatch({
           type: 'form/submitRegularForm',
-          payload: values
+          payload: values,
         });
       }
     });
@@ -42,26 +42,26 @@ class BasicForm extends React.PureComponent {
   render() {
     const { submitting } = this.props;
     const {
-      form: { getFieldDecorator, getFieldValue }
+      form: { getFieldDecorator, getFieldValue },
     } = this.props;
 
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 7 }
+        sm: { span: 7 },
       },
       wrapperCol: {
         xs: { span: 24 },
         sm: { span: 12 },
-        md: { span: 10 }
-      }
+        md: { span: 10 },
+      },
     };
 
     const submitFormLayout = {
       wrapperCol: {
         xs: { span: 24, offset: 0 },
-        sm: { span: 10, offset: 7 }
-      }
+        sm: { span: 10, offset: 7 },
+      },
     };
 
     return (
@@ -70,60 +70,43 @@ class BasicForm extends React.PureComponent {
         content={<FormattedMessage id="app.forms.basic.description" />}
       >
         <Card bordered={false}>
-          <Form
-            onSubmit={this.handleSubmit}
-            hideRequiredMark
-            style={{ marginTop: 8 }}
-          >
-            <FormItem
-              {...formItemLayout}
-              label={<FormattedMessage id="form.title.label" />}
-            >
+          <Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 8 }}>
+            <FormItem {...formItemLayout} label={<FormattedMessage id="form.title.label" />}>
               {getFieldDecorator('title', {
                 rules: [
                   {
                     required: true,
-                    message: formatMessage({ id: 'validation.title.required' })
-                  }
-                ]
-              })(
-                <Input
-                  placeholder={formatMessage({ id: 'form.title.placeholder' })}
-                />
-              )}
+                    message: formatMessage({ id: 'validation.title.required' }),
+                  },
+                ],
+              })(<Input placeholder={formatMessage({ id: 'form.title.placeholder' })} />)}
             </FormItem>
-            <FormItem
-              {...formItemLayout}
-              label={<FormattedMessage id="form.date.label" />}
-            >
+            <FormItem {...formItemLayout} label={<FormattedMessage id="form.date.label" />}>
               {getFieldDecorator('date', {
                 rules: [
                   {
                     required: true,
-                    message: formatMessage({ id: 'validation.date.required' })
-                  }
-                ]
+                    message: formatMessage({ id: 'validation.date.required' }),
+                  },
+                ],
               })(
                 <RangePicker
                   style={{ width: '100%' }}
                   placeholder={[
                     formatMessage({ id: 'form.date.placeholder.start' }),
-                    formatMessage({ id: 'form.date.placeholder.end' })
+                    formatMessage({ id: 'form.date.placeholder.end' }),
                   ]}
                 />
               )}
             </FormItem>
-            <FormItem
-              {...formItemLayout}
-              label={<FormattedMessage id="form.goal.label" />}
-            >
+            <FormItem {...formItemLayout} label={<FormattedMessage id="form.goal.label" />}>
               {getFieldDecorator('goal', {
                 rules: [
                   {
                     required: true,
-                    message: formatMessage({ id: 'validation.goal.required' })
-                  }
-                ]
+                    message: formatMessage({ id: 'validation.goal.required' }),
+                  },
+                ],
               })(
                 <TextArea
                   style={{ minHeight: 32 }}
@@ -132,24 +115,21 @@ class BasicForm extends React.PureComponent {
                 />
               )}
             </FormItem>
-            <FormItem
-              {...formItemLayout}
-              label={<FormattedMessage id="form.standard.label" />}
-            >
+            <FormItem {...formItemLayout} label={<FormattedMessage id="form.standard.label" />}>
               {getFieldDecorator('standard', {
                 rules: [
                   {
                     required: true,
                     message: formatMessage({
-                      id: 'validation.standard.required'
-                    })
-                  }
-                ]
+                      id: 'validation.standard.required',
+                    }),
+                  },
+                ],
               })(
                 <TextArea
                   style={{ minHeight: 32 }}
                   placeholder={formatMessage({
-                    id: 'form.standard.placeholder'
+                    id: 'form.standard.placeholder',
                   })}
                   rows={4}
                 />
@@ -162,11 +142,7 @@ class BasicForm extends React.PureComponent {
                   <FormattedMessage id="form.client.label" />
                   <em className={styles.optional}>
                     <FormattedMessage id="form.optional" />
-                    <Tooltip
-                      title={
-                        <FormattedMessage id="form.client.label.tooltip" />
-                      }
-                    >
+                    <Tooltip title={<FormattedMessage id="form.client.label.tooltip" />}>
                       <Icon type="info-circle-o" style={{ marginRight: 4 }} />
                     </Tooltip>
                   </em>
@@ -174,9 +150,7 @@ class BasicForm extends React.PureComponent {
               }
             >
               {getFieldDecorator('client')(
-                <Input
-                  placeholder={formatMessage({ id: 'form.client.placeholder' })}
-                />
+                <Input placeholder={formatMessage({ id: 'form.client.placeholder' })} />
               )}
             </FormItem>
             <FormItem
@@ -193,7 +167,7 @@ class BasicForm extends React.PureComponent {
               {getFieldDecorator('invites')(
                 <Input
                   placeholder={formatMessage({
-                    id: 'form.invites.placeholder'
+                    id: 'form.invites.placeholder',
                   })}
                 />
               )}
@@ -225,7 +199,7 @@ class BasicForm extends React.PureComponent {
             >
               <div>
                 {getFieldDecorator('public', {
-                  initialValue: '1'
+                  initialValue: '1',
                 })(
                   <Radio.Group>
                     <Radio value="1">
@@ -244,12 +218,11 @@ class BasicForm extends React.PureComponent {
                     <Select
                       mode="multiple"
                       placeholder={formatMessage({
-                        id: 'form.publicUsers.placeholder'
+                        id: 'form.publicUsers.placeholder',
                       })}
                       style={{
                         margin: '8px 0',
-                        display:
-                          getFieldValue('public') === '2' ? 'block' : 'none'
+                        display: getFieldValue('public') === '2' ? 'block' : 'none',
                       }}
                     >
                       <Option value="1">

@@ -29,9 +29,7 @@ const RegisterResult = ({ location }) => (
         <FormattedMessage
           id="app.register-result.msg"
           values={{
-            email: location.state
-              ? location.state.account
-              : 'AntDesign@example.com'
+            email: location.state ? location.state.account : 'AntDesign@example.com',
           }}
         />
       </div>

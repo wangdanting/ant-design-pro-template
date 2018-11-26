@@ -8,18 +8,16 @@ import responsive from './responsive';
 const Description = ({ term, column, children, ...restProps }) => (
   <Col {...responsive[column]} {...restProps}>
     {term && <div className={styles.term}>{term}</div>}
-    {children !== null && children !== undefined && (
-      <div className={styles.detail}>{children}</div>
-    )}
+    {children !== null && children !== undefined && <div className={styles.detail}>{children}</div>}
   </Col>
 );
 
 Description.defaultProps = {
-  term: ''
+  term: '',
 };
 
 Description.propTypes = {
-  term: PropTypes.node
+  term: PropTypes.node,
 };
 
 const DescriptionList = ({
@@ -32,15 +30,10 @@ const DescriptionList = ({
   size,
   ...restProps
 }) => {
-  const clsString = classNames(
-    styles.descriptionList,
-    styles[layout],
-    className,
-    {
-      [styles.small]: size === 'small',
-      [styles.large]: size === 'large'
-    }
-  );
+  const clsString = classNames(styles.descriptionList, styles[layout], className, {
+    [styles.small]: size === 'small',
+    [styles.large]: size === 'large',
+  });
   const column = col > 4 ? 4 : col;
   return (
     <div className={clsString} {...restProps}>

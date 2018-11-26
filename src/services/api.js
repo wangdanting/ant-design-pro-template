@@ -8,14 +8,14 @@ export async function getFakeCaptcha(mobile) {
 export async function fakeAccountLogin(params) {
   return request('/api/login/account', {
     method: 'POST',
-    body: params
+    body: params,
   });
 }
 
 export async function fakeRegister(params) {
   return request('/api/register', {
     method: 'POST',
-    body: params
+    body: params,
   });
 }
 
@@ -26,7 +26,7 @@ export async function queryNotices() {
 export async function fakeSubmitForm(params) {
   return request('/api/forms', {
     method: 'POST',
-    boby: params
+    boby: params,
   });
 }
 
@@ -39,8 +39,8 @@ export async function addRule(params) {
     method: 'POST',
     body: {
       ...params,
-      method: 'post'
-    }
+      method: 'post',
+    },
   });
 }
 
@@ -49,8 +49,8 @@ export async function removeRule(params) {
     method: 'POST',
     body: {
       ...params,
-      method: 'delete'
-    }
+      method: 'delete',
+    },
   });
 }
 
@@ -59,8 +59,8 @@ export async function updateRule(params) {
     method: 'POST',
     body: {
       ...params,
-      method: 'update'
-    }
+      method: 'update',
+    },
   });
 }
 
@@ -74,8 +74,8 @@ export async function removeFakeList(params) {
     method: 'POST',
     body: {
       ...restParams,
-      method: 'delete'
-    }
+      method: 'delete',
+    },
   });
 }
 
@@ -85,8 +85,8 @@ export async function addFakeList(params) {
     method: 'POST',
     body: {
       ...restParams,
-      method: 'post'
-    }
+      method: 'post',
+    },
   });
 }
 
@@ -96,8 +96,8 @@ export async function updateFakeList(params) {
     method: 'POST',
     body: {
       ...restParams,
-      method: 'update'
-    }
+      method: 'update',
+    },
   });
 }
 

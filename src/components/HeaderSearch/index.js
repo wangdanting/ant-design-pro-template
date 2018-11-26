@@ -15,7 +15,7 @@ export default class HeaderSearch extends PureComponent {
     defaultActiveFirstOption: PropTypes.bool,
     dataSource: PropTypes.array,
     defaultOpen: PropTypes.bool,
-    onVisibleChange: PropTypes.func
+    onVisibleChange: PropTypes.func,
   };
 
   static defaultProps = {
@@ -26,13 +26,13 @@ export default class HeaderSearch extends PureComponent {
     placeholder: '',
     dataSource: [],
     defaultOpen: false,
-    onVisibleChange: () => {}
+    onVisibleChange: () => {},
   };
 
   static getDerivedStateFromProps(props) {
     if ('open' in props) {
       return {
-        searchMode: props.open
+        searchMode: props.open,
       };
     }
     return null;
@@ -42,7 +42,7 @@ export default class HeaderSearch extends PureComponent {
     super(props);
     this.state = {
       searchMode: props.defaultOpen,
-      value: ''
+      value: '',
     };
   }
 
@@ -82,7 +82,7 @@ export default class HeaderSearch extends PureComponent {
   leaveSearchMode = () => {
     this.setState({
       searchMode: false,
-      value: ''
+      value: '',
     });
   };
 
@@ -90,7 +90,7 @@ export default class HeaderSearch extends PureComponent {
   @Bind()
   @Debounce(500, {
     leading: true,
-    trailing: false
+    trailing: false,
   })
   debouncePressEnter() {
     const { onPressEnter } = this.props;
@@ -103,7 +103,7 @@ export default class HeaderSearch extends PureComponent {
     const { searchMode, value } = this.state;
     delete restProps.defaultOpen; // for rc-select not affected
     const inputClass = classNames(styles.input, {
-      [styles.show]: searchMode
+      [styles.show]: searchMode,
     });
     return (
       <span

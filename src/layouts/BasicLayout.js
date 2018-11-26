@@ -36,7 +36,7 @@ function formatter(data, parentAuthority, parentName) {
         const result = {
           ...item,
           locale,
-          authority: item.authority || parentAuthority
+          authority: item.authority || parentAuthority,
         };
         if (item.routes) {
           const children = formatter(item.routes, item.authority, locale);
@@ -56,33 +56,33 @@ const memoizeOneFormatter = memoizeOne(formatter, isEqual);
 
 const query = {
   'screen-xs': {
-    maxWidth: 575
+    maxWidth: 575,
   },
   'screen-sm': {
     minWidth: 576,
-    maxWidth: 767
+    maxWidth: 767,
   },
   'screen-md': {
     minWidth: 768,
-    maxWidth: 991
+    maxWidth: 991,
   },
   'screen-lg': {
     minWidth: 992,
-    maxWidth: 1199
+    maxWidth: 1199,
   },
   'screen-xl': {
     minWidth: 1200,
-    maxWidth: 1599
+    maxWidth: 1599,
   },
   'screen-xxl': {
-    minWidth: 1600
-  }
+    minWidth: 1600,
+  },
 };
 
 @connect(({ global, setting }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
-  ...setting
+  ...setting,
 }))
 class BasicLayout extends React.PureComponent {
   constructor(props) {
@@ -93,19 +93,19 @@ class BasicLayout extends React.PureComponent {
 
   state = {
     isMobile: false,
-    menuData: this.getMenuData()
+    menuData: this.getMenuData(),
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'user/fetchCurrent'
+      type: 'user/fetchCurrent',
     });
     this.enquireHandler = enquireScreen(mobile => {
       const { isMobile } = this.state;
       if (isMobile !== mobile) {
         this.setState({
-          isMobile: mobile
+          isMobile: mobile,
         });
       }
     });
@@ -117,7 +117,7 @@ class BasicLayout extends React.PureComponent {
 
   getMenuData() {
     const {
-      route: { routes }
+      route: { routes },
     } = this.props;
     return memoizeOneFormatter(routes);
   }
@@ -140,7 +140,7 @@ class BasicLayout extends React.PureComponent {
     const { location } = this.props;
     return {
       location,
-      breadcrumbNameMap: this.breadcrumbNameMap
+      breadcrumbNameMap: this.breadcrumbNameMap,
     };
   }
 
@@ -160,7 +160,7 @@ class BasicLayout extends React.PureComponent {
 
     const message = formatMessage({
       id: currRouterData.locale || currRouterData.name,
-      defaultMessage: currRouterData.name
+      defaultMessage: currRouterData.name,
     });
 
     return `${message} - Ant Design Pro`;
@@ -170,7 +170,7 @@ class BasicLayout extends React.PureComponent {
     const { dispatch } = this.props;
     dispatch({
       type: 'global/changeLayoutCollapsed',
-      payload: collapsed
+      payload: collapsed,
     });
   };
 
@@ -179,7 +179,7 @@ class BasicLayout extends React.PureComponent {
     const { fixSiderbar, collapsed, layout } = this.props;
     if (fixSiderbar && layout !== 'topmenu' && !isMobile) {
       return {
-        paddingLeft: collapsed ? '80px' : '256px'
+        paddingLeft: collapsed ? '80px' : '256px',
       };
     }
     return null;
@@ -189,7 +189,7 @@ class BasicLayout extends React.PureComponent {
     const { fixedHeader } = this.props;
     return {
       margin: '24px 24px 0',
-      paddingTop: fixedHeader ? 64 : 0
+      paddingTop: fixedHeader ? 64 : 0,
     };
   };
 
@@ -198,7 +198,7 @@ class BasicLayout extends React.PureComponent {
       navTheme,
       layout: PropsLayout,
       location: { pathname },
-      children
+      children,
     } = this.props;
     const { menuData, isMobile } = this.state;
     const isTop = PropsLayout === 'topmenu';
@@ -219,13 +219,10 @@ class BasicLayout extends React.PureComponent {
         <Layout
           style={{
             ...this.getLayoutStyle(),
-            minHeight: '100vh'
+            minHeight: '100vh',
           }}
         >
-          <Header
-            handleMenuCollapse={this.handleMenuCollapse}
-            {...this.props}
-          />
+          <Header handleMenuCollapse={this.handleMenuCollapse} {...this.props} />
           <Content style={this.getContentStyle()}>
             <Authorized
               authority={routerConfig && routerConfig.authority}

@@ -15,9 +15,7 @@ const PageHeaderWrapper = ({ children, contentWidth, ...restProps }) => (
           {...value}
           itemRender={item => {
             if (item.locale) {
-              return (
-                <FormattedMessage id={item.locale} defaultMessage={item.name} />
-              );
+              return <FormattedMessage id={item.locale} defaultMessage={item.name} />;
             }
             return item.name;
           }}
@@ -34,5 +32,5 @@ const PageHeaderWrapper = ({ children, contentWidth, ...restProps }) => (
 );
 
 export default connect(({ setting }) => ({
-  contentWidth: setting.contentWidth
+  contentWidth: setting.contentWidth,
 }))(PageHeaderWrapper);

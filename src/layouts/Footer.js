@@ -11,20 +11,20 @@ const FooterView = () => (
           key: 'Pro 首页',
           title: 'Pro 首页',
           href: 'https://pro.ant.design',
-          blankTarget: true
+          blankTarget: true,
         },
         {
           key: 'github',
           title: <Icon type="github" />,
           href: 'https://github.com/ant-design/ant-design-pro',
-          blankTarget: true
+          blankTarget: true,
         },
         {
           key: 'Ant Design',
           title: 'Ant Design',
           href: 'https://ant.design',
-          blankTarget: true
-        }
+          blankTarget: true,
+        },
       ]}
       copyright={
         <Fragment>

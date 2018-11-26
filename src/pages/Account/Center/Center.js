@@ -14,7 +14,7 @@ const operationTabList = [
       <span>
         文章 <span style={{ fontSize: 14 }}>(8)</span>
       </span>
-    )
+    ),
   },
   {
     key: 'applications',
@@ -22,7 +22,7 @@ const operationTabList = [
       <span>
         应用 <span style={{ fontSize: 14 }}>(8)</span>
       </span>
-    )
+    ),
   },
   {
     key: 'projects',
@@ -30,8 +30,8 @@ const operationTabList = [
       <span>
         项目 <span style={{ fontSize: 14 }}>(8)</span>
       </span>
-    )
-  }
+    ),
+  },
 ];
 
 @connect(({ loading, user, project }) => ({
@@ -39,30 +39,30 @@ const operationTabList = [
   currentUserLoading: loading.effects['user/fetchCurrent'],
   project,
   projectLoading: loading.effects['project/fetchNotice'],
-  listLoading: loading.effects['list/fetch']
+  listLoading: loading.effects['list/fetch'],
 }))
 class Center extends PureComponent {
   state = {
     newTags: [],
     inputVisible: false,
-    inputValue: ''
+    inputValue: '',
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'user/fetchCurrent'
+      type: 'user/fetchCurrent',
     });
 
     dispatch({
       type: 'list/fetch',
       payload: {
-        count: 8
-      }
+        count: 8,
+      },
     });
 
     dispatch({
-      type: 'project/fetchNotice'
+      type: 'project/fetchNotice',
     });
   }
 
@@ -78,19 +78,13 @@ class Center extends PureComponent {
     const { state } = this;
     const { inputValue } = state;
     let { newTags } = state;
-    if (
-      inputValue &&
-      newTags.filter(tag => tag.label === inputValue).length === 0
-    ) {
-      newTags = [
-        ...newTags,
-        { key: `new-${newTags.length}`, label: inputValue }
-      ];
+    if (inputValue && newTags.filter(tag => tag.label === inputValue).length === 0) {
+      newTags = [...newTags, { key: `new-${newTags.length}`, label: inputValue }];
     }
     this.setState({
       newTags,
       inputVisible: false,
-      inputValue: ''
+      inputValue: '',
     });
   };
 
@@ -101,17 +95,17 @@ class Center extends PureComponent {
   onTabChange = key => {
     const { match } = this.props;
     switch (key) {
-    case 'articles':
-      router.push(`${match.url}/articles`);
-      break;
-    case 'applications':
-      router.push(`${match.url}/applications`);
-      break;
-    case 'projects':
-      router.push(`${match.url}/projects`);
-      break;
-    default:
-      break;
+      case 'articles':
+        router.push(`${match.url}/articles`);
+        break;
+      case 'applications':
+        router.push(`${match.url}/applications`);
+        break;
+      case 'projects':
+        router.push(`${match.url}/projects`);
+        break;
+      default:
+        break;
     }
   };
 
@@ -124,7 +118,7 @@ class Center extends PureComponent {
       listLoading,
       location,
       match,
-      children
+      children,
     } = this.props;
 
     const { newTags, inputVisible, inputValue } = this.state;
@@ -132,11 +126,7 @@ class Center extends PureComponent {
       <GridContent className={styles.userCenter}>
         <Row gutter={24}>
           <Col lg={7} md={24}>
-            <Card
-              bordered={false}
-              style={{ marginBottom: 24 }}
-              loading={currentUserLoading}
-            >
+            <Card bordered={false} style={{ marginBottom: 24 }} loading={currentUserLoading}>
               {currentUser && Object.keys(currentUser).length ? (
                 <div>
                   <div className={styles.avatarHolder}>

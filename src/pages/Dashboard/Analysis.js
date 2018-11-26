@@ -16,27 +16,27 @@ const topColResponsiveProps = {
   md: 12,
   lg: 12,
   xl: 6,
-  style: { marginBottom: 24 }
+  style: { marginBottom: 24 },
 };
 
 @connect(({ chart, loading }) => ({
   chart,
-  loading: loading.effects['chart/fetch']
+  loading: loading.effects['chart/fetch'],
 }))
 class Analysis extends PureComponent {
   state = {
-    loading: true
+    loading: true,
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
     this.reqRef = requestAnimationFrame(() => {
       dispatch({
-        type: 'chart/fetch'
+        type: 'chart/fetch',
       });
       this.timeoutId = setTimeout(() => {
         this.setState({
-          loading: false
+          loading: false,
         });
       }, 600);
     });
@@ -45,7 +45,7 @@ class Analysis extends PureComponent {
   componentWillUnmount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'chart/clear'
+      type: 'chart/clear',
     });
     cancelAnimationFrame(this.reqRef);
     clearTimeout(this.timeoutId);
@@ -63,18 +63,12 @@ class Analysis extends PureComponent {
             <ChartCard
               bordered={false}
               title={
-                <FormattedMessage
-                  id="app.analysis.total-sales"
-                  defaultMessage="Total Sales"
-                />
+                <FormattedMessage id="app.analysis.total-sales" defaultMessage="Total Sales" />
               }
               action={
                 <Tooltip
                   title={
-                    <FormattedMessage
-                      id="app.analysis.introduce"
-                      defaultMessage="introduce"
-                    />
+                    <FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />
                   }
                 >
                   <Icon type="info-circle-o" />
@@ -85,10 +79,7 @@ class Analysis extends PureComponent {
               footer={
                 <Field
                   label={
-                    <FormattedMessage
-                      id="app.analysis.day-sales"
-                      defaultMessage="Day Sales"
-                    />
+                    <FormattedMessage id="app.analysis.day-sales" defaultMessage="Day Sales" />
                   }
                   value={`￥${numeral(12423).format('0,0')}`}
                 />
@@ -96,17 +87,11 @@ class Analysis extends PureComponent {
               contentheight={46}
             >
               <Trend flag="up" style={{ marginRight: 16 }}>
-                <FormattedMessage
-                  id="app.analysis.week"
-                  defaultMessage="Weekly Changes"
-                />
+                <FormattedMessage id="app.analysis.week" defaultMessage="Weekly Changes" />
                 <span className={styles.trendText}>12%</span>
               </Trend>
               <Trend flag="down">
-                <FormattedMessage
-                  id="app.analysis.day"
-                  defaultMessage="Daily Changes"
-                />
+                <FormattedMessage id="app.analysis.day" defaultMessage="Daily Changes" />
                 <span className={styles.trendText}>11%</span>
               </Trend>
             </ChartCard>
@@ -115,19 +100,11 @@ class Analysis extends PureComponent {
             <ChartCard
               bordered={false}
               loading={loading}
-              title={
-                <FormattedMessage
-                  id="app.analysis.visits"
-                  defaultMessage="visits"
-                />
-              }
+              title={<FormattedMessage id="app.analysis.visits" defaultMessage="visits" />}
               action={
                 <Tooltip
                   title={
-                    <FormattedMessage
-                      id="app.analysis.introduce"
-                      defaultMessage="introduce"
-                    />
+                    <FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />
                   }
                 >
                   <Icon type="info-circle-o" />
@@ -137,10 +114,7 @@ class Analysis extends PureComponent {
               footer={
                 <Field
                   label={
-                    <FormattedMessage
-                      id="app.analysis.day-visits"
-                      defaultMessage="Day Visits"
-                    />
+                    <FormattedMessage id="app.analysis.day-visits" defaultMessage="Day Visits" />
                   }
                   value={numeral(1234).format('0,0')}
                 />

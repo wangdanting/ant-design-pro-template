@@ -440,21 +440,21 @@ class TableList extends PureComponent {
     if (!selectedRows) return;
 
     switch (e.key) {
-    case 'remove':
-      dispatch({
-        type: 'rule/remove',
-        payload: {
-          key: selectedRows.map(row => row.key),
-        },
-        callback: () => {
-          this.setState({
-            selectedRows: [],
-          });
-        },
-      });
-      break;
-    default:
-      break;
+      case 'remove':
+        dispatch({
+          type: 'rule/remove',
+          payload: {
+            key: selectedRows.map(row => row.key),
+          },
+          callback: () => {
+            this.setState({
+              selectedRows: [],
+            });
+          },
+        });
+        break;
+      default:
+        break;
     }
   };
 

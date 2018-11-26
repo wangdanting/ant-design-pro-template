@@ -10,7 +10,7 @@ const isSupportLineClamp = document.body.style.webkitLineClamp !== undefined;
 
 const TooltipOverlayStyle = {
   overflowWrap: 'break-word',
-  wordWrap: 'break-word'
+  wordWrap: 'break-word',
 };
 
 export const getStrFullLength = (str = '') =>
@@ -40,28 +40,17 @@ export const cutStrByFullLength = (str = '', maxLength) => {
 
 const getTooltip = ({ tooltip, overlayStyle, title, children }) => {
   if (tooltip) {
-    const props =
-      tooltip === true
-        ? { overlayStyle, title }
-        : { ...tooltip, overlayStyle, title };
+    const props = tooltip === true ? { overlayStyle, title } : { ...tooltip, overlayStyle, title };
     return <Tooltip {...props}>{children}</Tooltip>;
   }
   return children;
 };
 
-const EllipsisText = ({
-  text,
-  length,
-  tooltip,
-  fullWidthRecognition,
-  ...other
-}) => {
+const EllipsisText = ({ text, length, tooltip, fullWidthRecognition, ...other }) => {
   if (typeof text !== 'string') {
     throw new Error('Ellipsis children must be string.');
   }
-  const textLength = fullWidthRecognition
-    ? getStrFullLength(text)
-    : text.length;
+  const textLength = fullWidthRecognition ? getStrFullLength(text) : text.length;
   if (textLength <= length || length < 0) {
     return <span {...other}>{text}</span>;
   }
@@ -70,9 +59,7 @@ const EllipsisText = ({
   if (length - tail.length <= 0) {
     displayText = '';
   } else {
-    displayText = fullWidthRecognition
-      ? cutStrByFullLength(text, length)
-      : text.slice(0, length);
+    displayText = fullWidthRecognition ? cutStrByFullLength(text, length) : text.slice(0, length);
   }
 
   const spanAttrs = tooltip ? {} : { ...other };
@@ -85,14 +72,14 @@ const EllipsisText = ({
         {displayText}
         {tail}
       </span>
-    )
+    ),
   });
 };
 
 export default class Ellipsis extends Component {
   state = {
     text: '',
-    targetCount: 0
+    targetCount: 0,
   };
 
   componentDidMount() {
@@ -111,8 +98,7 @@ export default class Ellipsis extends Component {
   computeLine = () => {
     const { lines } = this.props;
     if (lines && !isSupportLineClamp) {
-      const text =
-        this.shadowChildren.innerText || this.shadowChildren.textContent;
+      const text = this.shadowChildren.innerText || this.shadowChildren.textContent;
       const lineHeight = parseInt(getComputedStyle(this.root).lineHeight, 10);
       const targetHeight = lines * lineHeight;
       this.content.style.height = `${targetHeight}px`;
@@ -122,7 +108,7 @@ export default class Ellipsis extends Component {
       if (totalHeight <= targetHeight) {
         this.setState({
           text,
-          targetCount: text.length
+          targetCount: text.length,
         });
         return;
       }
@@ -135,7 +121,7 @@ export default class Ellipsis extends Component {
 
       this.setState({
         text,
-        targetCount: count
+        targetCount: count,
       });
     }
   };
@@ -209,7 +195,7 @@ export default class Ellipsis extends Component {
 
     const cls = classNames(styles.ellipsis, className, {
       [styles.lines]: lines && !isSupportLineClamp,
-      [styles.lineClamp]: lines && isSupportLineClamp
+      [styles.lineClamp]: lines && isSupportLineClamp,
     });
 
     if (!lines && !length) {
@@ -234,9 +220,7 @@ export default class Ellipsis extends Component {
       );
     }
 
-    const id = `antd-pro-ellipsis-${`${new Date().getTime()}${Math.floor(
-      Math.random() * 100
-    )}`}`;
+    const id = `antd-pro-ellipsis-${`${new Date().getTime()}${Math.floor(Math.random() * 100)}`}`;
 
     // support document.body.style.webkitLineClamp
     if (isSupportLineClamp) {
@@ -253,7 +237,7 @@ export default class Ellipsis extends Component {
         tooltip,
         overlayStyle: TooltipOverlayStyle,
         title: children,
-        children: node
+        children: node,
       });
     }
 
@@ -271,7 +255,7 @@ export default class Ellipsis extends Component {
             tooltip,
             overlayStyle: TooltipOverlayStyle,
             title: text,
-            children: childNode
+            children: childNode,
           })}
           <div className={styles.shadow} ref={this.handleShadowChildren}>
             {children}

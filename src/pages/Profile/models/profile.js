@@ -7,7 +7,7 @@ export default {
     basicGoods: [],
     advancedOperation1: [],
     advancedOperation2: [],
-    advancedOperation3: []
+    advancedOperation3: [],
   },
 
   effects: {
@@ -15,24 +15,24 @@ export default {
       const response = yield call(queryBasicProfile);
       yield put({
         type: 'show',
-        payload: response
+        payload: response,
       });
     },
     *fetchAdvanced(_, { call, put }) {
       const response = yield call(queryAdvancedProfile);
       yield put({
         type: 'show',
-        payload: response
+        payload: response,
       });
-    }
+    },
   },
 
   reducers: {
     show(state, { payload }) {
       return {
         ...state,
-        ...payload
+        ...payload,
       };
-    }
-  }
+    },
+  },
 };

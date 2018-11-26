@@ -10,8 +10,8 @@ export default {
       payAccount: 'ant-design@alipay.com',
       receiverAccount: 'test@example.com',
       receiverName: 'Alex',
-      amount: '500'
-    }
+      amount: '500',
+    },
   },
 
   effects: {
@@ -23,14 +23,14 @@ export default {
       yield call(fakeSubmitForm, payload);
       yield put({
         type: 'saveStepFormData',
-        payload
+        payload,
       });
       yield put(routerRedux.push('/form/step-form/result'));
     },
     *submitAdvancedForm({ payload }, { call }) {
       yield call(fakeSubmitForm, payload);
       message.success('提交成功');
-    }
+    },
   },
 
   reducers: {
@@ -39,9 +39,9 @@ export default {
         ...state,
         step: {
           ...state.step,
-          ...payload
-        }
+          ...payload,
+        },
       };
-    }
-  }
+    },
+  },
 };

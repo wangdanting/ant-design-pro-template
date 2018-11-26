@@ -20,7 +20,7 @@ class StandardTable extends PureComponent {
 
     this.state = {
       selectedRowKeys: [],
-      needTotalList
+      needTotalList,
     };
   }
 
@@ -29,7 +29,7 @@ class StandardTable extends PureComponent {
       const needTotalList = initTotalList(nextProps.columns);
       return {
         selectedRowKeys: [],
-        needTotalList
+        needTotalList,
       };
     }
     return null;
@@ -39,10 +39,7 @@ class StandardTable extends PureComponent {
     let { needTotalList } = this.state;
     needTotalList = needTotalList.map(item => ({
       ...item,
-      total: selectedRows.reduce(
-        (sum, val) => parseFloat(val[item.dataIndex], 10),
-        0
-      )
+      total: selectedRows.reduce((sum, val) => parseFloat(val[item.dataIndex], 10), 0),
     }));
     const { onSelectRow } = this.props;
     if (onSelectRow) {
@@ -73,12 +70,12 @@ class StandardTable extends PureComponent {
     const paginationProps = {
       showSizeChanger: true,
       showQuickJumper: true,
-      ...pagination
+      ...pagination,
     };
 
     const rowSelection = {
       selectedRowKeys,
-      onChange: this.handleRowSelectChange
+      onChange: this.handleRowSelectChange,
     };
 
     return (
@@ -87,8 +84,7 @@ class StandardTable extends PureComponent {
           <Alert
             message={
               <Fragment>
-                已选择{' '}
-                <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a>
+                已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a>
                 项&nbsp;&nbsp;
                 {needTotalList.map(item => (
                   <span style={{ marginLeft: 8 }} key={item.dataIndex}>

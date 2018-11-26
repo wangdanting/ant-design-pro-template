@@ -8,19 +8,19 @@ const { Step } = Steps;
 class StepForm extends PureComponent {
   getCurrentStep() {
     const {
-      location: { pathname }
+      location: { pathname },
     } = this.props;
 
     const pathList = pathname.split('/');
     switch (pathList.pop()) {
-    case 'info':
-      return 0;
-    case 'confirm':
-      return 1;
-    case 'result':
-      return 2;
-    default:
-      return 0;
+      case 'info':
+        return 0;
+      case 'confirm':
+        return 1;
+      case 'result':
+        return 2;
+      default:
+        return 0;
     }
   }
 

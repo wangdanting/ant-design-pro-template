@@ -5,12 +5,12 @@ import ArticleListContent from '@/components/ArticleListContent';
 import styles from './Article.less';
 
 @connect(({ list }) => ({
-  list
+  list,
 }))
 class Articles extends PureComponent {
   render() {
     const {
-      list: { list }
+      list: { list },
     } = this.props;
 
     const IconText = ({ type, text }) => (
@@ -33,7 +33,7 @@ class Articles extends PureComponent {
             actions={[
               <IconText type="star-o" text={item.star} />,
               <IconText type="like-o" text={item.like} />,
-              <IconText type="message" text={item.message} />
+              <IconText type="message" text={item.message} />,
             ]}
           >
             <List.Item.Meta
