@@ -14,7 +14,7 @@ const FormItem = Form.Item;
 const formItemLayout = {
   wrapperCol: {
     xs: { span: 24 },
-    sm: { span: 17 },
+    sm: { span: 16 },
   },
 };
 
